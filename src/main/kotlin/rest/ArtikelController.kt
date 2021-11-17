@@ -4,7 +4,6 @@ package com.acme.artikel.rest
 
 import com.acme.artikel.service.ArtikelService
 import entity.Artikel
-import graphql.normalized.FieldCollectorNormalizedQueryParams
 import kotlinx.coroutines.flow.toList
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
@@ -43,9 +42,7 @@ class ArtikelController(private val service: ArtikelService) {
     }
 
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
-    suspend fun find(
-        @RequestParam queryParams: Map<String,String>
-    ): ResponseEntity<Collection<Artikel>> {
+    suspend fun find( @RequestParam queryParams: Map<String,String>): ResponseEntity<Collection<Artikel>> {
         val artikel = mutableListOf<Artikel>()
         service.find(queryParams).toList(artikel)
         if(artikel.isEmpty()) {
