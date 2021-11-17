@@ -116,9 +116,9 @@ class ArtikelService {
     }
 
     /**
-     * Initializiert nur den Logger
+     * Konstanten für die Service Klasse
      */
     private companion object {
-        val logger: Logger = LoggerFactory.getLogger(ArtikelController::class.java)
+        val logger: Logger = LoggerFactory.getLogger(ArtikelService::class.java)
     }
 }
