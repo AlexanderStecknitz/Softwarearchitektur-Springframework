@@ -1,0 +1,9 @@
+GET {{baseUrl}}/api
+Accept: application/json
+ALPN: h2
+
+###
+
+GET {{baseUrl}}/api/3232
+Accept: application/json
+ALPN: h2

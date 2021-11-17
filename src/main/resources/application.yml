@@ -1,0 +1,89 @@
+# Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+server:
+  #port: 8080
+  compression:
+    enabled: true
+    mime-types: application/hal+json
+    min-response-size: 2KB
+  error.whitelabel.enabled: false
+  http2.enabled: true
+  ssl:
+    enabled: true
+    enabled-protocols: TLSv1.3,TLSv1.2
+    key-alias: microservice
+    key-password: zimmermann
+    key-store: classpath:keystore.p12
+    key-store-password: zimmermann
+    key-store-type: PKCS12
+    protocol: TLS
+    trust-store: classpath:truststore.p12
+    trust-store-password: zimmermann
+    trust-store-type: PKCS12
+
+spring:
+  aop.proxy-target-class: false
+  application.name: kunde
+  # Spring Data wird erst ab Beispiel 2 genutzt
+  data.mongodb.repositories.type: none
+  jackson.default-property-inclusion: non_null
+  lifecycle.timeout-per-shutdown-phase: 3s
+  main:
+    lazy-initialization: true
+    web-application-type: reactive
+  # fuer Images mit GraalVM Native
+  native.remove-unused-autoconfig: true
+  security.user.password: p
+  spel.ignore: true
+
+management:
+  endpoints.web.exposure.include: "*"
+  #endpoint.shutdown.enabled: true
+
+info.app:
+  author: Juergen Zimmermann
+  lecture: Softwarearchitektur
+  semester: 3
+  studiengang: Wirtschaftsinformatik und Microservices
+
+---
+# alternativ: azure_app_service, sap, heroku
+spring.config.activate.on-cloud-platform: kubernetes
+management.endpoint.health:
+  enabled: true
+  probes.enabled: true
+  show-details: ALWAYS
+server.shutdown: graceful
+spring.lifecycle.timeout-per-shutdown-phase: 30s
+
+---
+spring:
+  config.activate.on-profile: dev
+  jackson.serialization.indent-output: true
+  reactor.debugagent.enabled: true
+  # Pfad fuer GraphQL: /graphql
+  # Pfad für GraphiQL: /graphiql
+  # Pfad für Schema:   /graphql/schema
+  graphql:
+    #graphiql.enabled: false
+    schema.printer.enabled: true
+    websocket.path: /graphql
+  #devtools:
+  #  livereload.enabled: false
+  #  restart.trigger-file: /restart.txt
+  #http.log-request-details: true
+  # siehe org.springframework.boot.autoconfigure.jackson.JacksonProperties
