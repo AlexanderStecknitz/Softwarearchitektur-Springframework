@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController
 @Tag(name="Artikel API")
 class ArtikelController(private val service: ArtikelService) {
 
+    /*
     /**
      * Liefert mehrere Mock-Objekte
      */
@@ -43,6 +44,7 @@ class ArtikelController(private val service: ArtikelService) {
         service.findAll().toList(artikel)
         return ok(artikel)
     }
+     */
 
     /**
      * Liefert ein bestimmtes Mock-Objekte mit einer ID
