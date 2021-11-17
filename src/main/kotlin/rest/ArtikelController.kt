@@ -41,6 +41,9 @@ class ArtikelController(private val service: ArtikelService) {
         return ok(artikel)
     }
 
+    /**
+     * Liefert ein bestimmtes Mock-Objekt mit den angegebenen Querys
+     */
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
     suspend fun find(@RequestParam queryParams: Map<String, String>): ResponseEntity<Collection<Artikel>> {
         val artikel = mutableListOf<Artikel>()
