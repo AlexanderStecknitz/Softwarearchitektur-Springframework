@@ -94,7 +94,7 @@ class ArtikelService {
      * Man geht hier davon aus, dass der Verkaufspreis nicht 0 sein kann
      */
     suspend fun findByVerkaufspreis(preis: Int): Flow<Artikel> {
-        if(preis != 0) {
+        if (preis != 0) {
             return flowOf(
                 Artikel(id = 1, name = "Handschuh", einkaufsPreis = 20, verkaufsPreis = preis, bestand = 20),
                 Artikel(id = 2, name = "Kleid", einkaufsPreis = 10, verkaufsPreis = preis, bestand = 34),
