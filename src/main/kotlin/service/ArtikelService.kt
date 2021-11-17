@@ -33,7 +33,7 @@ class ArtikelService {
      */
     fun findById(id: Int?): Artikel? {
         logger.debug("findById={}", id)
-        id?.let { return Artikel(id = id, name = "Buch", einkaufsPreis = 12, verkaufsPreis = 30, bestand = 20)}
+        id?.let { return Artikel(id = id, name = "Buch", einkaufsPreis = 12, verkaufsPreis = 30, bestand = 20) }
         return null
     }
 
@@ -63,12 +63,13 @@ class ArtikelService {
     /**
      * Gibt ein Mock-Objekt zurück mit einem bestimmten Namen
      */
-    suspend fun findByName(name:String): Flow<Artikel> {
-        if(name.trim().isNotEmpty()){
+    suspend fun findByName(name: String): Flow<Artikel> {
+        if (name.trim().isNotEmpty()) {
             return flowOf(
                 Artikel(id = 1, name = name, einkaufsPreis = 12, verkaufsPreis = 30, bestand = 20),
                 Artikel(id = 2, name = name, einkaufsPreis = 1, verkaufsPreis = 3, bestand = 34),
-                Artikel(id = 3, name = name, einkaufsPreis = 1, verkaufsPreis = 4, bestand = 98),)
+                Artikel(id = 3, name = name, einkaufsPreis = 1, verkaufsPreis = 4, bestand = 98),
+            )
         }
         return findAll()
     }
@@ -77,8 +78,8 @@ class ArtikelService {
      * Gibt ein Mock-Objekt zurück mit einem bestimmten Einkaufspreis
      * Man geht hier davon aus, dass der Einkaufspreis nicht 0 sein kann
      */
-    suspend fun findByEinkaufspreis(preis:Int): Flow<Artikel> {
-        if(preis != 0) {
+    suspend fun findByEinkaufspreis(preis: Int): Flow<Artikel> {
+        if (preis != 0) {
             return flowOf(
                 Artikel(id = 1, name = "Tablet", einkaufsPreis = preis, verkaufsPreis = 30, bestand = 20),
                 Artikel(id = 2, name = "Laptop", einkaufsPreis = preis, verkaufsPreis = 3, bestand = 34),
@@ -92,7 +93,7 @@ class ArtikelService {
      * Gibt ein Mock-Objekt zurück mit einem bestimmten Verkaufspreis
      * Man geht hier davon aus, dass der Verkaufspreis nicht 0 sein kann
      */
-    suspend fun findByVerkaufspreis(preis:Int): Flow<Artikel> {
+    suspend fun findByVerkaufspreis(preis: Int): Flow<Artikel> {
         if(preis != 0) {
             return flowOf(
                 Artikel(id = 1, name = "Handschuh", einkaufsPreis = 20, verkaufsPreis = preis, bestand = 20),
@@ -106,7 +107,7 @@ class ArtikelService {
     /**
      * Gibt ein Mock-Objekt zurück mit einem bestimmten Bestand
      */
-    suspend fun findByBestand(bestand:Int): Flow<Artikel> {
+    suspend fun findByBestand(bestand: Int): Flow<Artikel> {
         return flowOf(
             Artikel(id = 1, name = "Tablet", einkaufsPreis = 20, verkaufsPreis = bestand, bestand = 20),
             Artikel(id = 2, name = "Laptop", einkaufsPreis = 10, verkaufsPreis = bestand, bestand = 34),

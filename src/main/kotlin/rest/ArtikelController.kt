@@ -42,10 +42,10 @@ class ArtikelController(private val service: ArtikelService) {
     }
 
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
-    suspend fun find( @RequestParam queryParams: Map<String,String>): ResponseEntity<Collection<Artikel>> {
+    suspend fun find(@RequestParam queryParams: Map<String, String>): ResponseEntity<Collection<Artikel>> {
         val artikel = mutableListOf<Artikel>()
         service.find(queryParams).toList(artikel)
-        if(artikel.isEmpty()) {
+        if (artikel.isEmpty()) {
             return notFound().build()
         }
         return ok(null)
