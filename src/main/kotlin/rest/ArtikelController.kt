@@ -66,6 +66,9 @@ class ArtikelController(private val service: ArtikelService) {
     }
 
     companion object {
+        /**
+         * Konstante für den API-Path
+         */
         const val API_PATH = "/api"
         private val logger: Logger = LoggerFactory.getLogger(ArtikelController::class.java)
     }
