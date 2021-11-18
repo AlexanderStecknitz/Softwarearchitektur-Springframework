@@ -199,22 +199,22 @@ class ArtikelService {
                 id = 1,
                 name = "Gitarre",
                 einkaufsPreis = 20,
-                verkaufsPreis = bestand,
-                bestand = 20,
+                verkaufsPreis = 23,
+                bestand = bestand,
             ),
             Artikel(
                 id = 2,
                 name = "Schlagzeug",
                 einkaufsPreis = 10,
-                verkaufsPreis = bestand,
-                bestand = 34,
+                verkaufsPreis = 21,
+                bestand = bestand,
             ),
             Artikel(
                 id = 3,
                 name = "Posaune",
                 einkaufsPreis = 50,
-                verkaufsPreis = bestand,
-                bestand = 98,
+                verkaufsPreis = 60,
+                bestand = bestand,
             ),
         )
     }
