@@ -197,21 +197,21 @@ class ArtikelService {
         return flowOf(
             Artikel(
                 id = 1,
-                name = "Tablet",
+                name = "Gitarre",
                 einkaufsPreis = 20,
                 verkaufsPreis = bestand,
                 bestand = 20,
             ),
             Artikel(
                 id = 2,
-                name = "Laptop",
+                name = "Schlagzeug",
                 einkaufsPreis = 10,
                 verkaufsPreis = bestand,
                 bestand = 34,
             ),
             Artikel(
                 id = 3,
-                name = "PC",
+                name = "Posaune",
                 einkaufsPreis = 50,
                 verkaufsPreis = bestand,
                 bestand = 98,
