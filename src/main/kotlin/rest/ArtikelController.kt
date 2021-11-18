@@ -35,8 +35,10 @@ class ArtikelController(private val service: ArtikelService) {
     @GetMapping(path = ["/{id:[1-9][0-9]*}"], produces = [APPLICATION_JSON_VALUE])
     @Operation(summary = "Suche mit einer Artikel-ID", tags = ["Suchen"])
     @ApiResponses(
-        ApiResponse(responseCode = "200", description = "Artikel wurde gefunden"),
-        ApiResponse(responseCode = "400", description = "Artikel konnte nicht gefunden werden"),
+        ApiResponse(responseCode = "200",
+                    description = "Artikel wurde gefunden"),
+        ApiResponse(responseCode = "400",
+                    description = "Artikel konnte nicht gefunden werden"),
     )
     fun findById(@PathVariable id: Int?): ResponseEntity<Artikel> {
         logger.debug("findById: id={}", id)
@@ -49,10 +51,13 @@ class ArtikelController(private val service: ArtikelService) {
      * Liefert ein bestimmtes Mock-Objekt mit den angegebenen Querys
      */
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
-    @Operation(summary = "Suche mit Suchkriterien", tags = ["Suchen"])
+    @Operation(summary = "Suche mit Suchkriterien",
+               tags = ["Suchen"])
     @ApiResponses(
-        ApiResponse(responseCode = "200", description = "CollectionModel mit den Artikeln"),
-        ApiResponse(responseCode = "400", description = "Keine Artikel gefunden"),
+        ApiResponse(responseCode = "200",
+                    description = "CollectionModel mit den Artikeln"),
+        ApiResponse(responseCode = "400",
+                    description = "Keine Artikel gefunden"),
     )
     suspend fun find(@RequestParam queryParams: Map<String, String>): ResponseEntity<Collection<Artikel>> {
         logger.debug("find: queryParams={}", queryParams)
