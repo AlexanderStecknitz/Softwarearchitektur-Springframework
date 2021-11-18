@@ -16,7 +16,8 @@ import org.springframework.stereotype.Service
 class ArtikelService {
 
     /**
-     * Gibt alle Mock-Objekte zurück
+     * Sucht nach allen Artikeln
+     * @return Ein Flow mit Artikeln
      */
     private fun findAll(): Flow<Artikel> {
         logger.debug("find: all")
@@ -46,7 +47,10 @@ class ArtikelService {
     }
 
     /**
-     * Gibt ein Mock-Objekt zurück mit einer bestimmten ID
+     * Sucht einen Artikel mit einer bestimmten ID
+     * @param id Die ID des gesuchten Artikels
+     * @return Ein Artikel mit der übergegeben ID
+     * oder null wenn es keinen Artikel mit der entsprechenden ID gibt.
      */
     fun findById(id: Int?): Artikel? {
         logger.debug("findById={}", id)
@@ -64,7 +68,9 @@ class ArtikelService {
     }
 
     /**
-     * Gibt ein passendes Mock-Objekt bei den Querys zurück
+     * Sucht einen passenden Artikel zu den Query-Parametern
+     * @param suchkriterien Die Suchkriterien für den Artikel
+     * @return Gibt ein Flow mit Artikeln zurück die zu den Suchkriterien passen
      */
     @Suppress("ReturnCount")
     fun find(suchkriterien: Map<String, String>): Flow<Artikel> {
@@ -87,7 +93,10 @@ class ArtikelService {
     }
 
     /**
-     * Gibt ein Mock-Objekt zurück mit einem bestimmten Namen
+     * Sucht einen Artikel mit einem bestimmten Namen
+     * @param name Der Name des gesuchten Artikels
+     * @return Ein Artikel mit dem übergegeben Namen
+     * oder alle, wenn name nicht angegeben wird
      */
     private fun findByName(name: String): Flow<Artikel> {
         if (name.trim().isNotEmpty()) {
@@ -119,8 +128,9 @@ class ArtikelService {
     }
 
     /**
-     * Gibt ein Mock-Objekt zurück mit einem bestimmten Einkaufspreis
-     * Man geht hier davon aus, dass der Einkaufspreis nicht 0 sein kann
+     * Sucht einen Artikel mit einem bestimmten Einkaufspreis
+     * @param preis Der Einkaufspreis des gesuchten Artikels
+     * @return Ein Artikel mit dem übergegeben Einkaufspreis
      */
     private fun findByEinkaufspreis(preis: Int): Flow<Artikel> {
         return flowOf(
@@ -149,8 +159,9 @@ class ArtikelService {
     }
 
     /**
-     * Gibt ein Mock-Objekt zurück mit einem bestimmten Verkaufspreis
-     * Man geht hier davon aus, dass der Verkaufspreis nicht 0 sein kann
+     * Sucht einen Artikel mit einem bestimmten Verkaufspreis
+     * @param preis Der Verkaufspreis des gesuchten Artikels
+     * @return Ein Artikel mit dem übergegeben Verkaufspreis
      */
     private fun findByVerkaufspreis(preis: Int): Flow<Artikel> {
         return flowOf(
@@ -178,7 +189,9 @@ class ArtikelService {
     }
 
     /**
-     * Gibt ein Mock-Objekt zurück mit einem bestimmten Bestand
+     * Sucht einen Artikel mit einem bestimmten Bestand
+     * @param bestand Der Bestand des gesuchten Artikels
+     * @return Ein Artikel mit dem übergegeben Bestand
      */
     private fun findByBestand(bestand: Int): Flow<Artikel> {
         return flowOf(

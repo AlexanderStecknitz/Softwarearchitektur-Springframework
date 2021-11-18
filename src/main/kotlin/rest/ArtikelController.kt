@@ -22,7 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 /**
- * Rest Controller zur Steuerung der eingegangenen Requests
+ * Eine @RestController Klasse beschreibt die eine REST-Schnittstelle
+ * @property service Ein ArtikelService Objekt mit dem die Artikel per Funktion gefunden werden können
  */
 @RestController
 @RequestMapping(ArtikelController.API_PATH)
@@ -31,6 +32,8 @@ class ArtikelController(private val service: ArtikelService) {
 
     /**
      * Liefert ein bestimmtes Mock-Objekte mit einer ID
+     * @param id Die ID zum suchen eines Artikels
+     * @return Bei gefundem Artikel ein 200 Response mit dem Artikel oder 404 bei einem nicht gefundenen
      */
     @GetMapping(path = ["/{id:[1-9][0-9]*}"], produces = [APPLICATION_JSON_VALUE])
     @Operation(summary = "Suche mit einer Artikel-ID", tags = ["Suchen"])
@@ -52,7 +55,10 @@ class ArtikelController(private val service: ArtikelService) {
     }
 
     /**
-     * Liefert ein bestimmtes Mock-Objekt mit den angegebenen Querys
+     * Sucht einen bestimmten Artikel mit den angegebenen Query-Parametern
+     * @param queryParams Die Query-Parameter als Map
+     * @return Bei gefundem Artikel ein 200 Response mit dem Artikel oder
+     * 404 bei einem nicht gefundenen. Sollten  die Query-Parameter leer sein werden alle Artikel ausgegeben
      */
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
     @Operation(
