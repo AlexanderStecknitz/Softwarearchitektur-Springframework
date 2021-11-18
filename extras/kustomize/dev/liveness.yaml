@@ -17,12 +17,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kunde-v1
+  name: mitarbeiter-v1
 spec:
   template:
     spec:
       containers:
-        - name: kunde
+        - name: mitarbeiter
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness

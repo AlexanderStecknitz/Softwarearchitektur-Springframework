@@ -19,12 +19,12 @@ apiVersion: apps/v1
 kind: Deployment
 # Beschreibung des Deplyoments ("Metadaten")
 metadata:
-  name: kunde-v1
+  name: mitarbeiter-v1
   # Kennzeichen bzw. Markierung
   # https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
   # https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels
   labels:
-    app: kunde
+    app: mitarbeiter
     version: 1.0.0
 spec:
   # https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#selector
@@ -34,7 +34,7 @@ spec:
     #              kubectl delete deployment/kunde-v1 --namespace acme
     # gleicher Wert wie in template.metadata.labels
     matchLabels:
-      app: kunde
+      app: mitarbeiter
       version: 1.0.0
   # Anzahl laufender Pods fuer das Template zu diesem Deployment (s.u.)
   replicas: 1
@@ -44,25 +44,25 @@ spec:
     metadata:
       # Labels fuer einen laufenden Pod
       labels:
-        app: kunde
+        app: mitarbeiter
         version: 1.0.0
     # Spezifikation des Pod
     spec:
-      serviceAccountName: acme-kunde
+      serviceAccountName: acme-mitarbeiter
       containers:
         # https://kubernetes.io/docs/concepts/containers/images
-        - image: docker.io/juergenzimmermann/kunde:1.0.0
+        - image: docker.io/juergenzimmermann/mitarbeiter:1.0.0
           #image: docker.io/juergenzimmermann/kunde:1.0.0-dockerfile
           #image: docker.io/juergenzimmermann/kunde:1.0.0-jib
           # default
           imagePullPolicy: IfNotPresent
-          name: kunde
+          name: mitarbeiter
           # https://kubernetes.io/docs/tasks/inject-data-application/define-interdependent-environment-variables
           # https://opensource.com/article/19/6/introduction-kubernetes-secrets-and-configmaps
           envFrom:
             # https://kubernetes.io/docs/concepts/configuration/configmap
             - configMapRef:
-                name: kunde-env-v1
+                name: mitarbeiter-env-v1
           # System-Properties fuer Jib, z.B. spring.profiles.active, spring.data.mongodb.username
           # https://github.com/GoogleContainerTools/jib/blob/master/docs/faq.md#jvm-flags
           # funktioniert jedoch nicht mit dem Gradle-Plugin von Spring Boot, deshalb ConfigMap mit Umgebungsvariablen
@@ -134,9 +134,9 @@ spec:
             failureThreshold: 2
           volumeMounts:
             - mountPath: /tmp
-              name: log-kunde-v1
+              name: log-mitarbeiter-v1
       volumes:
-        - name: log-kunde-v1
+        - name: log-mitarbeiter-v1
           # https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
           hostPath:
             path: /run/desktop/mnt/host/c/Zimmermann/volumes/kunde-v1

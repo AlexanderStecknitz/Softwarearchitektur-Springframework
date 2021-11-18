@@ -19,12 +19,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kunde
+  name: mitarbeiter
   labels:
-    app: kunde
+    app: mitarbeiter
 spec:
   # Selektion der Pods fuer eingehende Requests
   selector:
-    app: kunde
+    app: mitarbeiter
   ports:
     - port: 8080

@@ -28,7 +28,7 @@ resources:
 # https://github.com/kubernetes-sigs/kustomize/blob/master/examples/configGeneration.md
 # https://github.com/kubernetes-sigs/kustomize/blob/master/examples/generatorOptions.md
 configMapGenerator:
-  - name: kunde-env-v1
+  - name: mitarbeiter-env-v1
     behavior: merge
     literals:
       - SPRING_PROFILES_DEFAULT=dev
