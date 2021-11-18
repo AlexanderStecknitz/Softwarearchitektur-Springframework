@@ -129,29 +129,29 @@ class ArtikelService {
 
     /**
      * Sucht einen Artikel mit einem bestimmten Einkaufspreis
-     * @param preis Der Einkaufspreis des gesuchten Artikels
+     * @param einkaufspreis Der Einkaufspreis des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Einkaufspreis
      */
-    private fun findByEinkaufspreis(preis: Int): Flow<Artikel> {
+    private fun findByEinkaufspreis(einkaufspreis: Int): Flow<Artikel> {
         return flowOf(
             Artikel(
                 id = 1,
                 name = "Tablet",
-                einkaufsPreis = preis,
+                einkaufsPreis = einkaufspreis,
                 verkaufsPreis = 30,
                 bestand = 20,
             ),
             Artikel(
                 id = 2,
                 name = "Laptop",
-                einkaufsPreis = preis,
+                einkaufsPreis = einkaufspreis,
                 verkaufsPreis = 3,
                 bestand = 34,
             ),
             Artikel(
                 id = 3,
                 name = "PC",
-                einkaufsPreis = preis,
+                einkaufsPreis = einkaufspreis,
                 verkaufsPreis = 4,
                 bestand = 98,
             ),
@@ -160,29 +160,29 @@ class ArtikelService {
 
     /**
      * Sucht einen Artikel mit einem bestimmten Verkaufspreis
-     * @param preis Der Verkaufspreis des gesuchten Artikels
+     * @param verkaufspreis Der Verkaufspreis des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Verkaufspreis
      */
-    private fun findByVerkaufspreis(preis: Int): Flow<Artikel> {
+    private fun findByVerkaufspreis(verkaufspreis: Int): Flow<Artikel> {
         return flowOf(
             Artikel(
                 id = 1,
                 name = "Handschuh",
                 einkaufsPreis = 20,
-                verkaufsPreis = preis,
+                verkaufsPreis = verkaufspreis,
                 bestand = 20,
             ),
             Artikel(
                 id = 2,
                 name = "Kleid",
                 einkaufsPreis = 10,
-                verkaufsPreis = preis,
+                verkaufsPreis = verkaufspreis,
                 bestand = 34,
             ),
             Artikel(
                 id = 3, name = "Hemd",
                 einkaufsPreis = 50,
-                verkaufsPreis = preis,
+                verkaufsPreis = verkaufspreis,
                 bestand = 98,
             ),
         )
