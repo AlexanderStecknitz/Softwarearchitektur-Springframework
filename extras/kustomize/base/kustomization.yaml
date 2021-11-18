@@ -25,7 +25,7 @@ namespace: acme
 # https://github.com/kubernetes-sigs/kustomize/blob/master/examples/configGeneration.md
 # https://github.com/kubernetes-sigs/kustomize/blob/master/examples/generatorOptions.md
 configMapGenerator:
-  - name: mitarbeiter-env-v1
+  - name: artikel-env-v1
     literals:
       - TZ=Europe/Berlin
       - LANG=de_DE.utf8
