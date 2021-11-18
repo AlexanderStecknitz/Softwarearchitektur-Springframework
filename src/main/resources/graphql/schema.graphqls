@@ -1,0 +1,113 @@
+# Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+type Query {
+  kunde(id: ID!): Kunde
+  kunden(input: Suchkriterien): [Kunde!]
+}
+
+type Mutation {
+  create(input: KundeInput!): CreatePayload
+}
+
+# https://spec.graphql.org/draft/#sec-Types
+"Eigenschaften eines Kunde-Datensatzes mit untergeordneten Eigenschaften"
+type Kunde {
+  id: ID
+  nachname: String!
+  email: String!
+  kategorie: Int!
+  newsletter: Boolean!
+  geburtsdatum: String
+  homepage: String
+  geschlecht: String
+  familienstand: String
+  interessen: [String!]
+  umsatz: Umsatz
+  adresse: Adresse!
+}
+
+type Umsatz {
+  betrag: String!
+  waehrung: String!
+}
+
+type Adresse {
+  plz: String!
+  ort: String!
+}
+
+# https://spec.graphql.org/draft/#sec-Input-Objects
+input Suchkriterien {
+  nachname: String
+  email: String
+}
+
+input KundeInput {
+  nachname: String!
+  email: String!
+  kategorie: Int!
+  newsletter: Boolean!
+  geburtsdatum: String
+  homepage: String
+  # damit toSting() vom Enum-Wert aufgerufen wird
+  geschlecht: Geschlecht
+  familienstand: Familienstand
+  interessen: [Interesse!]
+  umsatz: UmsatzInput
+  adresse: AdresseInput!
+}
+
+enum Geschlecht {
+  W
+  "maennlich"
+  M
+  "divers"
+  D
+}
+
+enum Familienstand {
+  "ledig"
+  L
+  "verheiratet"
+  V
+  "geschieden"
+  G
+  "verwitwet"
+  VW
+}
+
+enum Interesse {
+  "Sport"
+  S
+  "Lesen"
+  L
+  "Reisen"
+  R
+}
+
+input UmsatzInput {
+  betrag: String!
+  waehrung: String!
+}
+
+input AdresseInput {
+  plz: String!
+  ort: String!
+}
+
+type CreatePayload {
+  id: String!
+}
