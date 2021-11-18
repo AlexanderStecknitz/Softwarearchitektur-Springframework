@@ -26,25 +26,8 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping(ArtikelController.API_PATH)
-@Tag(name="Artikel API")
+@Tag(name = "Artikel API")
 class ArtikelController(private val service: ArtikelService) {
-
-    /*
-    /**
-     * Liefert mehrere Mock-Objekte
-     */
-    @GetMapping(produces = [APPLICATION_JSON_VALUE])
-    @Operation(summary = "Gibt alle Artikel zurück", tags = ["Suchen"])
-    @ApiResponses(
-        ApiResponse(responseCode = "200", description = "Alle Artikel gefunden"),
-        ApiResponse(responseCode = "400", description = "Keinen Artikel gefunden")
-    )
-    suspend fun findAll(): ResponseEntity<List<Artikel>> {
-        val artikel = mutableListOf<Artikel>()
-        service.findAll().toList(artikel)
-        return ok(artikel)
-    }
-     */
 
     /**
      * Liefert ein bestimmtes Mock-Objekte mit einer ID
@@ -53,7 +36,7 @@ class ArtikelController(private val service: ArtikelService) {
     @Operation(summary = "Suche mit einer Artikel-ID", tags = ["Suchen"])
     @ApiResponses(
         ApiResponse(responseCode = "200", description = "Artikel wurde gefunden"),
-        ApiResponse(responseCode = "400", description = "Artikel konnte nicht gefunden werden")
+        ApiResponse(responseCode = "400", description = "Artikel konnte nicht gefunden werden"),
     )
     fun findById(@PathVariable id: Int?): ResponseEntity<Artikel> {
         logger.debug("findById: id={}", id)
@@ -69,7 +52,7 @@ class ArtikelController(private val service: ArtikelService) {
     @Operation(summary = "Suche mit Suchkriterien", tags = ["Suchen"])
     @ApiResponses(
         ApiResponse(responseCode = "200", description = "CollectionModel mit den Artikeln"),
-        ApiResponse(responseCode = "400", description = "Keine Artikel gefunden")
+        ApiResponse(responseCode = "400", description = "Keine Artikel gefunden"),
     )
     suspend fun find(@RequestParam queryParams: Map<String, String>): ResponseEntity<Collection<Artikel>> {
         logger.debug("find: queryParams={}", queryParams)
@@ -81,6 +64,7 @@ class ArtikelController(private val service: ArtikelService) {
         logger.debug("find: {}", artikel)
         return ok(artikel)
     }
+
     companion object {
         const val API_PATH = "/api"
         private val logger: Logger = LoggerFactory.getLogger(ArtikelController::class.java)

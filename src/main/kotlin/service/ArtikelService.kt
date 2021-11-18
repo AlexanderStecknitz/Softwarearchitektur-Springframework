@@ -1,6 +1,5 @@
 package com.acme.artikel.service
 
-import com.acme.artikel.rest.ArtikelController
 import entity.Artikel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -33,7 +32,10 @@ class ArtikelService {
      */
     fun findById(id: Int?): Artikel? {
         logger.debug("findById={}", id)
-        id?.let { return Artikel(id = id, name = "Buch", einkaufsPreis = 12, verkaufsPreis = 30, bestand = 20) }
+        val artikel = Artikel(id = 10, name = "Buch", einkaufsPreis = 12, verkaufsPreis = 30, bestand = 20)
+        if (artikel.id == id) {
+            return artikel
+        }
         return null
     }
 
