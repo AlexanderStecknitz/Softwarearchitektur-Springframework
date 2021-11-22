@@ -54,17 +54,12 @@ class ArtikelReadService {
      */
     fun findById(id: Int?): Artikel? {
         logger.debug("findById={}", id)
-        val artikel = Artikel(
-            id = 10,
-            name = "Buch",
-            einkaufsPreis = 12,
-            verkaufsPreis = 30,
-            bestand = 20,
-        )
-        if (artikel.id == id) {
-            return artikel
-        }
-        return null
+        if(id != 1) return null
+        return Artikel(id = id,
+                        name = "Handschuh",
+                        einkaufsPreis = 12,
+                        verkaufsPreis = 24,
+                        bestand = 10)
     }
 
     /**
