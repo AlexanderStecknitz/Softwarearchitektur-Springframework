@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
  * Dies ist eine Mock-Klasse
  */
 @Service
-class ArtikelService {
+class ArtikelReadService {
 
     /**
      * Sucht nach allen Artikeln
@@ -223,6 +223,6 @@ class ArtikelService {
      * Konstanten für die Service Klasse
      */
     private companion object {
-        val logger: Logger = LoggerFactory.getLogger(ArtikelService::class.java)
+        val logger: Logger = LoggerFactory.getLogger(ArtikelReadService::class.java)
     }
 }

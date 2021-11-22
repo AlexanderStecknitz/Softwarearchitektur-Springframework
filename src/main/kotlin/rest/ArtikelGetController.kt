@@ -2,7 +2,7 @@
 
 package com.acme.artikel.rest
 
-import com.acme.artikel.service.ArtikelService
+import com.acme.artikel.service.ArtikelReadService
 import entity.Artikel
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.RestController
  * @property service Ein ArtikelService Objekt mit dem die Artikel per Funktion gefunden werden können
  */
 @RestController
-@RequestMapping(ArtikelController.API_PATH)
+@RequestMapping(ArtikelGetController.API_PATH)
 @Tag(name = "Artikel API")
-class ArtikelController(private val service: ArtikelService) {
+class ArtikelGetController(private val service: ArtikelReadService) {
 
     /**
      * Liefert ein bestimmtes Mock-Objekte mit einer ID
@@ -91,6 +91,6 @@ class ArtikelController(private val service: ArtikelService) {
          * Konstante für den API-Path
          */
         const val API_PATH = "/api"
-        private val logger: Logger = LoggerFactory.getLogger(ArtikelController::class.java)
+        private val logger: Logger = LoggerFactory.getLogger(ArtikelGetController::class.java)
     }
 }

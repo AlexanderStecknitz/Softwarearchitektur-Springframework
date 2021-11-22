@@ -1,7 +1,11 @@
 package entity
 
-/** Entität Artikel
- *
+/** Beschreibt einen Artikel
+ *  @property id Eindeutige ID eines Artikels
+ *  @property name Name des Artikels
+ *  @property einkaufsPreis EinkaufsPreis des Artikels
+ *  @property verkaufsPreis VerkaufsPreis des Artikels
+ *  @property bestand Derzeitiger Bestand des Artikels
  */
 data class Artikel(
     /**
