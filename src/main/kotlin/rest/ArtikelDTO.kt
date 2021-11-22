@@ -41,7 +41,7 @@ data class ArtikelDTO(
 
     /**
      * Rückhabewert
-     * @return True, dalls das zu vergleichende Objekt den gleichen Namen hat.
+     * @return hashCode von Name.
      */
     override fun hashCode() = name.hashCode()
 }
