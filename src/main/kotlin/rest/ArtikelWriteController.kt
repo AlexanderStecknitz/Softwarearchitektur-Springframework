@@ -45,7 +45,7 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
     ): ResponseEntity<GenericBody> {
         logger.debug("create: {}", artikelDTO)
 
-        return when (val result = service.create(artikelDTO.toArtikel())) {
+        return when (val result = service.create(artikel = artikelDTO.toArtikel())) {
             is CreateResult.Created -> {
                 logger.debug("create: {}", result)
                 val location = URI("${request.uri}/${result.artikel.id}")

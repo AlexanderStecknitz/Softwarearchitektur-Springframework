@@ -3,8 +3,10 @@ package com.acme.artikel.service
 import entity.Artikel
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.stereotype.Service
 import java.util.*
 
+@Service
 class ArtikelWriteService(private val validator: ArtikelValidator, private val readService: ArtikelReadService) {
 
     fun create(artikel: Artikel): CreateResult {
