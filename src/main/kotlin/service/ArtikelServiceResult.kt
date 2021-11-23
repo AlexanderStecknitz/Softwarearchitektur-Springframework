@@ -8,7 +8,7 @@ import entity.Artikel
 sealed interface CreateResult {
     data class Created(val artikel: Artikel) : CreateResult
     data class NameExists(val name: String) : CreateResult
-    data class ConstraintViolations(val violations: Collection<ConstraintViolations>): CreateResult
+    data class ConstraintViolations(val violations: Collection<ConstraintViolations>) : CreateResult
 }
 
 /**
@@ -17,6 +17,6 @@ sealed interface CreateResult {
 sealed interface UpdateResult {
     data class Updated(val artikel: Artikel) : UpdateResult
     data class NameExists(val name: String) : UpdateResult
-    data class ConstraintViolations(val violations: Collection<ConstraintViolations>): UpdateResult
+    data class ConstraintViolations(val violations: Collection<ConstraintViolations>) : UpdateResult
     object NotFound : UpdateResult
 }

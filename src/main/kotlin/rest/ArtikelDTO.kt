@@ -7,7 +7,7 @@ import entity.Artikel
  *  @property einkaufsPreis EinkaufsPreis des Artikels
  *  @property verkaufsPreis VerkaufsPreis des Artikels
  *  @property bestand Derzeitiger Bestand des Artikels
-*/
+ */
 data class ArtikelDTO(
     val name: String,
     val einkaufsPreis: Int,
@@ -32,8 +32,8 @@ data class ArtikelDTO(
      * @return True, dalls das zu vergleichende Objekt den gleichen Namen hat.
      */
     override fun equals(other: Any?): Boolean {
-        if(this === other) return true
-        if(javaClass != other?.javaClass) return false
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
 
         other as ArtikelDTO
         return name == other.name

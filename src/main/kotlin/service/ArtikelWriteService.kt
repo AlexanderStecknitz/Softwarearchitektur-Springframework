@@ -12,7 +12,7 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
     fun create(artikel: Artikel): CreateResult {
         logger.debug("create: {}", artikel)
         val violations = validator.validate(artikel = artikel)
-        if(violations.isNotEmpty()) {
+        if (violations.isNotEmpty()) {
             logger.debug("create: violations={}", violations)
         }
         if (artikel.name[0].lowercaseChar() == 'a') {
@@ -27,7 +27,7 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
     fun update(artikel: Artikel, id: Int): UpdateResult {
         logger.debug("update: {}", artikel)
         val violations = validator.validate(artikel = artikel)
-        if(violations.isNotEmpty()) {
+        if (violations.isNotEmpty()) {
             logger.debug("create: violations={}", violations)
         }
         if (readService.findById(id) == null) {

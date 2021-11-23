@@ -54,12 +54,14 @@ class ArtikelReadService {
      */
     fun findById(id: Int?): Artikel? {
         logger.debug("findById={}", id)
-        if(id != 1) return null
-        return Artikel(id = id,
-                        name = "Handschuh",
-                        einkaufsPreis = 12,
-                        verkaufsPreis = 24,
-                        bestand = 10)
+        if (id != 1) return null
+        return Artikel(
+            id = id,
+            name = "Handschuh",
+            einkaufsPreis = 12,
+            verkaufsPreis = 24,
+            bestand = 10,
+        )
     }
 
     /**

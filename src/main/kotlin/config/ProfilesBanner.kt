@@ -22,7 +22,7 @@ import org.springframework.core.env.Environment
 import org.springframework.security.core.SpringSecurityCoreVersion
 import java.io.PrintStream
 import java.net.InetAddress
-import java.util.Locale
+import java.util.*
 
 /**
  * Singleton-Klasse, um sinnvolle Konfigurationswerte für den Microservice vorzugeben.
