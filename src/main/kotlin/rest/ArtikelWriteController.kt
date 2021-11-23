@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
+/**
+ * RestController für die HTTP Methoden PUT und POST
+ * @property service ArtikelWriteService Klasse
+ */
 @RestController
 @RequestMapping(API_PATH)
 @Tag(name = "Artikel API")

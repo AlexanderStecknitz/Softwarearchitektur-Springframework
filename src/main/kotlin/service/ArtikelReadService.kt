@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service
 /**
  * Service Klasse für die Entität Artikel
  * Dies ist eine Mock-Klasse
+ * @author [Alexander Stecknitz]
  */
 @Service
 class ArtikelReadService {

@@ -6,9 +6,19 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.util.*
 
+/**
+ * Service Klasse für die HTTP-Methoden PUT und POST
+ * @constructor Einen ArtikelService mit einem injezierten ValidatorFactory erzeugen
+ * @author [Alexander Stecknitz]
+ */
 @Service
 class ArtikelWriteService(private val validator: ArtikelValidator, private val readService: ArtikelReadService) {
 
+    /**
+     * Einen neuen Artikel anlegen
+     * @param artikel Das Objekt des neuanzulegenden Artikels
+     * @return Ein Resultatobjekt mit entweder dem neu angelegten Artikel oder mit einem Fehlermeldungsobjekt
+     */
     fun create(artikel: Artikel): CreateResult {
         logger.debug("create: {}", artikel)
         val violations = validator.validate(artikel = artikel)
@@ -24,6 +34,12 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
         return CreateResult.Created(neuerArtikel)
     }
 
+    /**
+     * Einen vorhanden Artikel aktualisieren
+     * @param artikel Das Objekt mit den neuen Daten (ohne ID)
+     * @param id ID des zu aktualisierenden Artikels
+     * @return Ein Resultatobjekt mit entweder dem aktualisierenden Artikel oder mit einem Fehlermeldungsobjekt
+     */
     fun update(artikel: Artikel, id: Int): UpdateResult {
         logger.debug("update: {}", artikel)
         val violations = validator.validate(artikel = artikel)
@@ -43,7 +59,7 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
         return UpdateResult.Updated(neuerArtikel)
     }
 
-    companion object {
+    private companion object {
         val logger: Logger = LoggerFactory.getLogger(ArtikelWriteService::class.java)
         val random: Random = Random()
     }

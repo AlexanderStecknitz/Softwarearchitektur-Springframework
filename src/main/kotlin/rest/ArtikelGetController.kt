@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 /**
- * Eine @RestController Klasse beschreibt die eine REST-Schnittstelle
- * @property service Ein ArtikelService Objekt mit dem die Artikel per Funktion gefunden werden können
+ * RestController für die HTTP-Methode GET
+ * @property service ArtikelReadService Klasse
  */
 @RestController
 @RequestMapping(ArtikelGetController.API_PATH)

@@ -10,6 +10,11 @@ import entity.Artikel
 import org.springframework.context.MessageSource
 import org.springframework.stereotype.Service
 
+/**
+ * Validierung von Objekten der Klasse [Artikel]
+ *
+ * @author [Alexander Stecknitz]
+ */
 @Service
 class ArtikelValidator(messageSource: MessageSource) {
     private val validator = ValidatorBuilder.of<Artikel>()
@@ -48,10 +53,18 @@ class ArtikelValidator(messageSource: MessageSource) {
         }
         .build()
 
+    /**
+     * Validierung eines Entity-Objekts der Klasse [Artikel]
+     * @param artikel Das zu validierende Artikel-Objekt
+     * @return Eine Liste mit den Verletzungen der Constraints oder eine leere Liste
+     */
     fun validate(artikel: Artikel) = validator.validate(artikel)
 
+    /**
+     * Konstante für die Validierung
+     */
     companion object {
-        const val MIN_PREIS = 0
-        const val MIN_BESTAND = 0
+        private const val MIN_PREIS = 0
+        private const val MIN_BESTAND = 0
     }
 }
