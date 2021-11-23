@@ -56,7 +56,7 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
             }
             is CreateResult.ConstraintViolations -> {
                 logger.debug("create: verletzung der violations")
-                return ResponseEntity.badRequest().build()
+                ResponseEntity.badRequest().build()
             }
         }
     }
