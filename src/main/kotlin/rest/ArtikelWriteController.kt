@@ -28,7 +28,6 @@ import java.net.URI
 @Tag(name = "Artikel API")
 class ArtikelWriteController(private val service: ArtikelWriteService) {
 
-
     /**
      * Einen neuen Artikel-Datensatz anlegen.
      * @param artikelDTO Das Artikelobjekt als Data Transfer Objekt für den Request-Body

@@ -21,7 +21,7 @@ import am.ik.yavi.message.MessageSourceMessageFormatter
 import org.springframework.context.MessageSource
 import org.springframework.context.annotation.Bean
 import org.springframework.context.support.ReloadableResourceBundleMessageSource
-import java.util.*
+import java.util.Locale
 import java.util.Locale.ENGLISH
 
 /**

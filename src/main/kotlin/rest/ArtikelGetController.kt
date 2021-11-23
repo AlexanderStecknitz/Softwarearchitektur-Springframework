@@ -63,7 +63,7 @@ class ArtikelGetController(private val service: ArtikelReadService) {
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
     @Operation(
         summary = "Suche mit Suchkriterien",
-        tags = ["Suchen"],
+        tags = ["Suchen"]
     )
     @ApiResponses(
         ApiResponse(
