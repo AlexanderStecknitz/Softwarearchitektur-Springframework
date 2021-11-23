@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.http.ResponseEntity
 import org.springframework.http.server.ServerHttpRequest
 import org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.PathVariable
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.net.URI
 
 @RestController
 @RequestMapping(API_PATH)
@@ -40,18 +42,21 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
     fun create(
         @RequestBody artikelDTO: ArtikelDTO,
         request: ServerHttpRequest
-    ) {
+    ): ResponseEntity<GenericBody> {
         logger.debug("create: {}", artikelDTO)
 
-        when (val result = service.create(artikelDTO.toArtikel())) {
+        return when (val result = service.create(artikelDTO.toArtikel())) {
             is CreateResult.Created -> {
                 logger.debug("create: {}", result)
+                val location = URI("${request.uri}/${result.artikel.id}")
+                ResponseEntity.created(location).build()
             }
             is CreateResult.NameExists -> {
-                logger.debug("create: name existiert bereits {}", result.name)
+                ResponseEntity.badRequest().body(GenericBody.Text("${result.name} existiert beretis"))
             }
             is CreateResult.ConstraintViolations -> {
                 logger.debug("create: verletzung der violations")
+                return ResponseEntity.badRequest().build()
             }
         }
     }
@@ -70,22 +75,26 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
     fun update(
         @PathVariable id: Int,
         @RequestBody artikelDTO: ArtikelDTO
-    ) {
+    ): ResponseEntity<GenericBody> {
         logger.debug("update: id={}", id)
         logger.debug("update: {}", artikelDTO)
 
-        when (val result = service.update(artikel = artikelDTO.toArtikel(), id)) {
+        return when (val result = service.update(artikel = artikelDTO.toArtikel(), id)) {
             is UpdateResult.Updated -> {
                 logger.debug("update: updated {}", result)
+                return ResponseEntity.noContent().build()
             }
             is UpdateResult.NameExists -> {
                 logger.debug("update: name already exists{}", result.name)
+                ResponseEntity.badRequest().body(GenericBody.Text("${result.name} existiert beretis"))
             }
             is UpdateResult.NotFound -> {
                 logger.debug("update: id not found{}", id)
+                return ResponseEntity.notFound().build()
             }
             is UpdateResult.ConstraintViolations -> {
                 logger.debug("create: verletzung der violations")
+                return ResponseEntity.badRequest().build()
             }
         }
     }
