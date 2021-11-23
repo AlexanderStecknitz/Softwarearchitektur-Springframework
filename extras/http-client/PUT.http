@@ -1,0 +1,5 @@
+PUT {{baseUrl}}/api/1
+Content-Type: application/json
+ALPN: h2
+
+< data/artikel-1-put.json
