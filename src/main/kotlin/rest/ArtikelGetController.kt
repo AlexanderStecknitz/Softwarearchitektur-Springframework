@@ -90,7 +90,7 @@ class ArtikelGetController(private val service: ArtikelReadService) {
         /**
          * Konstante für den API-Path
          */
-        const val API_PATH = "/api1"
+        const val API_PATH = "/api"
         private val logger: Logger = LoggerFactory.getLogger(ArtikelGetController::class.java)
     }
 }
