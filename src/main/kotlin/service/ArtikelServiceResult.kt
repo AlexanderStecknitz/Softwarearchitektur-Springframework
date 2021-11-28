@@ -1,6 +1,23 @@
 package com.acme.artikel.service
 
+import am.ik.yavi.core.ConstraintViolation
 import entity.Artikel
+
+/**
+ * Resultat-Typ für [ArtikelReadService.findById].
+ */
+sealed interface FindByIdResult{
+    /**
+     * Resultat-Typ, wenn ein Artikel gefunden wurde
+     * @property artikel Der gefundene Artikel
+     */
+    data class Found(val artikel: Artikel): FindByIdResult
+
+    /**
+     * Resultat-Typ, wenn kein Artikel gefunden wurde
+     */
+    object NotFound: FindByIdResult
+}
 
 /**
  * Resultat-Typ für [ArtikelWriteService.create]
@@ -22,7 +39,7 @@ sealed interface CreateResult {
      * Resultat-Typ, wenn ein Artikel wegen Constraint-Verletzungen nicht angelegt wurde
      * @property violations Die verletzten Constraints
      */
-    data class ConstraintViolations(val violations: Collection<ConstraintViolations>) : CreateResult
+    data class ConstraintViolations(val violations: Collection<ConstraintViolation>) : CreateResult
 }
 
 /**

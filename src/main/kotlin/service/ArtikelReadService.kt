@@ -53,16 +53,16 @@ class ArtikelReadService {
      * @return Ein Artikel mit der übergegeben ID
      * oder null wenn es keinen Artikel mit der entsprechenden ID gibt.
      */
-    fun findById(id: Int?): Artikel? {
+    fun findById(id: Int?): FindByIdResult {
         logger.debug("findById={}", id)
-        if (id != 1) return null
-        return Artikel(
+        if (id != 1) return FindByIdResult.NotFound
+        return FindByIdResult.Found(Artikel(
             id = id,
             name = "Handschuh",
             einkaufsPreis = 12,
             verkaufsPreis = 24,
             bestand = 10,
-        )
+        ))
     }
 
     /**

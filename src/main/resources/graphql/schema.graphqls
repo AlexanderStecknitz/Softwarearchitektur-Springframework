@@ -14,39 +14,22 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 type Query {
-  kunde(id: ID!): Kunde
-  kunden(input: Suchkriterien): [Kunde!]
+  artikel(id: ID!): Artikel
+  artikels(input: Suchkriterien): [Artikel!]
 }
 
 type Mutation {
-  create(input: KundeInput!): CreatePayload
+  create(input: ArtikelInput!): CreatePayload
 }
 
 # https://spec.graphql.org/draft/#sec-Types
-"Eigenschaften eines Kunde-Datensatzes mit untergeordneten Eigenschaften"
-type Kunde {
+"Eigenschaften eines Artikel-Datensatzes mit untergeordneten Eigenschaften"
+type Artikel {
   id: ID
-  nachname: String!
-  email: String!
-  kategorie: Int!
-  newsletter: Boolean!
-  geburtsdatum: String
-  homepage: String
-  geschlecht: String
-  familienstand: String
-  interessen: [String!]
-  umsatz: Umsatz
-  adresse: Adresse!
-}
-
-type Umsatz {
-  betrag: String!
-  waehrung: String!
-}
-
-type Adresse {
-  plz: String!
-  ort: String!
+  name: String
+  einkaufsPreis: Int!
+  verkaufsPreis: Int!
+  bestand: Int!
 }
 
 # https://spec.graphql.org/draft/#sec-Input-Objects
@@ -55,57 +38,11 @@ input Suchkriterien {
   email: String
 }
 
-input KundeInput {
-  nachname: String!
-  email: String!
-  kategorie: Int!
-  newsletter: Boolean!
-  geburtsdatum: String
-  homepage: String
-  # damit toSting() vom Enum-Wert aufgerufen wird
-  geschlecht: Geschlecht
-  familienstand: Familienstand
-  interessen: [Interesse!]
-  umsatz: UmsatzInput
-  adresse: AdresseInput!
-}
-
-enum Geschlecht {
-  W
-  "maennlich"
-  M
-  "divers"
-  D
-}
-
-enum Familienstand {
-  "ledig"
-  L
-  "verheiratet"
-  V
-  "geschieden"
-  G
-  "verwitwet"
-  VW
-}
-
-enum Interesse {
-  "Sport"
-  S
-  "Lesen"
-  L
-  "Reisen"
-  R
-}
-
-input UmsatzInput {
-  betrag: String!
-  waehrung: String!
-}
-
-input AdresseInput {
-  plz: String!
-  ort: String!
+input ArtikelInput {
+  name: String!
+  einkaufsPreis: Int!
+  verkaufsPreis: Int!
+  bestand: Int!
 }
 
 type CreatePayload {

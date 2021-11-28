@@ -46,7 +46,7 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
         if (violations.isNotEmpty()) {
             logger.debug("create: violations={}", violations)
         }
-        if (readService.findById(id) == null) {
+        if (readService.findById(id) is FindByIdResult.NotFound) {
             return UpdateResult.NotFound
         }
 

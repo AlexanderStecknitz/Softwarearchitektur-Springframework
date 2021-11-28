@@ -3,6 +3,7 @@
 package com.acme.artikel.rest
 
 import com.acme.artikel.service.ArtikelReadService
+import com.acme.artikel.service.FindByIdResult
 import entity.Artikel
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -49,7 +50,10 @@ class ArtikelGetController(private val service: ArtikelReadService) {
     )
     fun findById(@PathVariable id: Int?): ResponseEntity<Artikel> {
         logger.debug("findById: id={}", id)
-        val artikel = service.findById(id) ?: return notFound().build()
+        val artikel = when(val result = service.findById(id)) {
+            is FindByIdResult.Found -> result.artikel
+            is FindByIdResult.NotFound -> return notFound().build()
+        }
         logger.trace("findById: {}", artikel)
         return ok(artikel)
     }
