@@ -1,0 +1,44 @@
+{
+  "name": "Artikel Schema",
+  "schemaPath": "../../src/main/resources/graphql/schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "HTTPS": {
+        "url": "https://localhost:8080/graphql",
+        "headers": {
+          "Accept-Language": "de",
+          "Authorization": "Basic YWRtaW46cA==",
+          "User-Agent": "JS GraphQL"
+        },
+        "introspect": true
+      },
+      "HTTPS Falsches Passwort": {
+        "url": "https://localhost:8080/graphql",
+        "headers": {
+          "Accept-Language": "de",
+          "Authorization": "Basic YWRtaW46RkFMU0NI",
+          "User-Agent": "JS GraphQL"
+        },
+        "introspect": false
+      },
+      "HTTP": {
+        "url": "http://localhost:8080/graphql",
+        "headers": {
+          "Accept-Language": "de",
+          "Authorization": "Basic YWRtaW46cA==",
+          "User-Agent": "JS GraphQL"
+        },
+        "introspect": true
+      },
+      "HTTP Falsches Passwort": {
+        "url": "http://localhost:8080/graphql",
+        "headers": {
+          "Accept-Language": "de",
+          "Authorization": "Basic YWRtaW46RkFMU0NI",
+          "User-Agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}
