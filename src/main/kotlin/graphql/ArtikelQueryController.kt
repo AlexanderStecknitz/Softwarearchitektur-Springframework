@@ -13,36 +13,54 @@ import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.stereotype.Controller
 import reactor.core.publisher.Flux
 
+/**
+ * Eine _Controller_-Klasse für das Lesen mit der GraphQL-Schnittstelle und den Typen aus dem GraphQL-Schema.
+ *
+ * @constructor Einen ArtikelQueryController mit einem injizierten [ArtikelReadService] erzeugen.
+ *
+ * @property service Injiziertes Objekt von [ArtikelReadService]
+ */
 @Controller
 @Suppress("unused")
 class ArtikelQueryController(val service: ArtikelReadService) {
 
+    /**
+     * Suche anhand der Artikel-ID als Pfad-Parameter
+     * @param id ID des zu suchenden Artikels
+     * @return Der gefundene Artikel
+     * @throws NotFoundException falls kein Artikel gefunden wurde
+     */
     @QueryMapping
     fun artikel(@Argument id: Int): Artikel {
         logger.debug("findById: id={}", id)
 
         val result = runBlocking { service.findById(id) }
-        if(result is FindByIdResult.NotFound) {
+        if (result is FindByIdResult.NotFound) {
             throw NotFoundException(id)
         }
         result as FindByIdResult.Found
         return result.artikel
     }
 
+    /**
+     * Suche mit diversen Suchkriterien
+     * @param input Suchkriterien und ihre Werte, z.B. `name` und `handschuh`
+     * @return Der gefundene Artikel
+     * @throws NotFoundException falls kein Artikel gefunden wurde
+     */
     @QueryMapping
     fun artikels(@Argument input: Map<String, String>): Flux<Artikel> {
         logger.debug("find: input={}", input)
         @Suppress("BlockingMethodInNonBlockingContext")
         val artikel = runBlocking {
             service.find(input)
-                .onEach { artikel -> logger.debug("find: {}", artikel)}
+                .onEach { artikel -> logger.debug("find: {}", artikel) }
                 .asFlux()
         }
         return artikel
     }
 
-    companion object {
+    private companion object {
         val logger: Logger = LoggerFactory.getLogger(ArtikelQueryController::class.java)
     }
-
 }

@@ -44,7 +44,7 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
     )
     fun create(
         @RequestBody artikelDTO: ArtikelDTO,
-        request: ServerHttpRequest
+        request: ServerHttpRequest,
     ): ResponseEntity<GenericBody> {
         logger.debug("create: {}", artikelDTO)
 
@@ -54,9 +54,8 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
                 val location = URI("${request.uri}/${result.artikel.id}")
                 ResponseEntity.created(location).build()
             }
-            is CreateResult.NameExists -> {
-                ResponseEntity.badRequest().body(GenericBody.Text("${result.name} existiert beretis"))
-            }
+            is CreateResult.NameExists -> ResponseEntity.badRequest()
+                .body(GenericBody.Text("${result.name} existiert beretis"))
             is CreateResult.ConstraintViolations -> {
                 logger.debug("create: verletzung der violations")
                 ResponseEntity.badRequest().build()
@@ -77,7 +76,7 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
     )
     fun update(
         @PathVariable id: Int,
-        @RequestBody artikelDTO: ArtikelDTO
+        @RequestBody artikelDTO: ArtikelDTO,
     ): ResponseEntity<GenericBody> {
         logger.debug("update: id={}", id)
         logger.debug("update: {}", artikelDTO)
@@ -105,5 +104,4 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
     private companion object {
         private val logger: Logger = LoggerFactory.getLogger(ArtikelWriteController::class.java)
     }
-
 }

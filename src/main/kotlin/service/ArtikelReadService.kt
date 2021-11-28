@@ -56,13 +56,15 @@ class ArtikelReadService {
     fun findById(id: Int?): FindByIdResult {
         logger.debug("findById={}", id)
         if (id != 1) return FindByIdResult.NotFound
-        return FindByIdResult.Found(Artikel(
-            id = id,
-            name = "Handschuh",
-            einkaufsPreis = 12,
-            verkaufsPreis = 24,
-            bestand = 10,
-        ))
+        return FindByIdResult.Found(
+            Artikel(
+                id = id,
+                name = "Handschuh",
+                einkaufsPreis = 12,
+                verkaufsPreis = 24,
+                bestand = 10,
+            ),
+        )
     }
 
     /**

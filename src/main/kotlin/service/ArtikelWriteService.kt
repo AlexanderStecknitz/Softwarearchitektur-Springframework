@@ -4,7 +4,7 @@ import entity.Artikel
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import java.util.*
+import java.util.Random
 
 /**
  * Service Klasse für die HTTP-Methoden PUT und POST
@@ -63,5 +63,4 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
         val logger: Logger = LoggerFactory.getLogger(ArtikelWriteService::class.java)
         val random: Random = Random()
     }
-
 }

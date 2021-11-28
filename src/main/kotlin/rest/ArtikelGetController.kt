@@ -50,7 +50,7 @@ class ArtikelGetController(private val service: ArtikelReadService) {
     )
     fun findById(@PathVariable id: Int?): ResponseEntity<Artikel> {
         logger.debug("findById: id={}", id)
-        val artikel = when(val result = service.findById(id)) {
+        val artikel = when (val result = service.findById(id)) {
             is FindByIdResult.Found -> result.artikel
             is FindByIdResult.NotFound -> return notFound().build()
         }

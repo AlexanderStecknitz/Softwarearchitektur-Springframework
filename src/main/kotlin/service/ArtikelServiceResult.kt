@@ -6,17 +6,17 @@ import entity.Artikel
 /**
  * Resultat-Typ für [ArtikelReadService.findById].
  */
-sealed interface FindByIdResult{
+sealed interface FindByIdResult {
     /**
      * Resultat-Typ, wenn ein Artikel gefunden wurde
      * @property artikel Der gefundene Artikel
      */
-    data class Found(val artikel: Artikel): FindByIdResult
+    data class Found(val artikel: Artikel) : FindByIdResult
 
     /**
      * Resultat-Typ, wenn kein Artikel gefunden wurde
      */
-    object NotFound: FindByIdResult
+    object NotFound : FindByIdResult
 }
 
 /**
