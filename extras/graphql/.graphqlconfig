@@ -6,8 +6,6 @@
       "HTTPS": {
         "url": "https://localhost:8080/graphql",
         "headers": {
-          "Accept-Language": "de",
-          "Authorization": "Basic YWRtaW46cA==",
           "User-Agent": "JS GraphQL"
         },
         "introspect": true

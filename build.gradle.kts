@@ -27,7 +27,7 @@
 //        .\gradlew bootJar
 //        java -jar build/libs/....jar --spring.profiles.active=dev
 //        .\gradlew bootBuildImage [-Dtag='2.0.0']
-//        .\gradlew jibDockerBuild  -DkotlinJvmTarget=11 -Dtag='1.0.0-jib' [-Ddebug=true]
+//        .\gradlew jibDockerBuild  -DjavaVersion=11 -Dtag='1.0.0-jib' [-Ddebug=true]
 //              erfordert die lokale Windows-Gruppe docker-users
 //
 //  3) Tests und QS
@@ -72,7 +72,7 @@
 //
 //  13) Initialisierung des Gradle Wrappers in der richtigen Version
 //      dazu ist ggf. eine Internetverbindung erforderlich
-//        gradle wrapper --gradle-version=7.3-rc-5 --distribution-type=bin
+//        gradle wrapper --gradle-version=7.3 --distribution-type=bin
 
 // https://github.com/gradle/kotlin-dsl/tree/master/samples
 // https://docs.gradle.org/current/userguide/kotlin_dsl.html
@@ -168,10 +168,10 @@ dependencies {
     // https://docs.gradle.org/current/userguide/managing_transitive_dependencies.html#sec:bom_import
     // https://github.com/JetBrains/kotlin/blob/master/libraries/tools/kotlin-bom/pom.xml
     implementation(platform(libs.kotlinBom))
-    //implementation(platform(libs.coroutinesBom))
+    implementation(platform(libs.coroutinesBom))
     // https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
     // https://github.com/netty/netty/issues/8537
-    implementation(platform(libs.nettyBom))
+    //implementation(platform(libs.nettyBom))
     //implementation(platform(libs.reactorBom))
     //implementation(platform(libs.jacksonBom))
     //implementation(platform(libs.springBom))
@@ -187,6 +187,7 @@ dependencies {
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 
     // "Starters" enthalten sinnvolle Abhaengigkeiten, die man i.a. benoetigt
+    // spring-boot-starter beinhaltet Spring Boot mit Actuator sowie spring-boot-starter-logging mit Logback
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-tomcat")
@@ -198,7 +199,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.security:spring-security-crypto")
     implementation("org.springframework.boot:spring-boot-starter-mail")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-actuator") {
+        // wegen Spring Native
+        exclude(group = "io.micrometer", module = "micrometer-core")
+    }
 
     //implementation(libs.javaNativeImage)
 
@@ -215,7 +219,9 @@ dependencies {
 
     // https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools
     // https://www.vojtechruzicka.com/spring-boot-devtools
-    runtimeOnly(libs.devtools)
+    // NICHT UNTERSTUETZT durch Spring Native
+    // runtimeOnly(libs.devtools)
+
     runtimeOnly(libs.jansi)
 
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
@@ -242,13 +248,14 @@ dependencies {
     constraints {
         implementation(libs.annotations)
         //implementation(libs.springHateoas)
-        implementation(libs.bundles.mongodb)
+        //implementation(libs.bundles.mongodb)
         //implementation(libs.bundles.tomcat)
         //implementation(libs.graphqlJava)
         //implementation(libs.bundles.graphqlJavaBundle)
         //implementation(libs.graphqlJava)
         implementation(libs.graphqlJavaDataloader)
         //implementation(libs.bundles.slf4jBundle)
+        //implementation(libs.logback)
         //implementation(libs.springSecurityRsa)
 
         ktlintCfg(libs.bundles.ktlint)
@@ -272,7 +279,7 @@ sweeney {
 
 tasks.compileJava {
     @Suppress("UNNECESSARY_SAFE_CALL", "USELESS_ELVIS")
-    targetCompatibility = JavaVersion.toVersion(System.getProperty("kotlinJvmTarget"))?.majorVersion ?: libs.versions.kotlinJvmTarget.get()
+    targetCompatibility = JavaVersion.toVersion(System.getProperty("javaVersion"))?.majorVersion ?: libs.versions.javaVersion.get()
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
@@ -281,10 +288,11 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         apiVersion = "1.7"
         languageVersion = "1.7"
 
-        jvmTarget = System.getProperty("kotlinJvmTarget") ?: libs.versions.kotlinJvmTarget.get()
+        jvmTarget = System.getProperty("javaVersion") ?: libs.versions.javaVersion.get()
         verbose = true
         freeCompilerArgs = listOfNotNull(
             "-Xjsr305=strict",
+            "-progressive",
             "-Xsuppress-version-warnings",
             "-Xstring-concat=indy-with-constants"
 
@@ -325,24 +333,37 @@ tasks.bootBuildImage {
         //"BP_JVM_VERSION" to "17.*"
         "BP_JVM_VERSION" to "17.0.1"
         //"BPL_JVM_THREAD_COUNT" to "50"
+
+        //"BP_BOOT_NATIVE_IMAGE" to "true",
+        // evtl. -H:+TraceClassInitialization
+        //"BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS" to """
+        //    --verbose
+        //    -H:+ReportExceptionStackTraces
+        //""".trimIndent()
     )
+    // evtl. -H:+TraceClassInitialization
+    // evtl. --initialize-at-build-time fuer Netty
 
     // Spring Native 0.11: Spring Boot 2.6, GraalVM 21.3, Java 17, Netty (NICHT: Tomcat), Gradle 7.x
     // https://github.com/paketo-buildpacks/spring-boot-native-image
     // https://github.com/paketo-buildpacks/builder
     // https://paketo.io/docs/getting-started/where-do-buildpacks-factor-in
     // https://github.com/spring-projects-experimental/spring-native
+    // https://docs.spring.io/spring-native/docs/0.11.0-RC1/reference/htmlsingle/#support-spring-boot
     //builder = "paketobuildpacks/builder:tiny"
-    //environment = mapOf(
-    //    "BP_BOOT_NATIVE_IMAGE" to "true",
-    //    "BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS" to """
-    //            -H:+ReportExceptionStackTraces
-    //        """.trimIndent()
-    //)
-    // evtl. -H:+TraceClassInitialization
-    // evtl. --initialize-at-build-time fuer Netty
-    //buildpacks = listOf("gcr.io/paketo-buildpacks/java-native-image:5.3.0")
+
+    // https://github.com/paketo-buildpacks/java-native-image/releases
+    //buildpacks = listOf("gcr.io/paketo-buildpacks/java-native-image:5.12.0")
 }
+
+// Fuer Spring Native und logback.xml:
+// https://docs.spring.io/spring-native/docs/0.11.0-RC1/reference/htmlsingle/#_starters_requiring_no_special_dependency_management
+// https://docs.spring.io/spring-native/docs/0.11.0-RC1/reference/htmlsingle/#spring-aot
+// https://github.com/spring-projects-experimental/spring-native/issues/625
+// https://github.com/spring-projects/spring-boot/issues/25847
+//springAot {
+//    removeXmlSupport.set(false)
+//}
 
 // https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin
 // https://github.com/GoogleContainerTools/jib/blob/master/docs/faq.md#why-is-my-image-created-48-years-ago
@@ -529,9 +550,9 @@ detekt {
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
     reports {
         val reportsDir = "$buildDir/reports"
-        xml { outputLocation.set(file("$reportsDir/detekt.xml")) }
-        html { outputLocation.set(file("$reportsDir/detekt.html")) }
-        txt { required.set(false) }
+        xml.outputLocation.set(file("$reportsDir/detekt.xml"))
+        html.outputLocation.set(file("$reportsDir/detekt.html"))
+        txt.required.set(false)
     }
 }
 
@@ -600,7 +621,7 @@ tasks.dokkaHtml {
         configureEach {
             includes.from("Module.md")
             reportUndocumented.set(true)
-            jdkVersion.set(libs.versions.kotlinJvmTarget.get().toInt())
+            jdkVersion.set(libs.versions.javaVersion.get().toInt())
             noStdlibLink.set(true)
             noJdkLink.set(true)
             failOnWarning.set(true)

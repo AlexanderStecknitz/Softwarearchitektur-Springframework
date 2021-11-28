@@ -1,5 +1,5 @@
 {
-  artikel(id: "1") {
+  artikel(id: 1) {
     name
     einkaufsPreis
     verkaufsPreis

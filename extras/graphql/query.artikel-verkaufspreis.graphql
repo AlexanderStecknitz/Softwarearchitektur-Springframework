@@ -1,5 +1,5 @@
 {
-  artikels(input: {verkaufsPreis: 20}) {
+  artikels(input: {verkaufsPreis: "20"}) {
     id
     einkaufsPreis
     verkaufsPreis

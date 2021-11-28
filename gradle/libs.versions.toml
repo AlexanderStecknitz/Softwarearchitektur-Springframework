@@ -18,15 +18,15 @@
 
 # table = Schluessel/Wert-Paare
 [versions]
-kotlin = "1.6.0-RC2"
-kotlinJvmTarget = "17"
+kotlin = "1.6.0"
+javaVersion = "17"
 
-springBoot = "2.6.0-RC1"
+springBoot = "2.6.0"
 springGraphQL = "1.0.0-M3"
 #graphqlJava = "17.3"
 graphqlJavaDataloader = "3.1.1"
 #javaNativeImage = "5.3.0"
-annotations = "22.0.0"
+annotations = "23.0.0"
 openapi = "1.5.12"
 yavi = "0.9.1"
 jansi = "2.4.0"
@@ -35,26 +35,27 @@ jansi = "2.4.0"
 allureBom = "2.16.1"
 #jackson = "2.13.0"
 #junit = "5.8.1"
-#kotlinCoroutines = "1.5.2"
-mongodb = "4.4.0-beta2"
-mongoDriverReactivestreams = "4.4.0-beta2"
-netty = "4.1.70.Final"
-#reactor = "2020.0.12"
+kotlinCoroutines = "1.6.0-RC"
+#logback = "1.2.7"
+#mongodb = "4.4.0"
+#mongoDriverReactivestreams = "4.4.0"
+#netty = "4.1.70.Final"
+#reactor = "2020.0.13"
 #slf4j = "1.7.32"
-#spring = "5.3.12"
-#springData = "2021.1.0-RC1"
-#springHateoas = "1.4.0-RC1"
-#springSecurity = "5.6.0-RC1"
-#tomcat = "9.0.53"
+#spring = "5.3.13"
+#springData = "2021.1.0"
+#springHateoas = "1.4.0"
+#springSecurity = "5.6.0"
+#tomcat = "9.0.55"
 
 # Testen
 junitPlatformSuite = "1.8.1"
-kotest = "5.0.0.M3"
-mockk = "1.12.0"
+kotest = "5.0.0"
+mockk = "1.12.1"
 
 # QS, Reports, Dokumentation
 ktlint = "0.43.0"
-ktlintKotlin = "1.6.0-RC2"
+ktlintKotlin = "1.6.0"
 jacoco = "0.8.7"
 allure = "2.16.1"
 allureCommandline = "2.16.1"
@@ -63,17 +64,17 @@ aspectjweaver = "1.9.8.M1"
 asciidoctorj = "2.5.2"
 asciidoctorjDiagram = "2.2.1"
 asciidoctorjPdf = "1.5.4"
-dokka = "1.5.31"
+dokka = "1.6.0"
 
 # Plugins
-kotlinPlugin = "1.6.0-RC2"
-#springAot = "0.10.3"
+kotlinPlugin = "1.6.0"
+#springAot = "0.11.0-RC1"
 testLogger = "3.1.0"
 allurePlugin = "2.9.6"
 sweeney = "4.4.0"
-detekt = "1.19.0-RC1"
+detekt = "1.19.0-RC2"
 jib = "3.1.4"
-owaspDependencycheck = "6.4.1.1"
+owaspDependencycheck = "6.5.0.1"
 snyk = "0.4"
 asciidoctor = "3.3.2"
 nwillc = "3.0.5"
@@ -82,8 +83,8 @@ licenseReport = "2.0"
 
 [libraries]
 kotlinBom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
-#coroutinesBom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "kotlinCoroutines" }
-nettyBom = { module = "io.netty:netty-bom", version.ref = "netty" }
+coroutinesBom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "kotlinCoroutines" }
+#nettyBom = { module = "io.netty:netty-bom", version.ref = "netty" }
 #reactorBom = { module = "io.projectreactor:reactor-bom", version.ref = "reactor" }
 #jacksonBom = { module = "com.fasterxml.jackson:jackson-bom", version.ref = "jackson" }
 #slf4jApi = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
@@ -99,8 +100,9 @@ springBootBom = { module = "org.springframework.boot:spring-boot-starter-parent"
 springGraphQL = { module = "org.springframework.experimental:graphql-spring-boot-starter", version.ref = "springGraphQL" }
 #graphqlJava = { module = "com.graphql-java:graphql-java", version.ref = "graphqlJava" }
 graphqlJavaDataloader = { module = "com.graphql-java:java-dataloader", version.ref = "graphqlJavaDataloader" }
-mongodbCore = { module = "org.mongodb:mongodb-driver-core", version.ref = "mongodb" }
-mongodbReactivestreams = { module = "org.mongodb:mongodb-driver-reactivestreams", version.ref = "mongoDriverReactivestreams" }
+#logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+#mongodbCore = { module = "org.mongodb:mongodb-driver-core", version.ref = "mongodb" }
+#mongodbReactivestreams = { module = "org.mongodb:mongodb-driver-reactivestreams", version.ref = "mongoDriverReactivestreams" }
 #tomcatCore = { module = "org.apache.tomcat.embed:tomcat-embed-core", version.ref = "tomcat" }
 #tomcatEl = { module = "org.apache.tomcat.embed:tomcat-embed-el", version.ref = "tomcat" }
 #springSecurityRsa = { module = "org.springframework.security:spring-security-rsa", version.ref = "springSecurityRsa" }
@@ -125,7 +127,7 @@ ktlintCompiler = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", v
 dokkaHtml = { module = "org.jetbrains.dokka:kotlin-as-java-plugin", version.ref = "dokka" }
 
 [bundles]
-mongodb = ["mongodbCore", "mongodbReactivestreams"]
+#mongodb = ["mongodbCore", "mongodbReactivestreams"]
 #tomcat = ["tomcatCore", "tomcatEl"]
 #graphqlJavaBundle = ["graphqlJava", "graphqlJavaDataloader"]
 #slf4jBundle = ["slf4jApi", "slf4jJul"]
