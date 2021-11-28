@@ -34,8 +34,9 @@ type Artikel {
 
 # https://spec.graphql.org/draft/#sec-Input-Objects
 input Suchkriterien {
-  nachname: String
-  email: String
+  verkaufsPreis: Int
+  einkaufsPreis: Int
+  bestand: Int
 }
 
 input ArtikelInput {

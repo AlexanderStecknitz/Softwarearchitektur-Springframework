@@ -1,6 +1,6 @@
 {
   "name": "Artikel Schema",
-  "schemaPath": "../../src/main/resources/graphql/schema.graphql",
+  "schemaPath": "../../src/main/resources/graphql/schema.graphqls",
   "extensions": {
     "endpoints": {
       "HTTPS": {

@@ -1,0 +1,12 @@
+mutation {
+  create(
+    input: {
+      name: "Handschuh"
+      einkaufsPreis: 10
+      verkaufsPreis: 20
+      bestand: 10
+    }
+  ) {
+    id
+  }
+}

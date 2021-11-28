@@ -1,0 +1,8 @@
+{
+  artikel(id: "1") {
+    name
+    einkaufsPreis
+    verkaufsPreis
+    bestand
+  }
+}
