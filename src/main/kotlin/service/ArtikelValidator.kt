@@ -1,9 +1,8 @@
-@file:Suppress("DEPRECATION")
-
 package com.acme.artikel.service
 
 import am.ik.yavi.builder.ValidatorBuilder
 import am.ik.yavi.builder.konstraint
+import am.ik.yavi.builder.validator
 import am.ik.yavi.core.ViolationMessage
 import am.ik.yavi.message.MessageSourceMessageFormatter
 import entity.Artikel
@@ -16,42 +15,32 @@ import org.springframework.stereotype.Service
  * @author [Alexander Stecknitz]
  */
 @Service
-class ArtikelValidator(messageSource: MessageSource) {
-    private val validator = ValidatorBuilder.of<Artikel>()
-        .messageFormatter(MessageSourceMessageFormatter(messageSource::getMessage))
-        .konstraint(Artikel::name) {
+class ArtikelValidator() {
+    private val validator = validator<Artikel> {
+        Artikel::name {
             notEmpty().message(
-                ViolationMessage.of(
-                    "artikel.name.notEmpty",
-                    "Es wird ein Name benötigt",
-                ),
+                ViolationMessage.of("artikel.nachname.notEmpty", "Es muss ein Name angegeben werden"),
             )
         }
-        .konstraint(Artikel::einkaufsPreis) {
+
+        Artikel::verkaufsPreis {
             lessThanOrEqual(MIN_PREIS).message(
-                ViolationMessage.of(
-                    "artikel.einkaufsPreis.toLow",
-                    "Einkaufspreis darf nicht 0 sein",
-                ),
+                ViolationMessage.of("artikel.verkaufspreis.min", "Der Verkaufspreis muss größer als -1 sein"),
             )
         }
-        .konstraint(Artikel::verkaufsPreis) {
+
+        Artikel::einkaufsPreis {
             lessThanOrEqual(MIN_PREIS).message(
-                ViolationMessage.of(
-                    "artikel.verkaufsPreis.toLow",
-                    "Verkaufspreis darf nicht 0 sein",
-                ),
+                ViolationMessage.of("artikel.einkaufspreis.min", "Der Einkaufspreis muss größer als -1 sein"),
             )
         }
-        .konstraint(Artikel::bestand) {
-            lessThan(MIN_BESTAND).message(
-                ViolationMessage.of(
-                    "artikel.bestand.toLow",
-                    "Der Bestand darf nicht unter 0 sein",
-                ),
+
+        Artikel::bestand {
+            lessThanOrEqual(MIN_BESTAND).message(
+                ViolationMessage.of("artikel.bestand.min", "Der Bestand muss größer als -1 sein"),
             )
         }
-        .build()
+    }
 
     /**
      * Validierung eines Entity-Objekts der Klasse [Artikel]
@@ -63,8 +52,8 @@ class ArtikelValidator(messageSource: MessageSource) {
     /**
      * Konstante für die Validierung
      */
-    companion object {
-        private const val MIN_PREIS = 0
-        private const val MIN_BESTAND = 0
+    private companion object {
+        private const val MIN_PREIS = -1
+        private const val MIN_BESTAND = -1
     }
 }

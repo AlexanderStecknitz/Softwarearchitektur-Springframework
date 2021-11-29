@@ -44,16 +44,16 @@ class ArtikelQueryController(val service: ArtikelReadService) {
 
     /**
      * Suche mit diversen Suchkriterien
-     * @param input Suchkriterien und ihre Werte, z.B. `name` und `handschuh`
+     * @param suchkriterien Suchkriterien und ihre Werte, z.B. `name` und `handschuh`
      * @return Der gefundene Artikel
      * @throws NotFoundException falls kein Artikel gefunden wurde
      */
     @QueryMapping
-    fun artikels(@Argument input: Map<String, String>): Flux<Artikel> {
-        logger.debug("find: input={}", input)
+    fun artikels(@Argument("input") suchkriterien: Suchkriterien): Flux<Artikel> {
+        logger.debug("find: input={}", suchkriterien)
         @Suppress("BlockingMethodInNonBlockingContext")
         val artikel = runBlocking {
-            service.find(input)
+            service.find(suchkriterien.toMap())
                 .onEach { artikel -> logger.debug("find: {}", artikel) }
                 .asFlux()
         }

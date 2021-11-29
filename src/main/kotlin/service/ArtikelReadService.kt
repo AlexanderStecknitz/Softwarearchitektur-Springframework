@@ -72,7 +72,6 @@ class ArtikelReadService {
      * @param suchkriterien Die Suchkriterien für den Artikel
      * @return Gibt ein Flow mit Artikeln zurück die zu den Suchkriterien passen
      */
-    @Suppress("ReturnCount")
     fun find(suchkriterien: Map<String, String>): Flow<Artikel> {
         logger.debug("find: suchkriterien={}", suchkriterien)
 
@@ -83,8 +82,8 @@ class ArtikelReadService {
         for ((key, value) in suchkriterien) {
             when (key) {
                 "name" -> return findByName(value)
-                "einkaufspreis" -> return findByEinkaufspreis(value.toInt())
-                "verkaufspreis" -> return findByVerkaufspreis(value.toInt())
+                "einkaufsPreis" -> return findByEinkaufspreis(value.toInt())
+                "verkaufsPreis" -> return findByVerkaufspreis(value.toInt())
                 "bestand" -> return findByBestand(value.toInt())
             }
         }
