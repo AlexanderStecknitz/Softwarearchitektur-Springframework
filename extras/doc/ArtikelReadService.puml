@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package kotlinx.coroutines.flow {
+    interface Flow
+}
+
+package com.acme.artikel {
+    package entity {
+        class Artikel << entity >>
+    }
+
+    package service {
+        class ArtikelReadService << controll >> << @Service >> {
+            + findById(id: Int?) : FindByIdResult
+            + suspend find(suchkriterien: Map<String, String>): Flow<Artikel>
+            - findAll() : Flow<Artikel>
+            - findByNachname(name: String): Flow<Artikel>
+            - findByEinkaufspreis(einkaufspreis: Int): Flow<Artikel>
+            - findByVerkaufspreis(verkaufspreis: Int): Flow<Artikel>
+            - findByBestand(bestand: Int): Flow<Artikel>
+        }
+
+        ArtikelReadService .up.> Artikel
+        ArtikelReadService ..> Flow
+    }
+}
+
+hide empty members
+@enduml

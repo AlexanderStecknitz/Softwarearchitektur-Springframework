@@ -1,0 +1,50 @@
+@startuml
+
+package org.springframework {
+    package web.bind.annotation {
+        interface "@PathVariable" as PathVariable
+
+        interface "@RequestParam" as RequestParam
+    }
+
+    package http {
+        class ResponseEntity<T>
+
+        package server.reactive {
+            interface ServerHttpRequest
+        }
+    }
+}
+
+package kotlin.collections {
+    interface Map
+}
+
+package com.acme.artikel {
+
+    package service {
+        class ArtikelReadService << controll >> << @Service >>
+    }
+
+    package rest {
+        class ArtikelGetController << boundary >> << @RestController >> << @RequestMapping >> {
+            + @GetMapping suspend findById(@PathVariable id: Int?) : ResponseEntity<Artikel>
+            + @GetMapping suspend find(@RequestParam queryParams: Map<String, String>): ResponseEntity<Collection<Artikel>>
+        }
+
+        ArtikelGetController o-right-> "1" ArtikelReadService : service
+
+        ArtikelGetController .up.> ResponseEntity
+        ArtikelGetController .up.> ServerHttpRequest
+        ArtikelGetController .up.> PathVariable
+        ArtikelGetController .up.> RequestParam
+
+        ArtikelGetController .up.> Map
+
+    }
+
+}
+
+hide empty members
+
+@enduml
