@@ -1,8 +1,8 @@
 package com.acme.artikel.graphql
 
+import com.acme.artikel.entity.Artikel
 import com.acme.artikel.service.ArtikelReadService
 import com.acme.artikel.service.FindByIdResult
-import entity.Artikel
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.reactor.asFlux
 import kotlinx.coroutines.runBlocking

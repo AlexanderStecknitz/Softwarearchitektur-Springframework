@@ -2,7 +2,7 @@ package com.acme.artikel.service
 
 import am.ik.yavi.builder.validator
 import am.ik.yavi.core.ViolationMessage
-import entity.Artikel
+import com.acme.artikel.entity.Artikel
 import org.springframework.stereotype.Service
 
 /**

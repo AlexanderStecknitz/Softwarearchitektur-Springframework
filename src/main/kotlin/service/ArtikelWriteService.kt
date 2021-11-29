@@ -1,6 +1,6 @@
 package com.acme.artikel.service
 
-import entity.Artikel
+import com.acme.artikel.entity.Artikel
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service

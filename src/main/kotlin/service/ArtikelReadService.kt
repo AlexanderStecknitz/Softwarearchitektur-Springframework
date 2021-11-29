@@ -1,6 +1,6 @@
 package com.acme.artikel.service
 
-import entity.Artikel
+import com.acme.artikel.entity.Artikel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf

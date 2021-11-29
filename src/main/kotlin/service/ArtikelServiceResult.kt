@@ -1,7 +1,7 @@
 package com.acme.artikel.service
 
 import am.ik.yavi.core.ConstraintViolation
-import entity.Artikel
+import com.acme.artikel.entity.Artikel
 
 /**
  * Resultat-Typ für [ArtikelReadService.findById].

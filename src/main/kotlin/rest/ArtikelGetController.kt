@@ -2,9 +2,9 @@
 
 package com.acme.artikel.rest
 
+import com.acme.artikel.entity.Artikel
 import com.acme.artikel.service.ArtikelReadService
 import com.acme.artikel.service.FindByIdResult
-import entity.Artikel
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses

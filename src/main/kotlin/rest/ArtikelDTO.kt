@@ -1,6 +1,6 @@
 package com.acme.artikel.rest
 
-import entity.Artikel
+import com.acme.artikel.entity.Artikel
 
 /** ValueObject für das Neuanlegen und Ändern eines neuen Artikels
  *  @property name Name des Artikels

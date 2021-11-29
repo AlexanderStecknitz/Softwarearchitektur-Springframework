@@ -1,4 +1,4 @@
-package entity
+package com.acme.artikel.entity
 
 /** Beschreibt einen Artikel
  *  @property id Eindeutige ID eines Artikels
