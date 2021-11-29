@@ -1,12 +1,8 @@
 package com.acme.artikel.service
 
-import am.ik.yavi.builder.ValidatorBuilder
-import am.ik.yavi.builder.konstraint
 import am.ik.yavi.builder.validator
 import am.ik.yavi.core.ViolationMessage
-import am.ik.yavi.message.MessageSourceMessageFormatter
 import entity.Artikel
-import org.springframework.context.MessageSource
 import org.springframework.stereotype.Service
 
 /**
@@ -15,7 +11,7 @@ import org.springframework.stereotype.Service
  * @author [Alexander Stecknitz]
  */
 @Service
-class ArtikelValidator() {
+class ArtikelValidator {
     private val validator = validator<Artikel> {
         Artikel::name {
             notEmpty().message(

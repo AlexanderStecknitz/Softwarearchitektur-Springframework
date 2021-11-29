@@ -10,7 +10,12 @@ package com.acme.artikel.graphql
  * @property einkaufsPreis Einkaufspreis
  * @property bestand Bestand
  */
-data class Suchkriterien(val name: String?, val verkaufsPreis: String?, val einkaufsPreis: String?, val bestand: String?) {
+data class Suchkriterien(
+    val name: String?,
+    val verkaufsPreis: String?,
+    val einkaufsPreis: String?,
+    val bestand: String?,
+) {
     /**
      * Konvertierung in eine Map
      * @return Das konvertierte Map-Objekt
@@ -26,7 +31,7 @@ data class Suchkriterien(val name: String?, val verkaufsPreis: String?, val eink
         if (einkaufsPreis != null) {
             map["einkaufsPreis"] = einkaufsPreis
         }
-        if(bestand != null) {
+        if (bestand != null) {
             map["bestand"] = bestand
         }
         return map
