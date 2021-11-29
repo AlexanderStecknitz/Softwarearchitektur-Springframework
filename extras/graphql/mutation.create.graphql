@@ -1,7 +1,7 @@
 mutation {
   create(
     input: {
-      name: "Handschuh"
+      name: "handschuh"
       einkaufsPreis: 10
       verkaufsPreis: 20
       bestand: 10
