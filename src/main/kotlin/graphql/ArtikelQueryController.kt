@@ -49,8 +49,8 @@ class ArtikelQueryController(val service: ArtikelReadService) {
         logger.debug("find: input={}", suchkriterien)
         @Suppress("BlockingMethodInNonBlockingContext")
         return service.find(suchkriterien.toMap())
-                .onEach { artikel -> logger.debug("find: {}", artikel) }
-        }
+            .onEach { artikel -> logger.debug("find: {}", artikel) }
+    }
 
     private companion object {
         val logger: Logger = LoggerFactory.getLogger(ArtikelQueryController::class.java)
