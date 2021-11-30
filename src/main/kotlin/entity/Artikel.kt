@@ -30,6 +30,11 @@ data class Artikel(
     val bestand: Int,
 ) {
 
+    /**
+     * Vergleich mit einem anderen Objekt oder null.
+     * @param other Das zu vergleichende Objekt oder null
+     * @return True, falls das zu vergleichende (Artikel-) Objekt die gleiche ID hat.
+     */
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -37,5 +42,9 @@ data class Artikel(
         return other.id == this.id
     }
 
+    /**
+     * Hashwert aufgrund der ID.
+     * @return Der Hashwert.
+     */
     override fun hashCode() = id?.hashCode() ?: this::class.hashCode()
 }

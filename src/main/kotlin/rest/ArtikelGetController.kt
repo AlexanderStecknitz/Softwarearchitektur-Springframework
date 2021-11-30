@@ -90,6 +90,9 @@ class ArtikelGetController(private val service: ArtikelReadService) {
         return ok(artikel)
     }
 
+    /**
+     * Konstante für den Rest-Controller
+     */
     companion object {
         /**
          * Konstante für den API-Path
