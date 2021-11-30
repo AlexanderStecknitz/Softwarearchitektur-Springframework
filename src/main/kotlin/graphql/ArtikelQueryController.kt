@@ -3,15 +3,13 @@ package com.acme.artikel.graphql
 import com.acme.artikel.entity.Artikel
 import com.acme.artikel.service.ArtikelReadService
 import com.acme.artikel.service.FindByIdResult
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.reactor.asFlux
-import kotlinx.coroutines.runBlocking
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.stereotype.Controller
-import reactor.core.publisher.Flux
 
 /**
  * Eine _Controller_-Klasse für das Lesen mit der GraphQL-Schnittstelle und den Typen aus dem GraphQL-Schema.
@@ -34,12 +32,10 @@ class ArtikelQueryController(val service: ArtikelReadService) {
     fun artikel(@Argument id: Int): Artikel {
         logger.debug("findById: id={}", id)
 
-        val result = runBlocking { service.findById(id) }
-        if (result is FindByIdResult.NotFound) {
-            throw NotFoundException(id)
+        return when (val result = service.findById(id)) {
+            is FindByIdResult.NotFound -> throw NotFoundException(id)
+            is FindByIdResult.Found -> result.artikel
         }
-        result as FindByIdResult.Found
-        return result.artikel
     }
 
     /**
@@ -49,16 +45,12 @@ class ArtikelQueryController(val service: ArtikelReadService) {
      * @throws NotFoundException falls kein Artikel gefunden wurde
      */
     @QueryMapping
-    fun artikels(@Argument("input") suchkriterien: Suchkriterien): Flux<Artikel> {
+    fun artikels(@Argument("input") suchkriterien: Suchkriterien): Flow<Artikel> {
         logger.debug("find: input={}", suchkriterien)
         @Suppress("BlockingMethodInNonBlockingContext")
-        val artikel = runBlocking {
-            service.find(suchkriterien.toMap())
+        return service.find(suchkriterien.toMap())
                 .onEach { artikel -> logger.debug("find: {}", artikel) }
-                .asFlux()
         }
-        return artikel
-    }
 
     private companion object {
         val logger: Logger = LoggerFactory.getLogger(ArtikelQueryController::class.java)
