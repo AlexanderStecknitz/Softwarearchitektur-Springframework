@@ -29,4 +29,4 @@ import org.springframework.hateoas.support.WebStack.WEBFLUX
 @Configuration(proxyBeanMethods = false)
 // application/hal+json wird zum Default beim Content-Type
 @EnableHypermediaSupport(type = [HAL], stacks = [WEBFLUX])
-class AppConfig : MessageSourceConfig, SecurityConfig
+class AppConfig : MessageSourceConfig, SecurityConfig, GraphQlConfig

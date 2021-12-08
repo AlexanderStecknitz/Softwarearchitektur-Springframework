@@ -20,19 +20,19 @@ class ArtikelValidator {
         }
 
         Artikel::verkaufsPreis {
-            lessThanOrEqual(MIN_PREIS).message(
+            greaterThanOrEqual(MIN_PREIS).message(
                 ViolationMessage.of("artikel.verkaufspreis.min", "Der Verkaufspreis muss größer als -1 sein"),
             )
         }
 
         Artikel::einkaufsPreis {
-            lessThanOrEqual(MIN_PREIS).message(
+            greaterThanOrEqual(MIN_PREIS).message(
                 ViolationMessage.of("artikel.einkaufspreis.min", "Der Einkaufspreis muss größer als -1 sein"),
             )
         }
 
         Artikel::bestand {
-            lessThanOrEqual(MIN_BESTAND).message(
+            greaterThanOrEqual(MIN_BESTAND).message(
                 ViolationMessage.of("artikel.bestand.min", "Der Bestand muss größer als -1 sein"),
             )
         }
