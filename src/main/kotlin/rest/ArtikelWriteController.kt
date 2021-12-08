@@ -42,7 +42,7 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
         ApiResponse(responseCode = "201", description = "Aktualisiert"),
         ApiResponse(responseCode = "400", description = "Ungültiger Name"),
     )
-    fun create(
+    suspend fun create(
         @RequestBody artikelDTO: ArtikelDTO,
         request: ServerHttpRequest,
     ): ResponseEntity<GenericBody> {
@@ -74,7 +74,7 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
         ApiResponse(responseCode = "201", description = "Aktualisiert"),
         ApiResponse(responseCode = "400", description = "Ungültiger Name"),
     )
-    fun update(
+    suspend fun update(
         @PathVariable id: Int,
         @RequestBody artikelDTO: ArtikelDTO,
     ): ResponseEntity<GenericBody> {

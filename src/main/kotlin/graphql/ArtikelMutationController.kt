@@ -27,7 +27,7 @@ class ArtikelMutationController(val service: ArtikelWriteService) {
      * @throws NameExistsException, falls es bereits einen Artikel mit diesem Namen existiert
      */
     @MutationMapping
-    fun create(@Argument input: ArtikelInput): CreatePayLoad {
+    suspend fun create(@Argument input: ArtikelInput): CreatePayLoad {
         logger.debug("create: inpute={}", input)
         val artikel = input.toArtikel()
         logger.debug("create: artikel={}", artikel)

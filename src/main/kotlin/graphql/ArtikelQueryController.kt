@@ -29,7 +29,7 @@ class ArtikelQueryController(val service: ArtikelReadService) {
      * @throws NotFoundException falls kein Artikel gefunden wurde
      */
     @QueryMapping
-    fun artikel(@Argument id: Int): Artikel {
+    suspend fun artikel(@Argument id: Int): Artikel {
         logger.debug("findById: id={}", id)
 
         return when (val result = service.findById(id)) {
@@ -45,7 +45,7 @@ class ArtikelQueryController(val service: ArtikelReadService) {
      * @throws NotFoundException falls kein Artikel gefunden wurde
      */
     @QueryMapping
-    fun artikels(@Argument("input") suchkriterien: Suchkriterien): Flow<Artikel> {
+    suspend fun artikels(@Argument("input") suchkriterien: Suchkriterien): Flow<Artikel> {
         logger.debug("find: input={}", suchkriterien)
         @Suppress("BlockingMethodInNonBlockingContext")
         return service.find(suchkriterien.toMap())
