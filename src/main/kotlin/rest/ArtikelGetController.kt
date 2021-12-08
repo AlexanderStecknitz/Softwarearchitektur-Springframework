@@ -94,11 +94,11 @@ class ArtikelGetController(private val service: ArtikelReadService) {
         val baseUri = "https://..."
         service.find(queryParams)
             .map { artikel ->
-                    val model = ArtikelModel(artikel)
-                        model.add(Link.of("$baseUri/${artikel.id}"))
+                val model = ArtikelModel(artikel)
+                model.add(Link.of("$baseUri/${artikel.id}"))
             }
             .toList(modelList)
-        if(modelList.isEmpty()) {
+        if (modelList.isEmpty()) {
             return notFound().build()
         }
         return ok(CollectionModel.of(modelList))

@@ -21,7 +21,7 @@ data class ArtikelModel(
     val einkaufsPreis: Int,
     val verkaufsPreis: Int,
     val bestand: Int,
-): RepresentationModel<ArtikelModel>() {
+) : RepresentationModel<ArtikelModel>() {
     constructor(artikel: Artikel) : this(
         artikel.name,
         artikel.einkaufsPreis,
@@ -35,13 +35,12 @@ data class ArtikelModel(
      * @return True, falls das zu vergleichende (Artikel-) Objekt der gleiche name hat.
      */
     override fun equals(other: Any?): Boolean {
-        if(this === other) return true
-        if(javaClass != other?.javaClass) return false
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
 
         other as ArtikelModel
         return name == other.name
     }
 
     override fun hashCode() = name.hashCode()
-
 }

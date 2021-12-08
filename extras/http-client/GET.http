@@ -1,21 +1,21 @@
 GET {{baseUrl}}/api
-Accept: application/json
+Accept: application/hal+json
 ALPN: h2
 
 ###
 
-GET {{baseUrl}}/api/10
-Accept: application/json
+GET {{baseUrl}}/api/1
+Accept: application/hal+json
 ALPN: h2
 
 ###
 
 GET {{baseUrl}}/api?name=hallo
-Accept: application/json
+Accept: application/hal+json
 ALPN: h2
 
 ###
 
-GET{{baseUrl}}/api?einkaufspreis=2
-Accept: application/json
+GET{{baseUrl}}/api?einkaufsPreis=2
+Accept: application/hal+json
 ALPN: h2
