@@ -2,17 +2,20 @@
 
 package com.acme.artikel.rest
 
-import com.acme.artikel.entity.Artikel
 import com.acme.artikel.service.ArtikelReadService
 import com.acme.artikel.service.FindByIdResult
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
+import org.springframework.hateoas.CollectionModel
+import org.springframework.hateoas.Link
+import org.springframework.hateoas.LinkRelation
+import org.springframework.hateoas.MediaTypes.HAL_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.notFound
 import org.springframework.http.ResponseEntity.ok
@@ -36,7 +39,7 @@ class ArtikelGetController(private val service: ArtikelReadService) {
      * @param id Die ID zum suchen eines Artikels
      * @return Bei gefundem Artikel ein 200 Response mit dem Artikel oder 404 bei einem nicht gefundenen
      */
-    @GetMapping(path = ["/{id:[1-9][0-9]*}"], produces = [APPLICATION_JSON_VALUE])
+    @GetMapping(path = ["/{id:[1-9][0-9]*}"], produces = [HAL_JSON_VALUE])
     @Operation(summary = "Suche mit einer Artikel-ID", tags = ["Suchen"])
     @ApiResponses(
         ApiResponse(
@@ -48,14 +51,20 @@ class ArtikelGetController(private val service: ArtikelReadService) {
             description = "Artikel konnte nicht gefunden werden",
         ),
     )
-    fun findById(@PathVariable id: Int?): ResponseEntity<Artikel> {
+    fun findById(@PathVariable id: Int?): ResponseEntity<ArtikelModel> {
         logger.debug("findById: id={}", id)
         val artikel = when (val result = service.findById(id)) {
             is FindByIdResult.Found -> result.artikel
             is FindByIdResult.NotFound -> return notFound().build()
         }
+        val artikelModel = ArtikelModel(artikel)
+        val baseUri = "https://..."
+        val idUri = "$baseUri/${artikel.id}"
+        val selfLink = Link.of(idUri)
+        val listLink = Link.of(baseUri, LinkRelation.of("list"))
+        artikelModel.add(selfLink, listLink)
         logger.trace("findById: {}", artikel)
-        return ok(artikel)
+        return ok(artikelModel)
     }
 
     /**
@@ -64,7 +73,7 @@ class ArtikelGetController(private val service: ArtikelReadService) {
      * @return Bei gefundem Artikel ein 200 Response mit dem Artikel oder
      * 404 bei einem nicht gefundenen. Sollten  die Query-Parameter leer sein werden alle Artikel ausgegeben
      */
-    @GetMapping(produces = [APPLICATION_JSON_VALUE])
+    @GetMapping(produces = [HAL_JSON_VALUE])
     @Operation(
         summary = "Suche mit Suchkriterien",
         tags = ["Suchen"]
@@ -79,15 +88,20 @@ class ArtikelGetController(private val service: ArtikelReadService) {
             description = "Keine Artikel gefunden",
         ),
     )
-    suspend fun find(@RequestParam queryParams: Map<String, String>): ResponseEntity<Collection<Artikel>> {
+    suspend fun find(@RequestParam queryParams: Map<String, String>): ResponseEntity<CollectionModel<ArtikelModel>> {
         logger.debug("find: queryParams={}", queryParams)
-        val artikel = mutableListOf<Artikel>()
-        service.find(queryParams).toList(artikel)
-        if (artikel.isEmpty()) {
+        val modelList = mutableListOf<ArtikelModel>()
+        val baseUri = "https://..."
+        service.find(queryParams)
+            .map { artikel ->
+                    val model = ArtikelModel(artikel)
+                        model.add(Link.of("$baseUri/${artikel.id}"))
+            }
+            .toList(modelList)
+        if(modelList.isEmpty()) {
             return notFound().build()
         }
-        logger.debug("find: {}", artikel)
-        return ok(artikel)
+        return ok(CollectionModel.of(modelList))
     }
 
     /**
