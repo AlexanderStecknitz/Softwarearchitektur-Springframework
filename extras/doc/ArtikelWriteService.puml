@@ -1,0 +1,31 @@
+@startuml ArtikelWriteService
+
+package com.acme.artikel {
+
+    package entity {
+            class Artikel << entity >>
+        }
+
+    package service #DDDDDD {
+        class ArtikelValidator
+        class ArtikelReadService
+        class CreateResult
+        class UpdateResult
+
+        class ArtikelWriteService << controller >> << @Serivce >> {
+            + suspend create(artikel: Artikel): CreateResult
+            + suspend update(artikel: Artikel, id: Int): UpdateResult
+        }
+
+        ArtikelWriteService o-down-> "1" ArtikelValidator
+        ArtikelWriteService o--> "1" ArtikelReadService
+        ArtikelWriteService .up.> Artikel
+        ArtikelWriteService .up.> CreateResult
+        ArtikelWriteService .up.> UpdateResult
+
+    }
+}
+
+hide empty members
+
+@enduml
