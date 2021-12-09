@@ -2,9 +2,9 @@ mutation {
   create(
     input: {
       name: "handschuh"
-      einkaufsPreis: 4
+      einkaufsPreis: 10
       verkaufsPreis: 20
-      bestand: 10
+      bestand: 1
     }
   ) {
     id

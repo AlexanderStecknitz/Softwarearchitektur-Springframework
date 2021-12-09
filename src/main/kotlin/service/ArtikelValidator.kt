@@ -21,19 +21,19 @@ class ArtikelValidator {
 
         Artikel::verkaufsPreis {
             greaterThanOrEqual(MIN_PREIS).message(
-                ViolationMessage.of("artikel.verkaufspreis.min", "Der Verkaufspreis muss größer als -1 sein"),
+                ViolationMessage.of("artikel.verkaufspreis.min", "Der Verkaufspreis muss groesser als -1 sein"),
             )
         }
 
         Artikel::einkaufsPreis {
             greaterThanOrEqual(MIN_PREIS).message(
-                ViolationMessage.of("artikel.einkaufspreis.min", "Der Einkaufspreis muss größer als -1 sein"),
+                ViolationMessage.of("artikel.einkaufspreis.min", "Der Einkaufspreis muss groesser als -1 sein"),
             )
         }
 
         Artikel::bestand {
             greaterThanOrEqual(MIN_BESTAND).message(
-                ViolationMessage.of("artikel.bestand.min", "Der Bestand muss größer als -1 sein"),
+                ViolationMessage.of("artikel.bestand.min", "Der Bestand muss groesser als -1 sein"),
             )
         }
     }
@@ -49,7 +49,7 @@ class ArtikelValidator {
      * Konstante für die Validierung
      */
     private companion object {
-        private const val MIN_PREIS = -1
-        private const val MIN_BESTAND = -1
+        private const val MIN_PREIS = 0
+        private const val MIN_BESTAND = 0
     }
 }

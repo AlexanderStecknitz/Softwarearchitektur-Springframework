@@ -24,6 +24,7 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
         val violations = validator.validate(artikel = artikel)
         if (violations.isNotEmpty()) {
             logger.debug("create: violations={}", violations)
+            return CreateResult.ConstraintViolations(violations)
         }
         if (artikel.name[0].lowercaseChar() == 'a') {
             logger.debug("create: name {} existiert", artikel.name)
@@ -45,6 +46,7 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
         val violations = validator.validate(artikel = artikel)
         if (violations.isNotEmpty()) {
             logger.debug("create: violations={}", violations)
+            return UpdateResult.ConstraintViolations(violations)
         }
         if (readService.findById(id) is FindByIdResult.NotFound) {
             return UpdateResult.NotFound

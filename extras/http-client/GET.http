@@ -10,6 +10,13 @@ ALPN: h2
 
 ###
 
+# Fehlermeldung 404
+GET {{baseUrl}}/api/10
+Accept: application/hal+json
+ALPN: h2
+
+###
+
 GET {{baseUrl}}/api?name=hallo
 Accept: application/hal+json
 ALPN: h2

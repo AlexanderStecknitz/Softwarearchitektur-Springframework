@@ -42,5 +42,9 @@ data class ArtikelModel(
         return name == other.name
     }
 
+    /**
+     * Hashwert aufgrund des Namens.
+     * @return Der Hashwert.
+     */
     override fun hashCode() = name.hashCode()
 }

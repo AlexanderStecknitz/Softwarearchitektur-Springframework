@@ -63,7 +63,7 @@ sealed interface UpdateResult {
      * Resultat-Typ, wenn der Artikel wegen Constraint-Verletzungen nicht aktualisiert wurde
      * @property violations Die verletzten Constraints
      */
-    data class ConstraintViolations(val violations: Collection<ConstraintViolations>) : UpdateResult
+    data class ConstraintViolations(val violations: Collection<ConstraintViolation>) : UpdateResult
 
     /**
      * Resultat-Typ, wenn der Artikel nicht gefunden werden konnte
