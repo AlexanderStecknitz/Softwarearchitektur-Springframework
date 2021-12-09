@@ -1,0 +1,65 @@
+@startuml
+
+package org.springframework {
+    package web.bind.annotation {
+        interface "@PathVariable" as PathVariable
+
+        interface "@RequestBody" as RequestBody
+    }
+
+    package http {
+        class ResponseEntity<T>
+
+        package server.reactive {
+            interface ServerHttpRequest
+        }
+    }
+}
+
+package kotlin.collections {
+    interface Map
+}
+
+package com.acme.artikel {
+
+    package service {
+        class ArtikelWriteService << controll >> << @Service >>
+    }
+
+    package rest {
+
+        class ArtikelDTO <<entity>>
+
+        interface GenericBody
+        class Text
+        class Values
+        GenericBody +-- Text
+        GenericBody <|-- Text
+        GenericBody +--- Values
+        GenericBody <|-- Values
+
+        class ArtikelWriteController << boundary >> << @RestController >> << @RequestMapping >> {
+            + @GetMapping suspend create(@RequestBody ArtikelDTO: ArtikelDTO, request: ServerHttpRequest) : ResponseEntity<GenericBody>
+            + @GetMapping suspend update(@PathVariable id: Int, @RequestBody artikelDTO: ArtikelDTO): ResponseEntity<GenericBody>
+        }
+
+        ArtikelWriteController o-right-> "1" ArtikelWriteService : service
+
+        ArtikelWriteController ..> ArtikelDTO
+        ArtikelWriteController ..> GenericBody
+
+        ArtikelWriteController .up.> ResponseEntity
+        ArtikelWriteController .up.> ServerHttpRequest
+
+        ArtikelWriteController .up.> PathVariable
+        ArtikelWriteController .up.> RequestBody
+
+        ArtikelWriteController .up.> Map
+
+    }
+
+}
+
+hide empty members
+
+@enduml
