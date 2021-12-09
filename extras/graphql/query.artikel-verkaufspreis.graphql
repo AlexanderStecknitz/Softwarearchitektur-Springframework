@@ -3,6 +3,5 @@
     id
     einkaufsPreis
     verkaufsPreis
-    bestand
   }
 }

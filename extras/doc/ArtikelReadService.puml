@@ -1,6 +1,4 @@
 @startuml
-'https://plantuml.com/class-diagram
-
 package kotlinx.coroutines.flow {
     interface Flow
 }
@@ -11,8 +9,8 @@ package com.acme.artikel {
     }
 
     package service {
-        class ArtikelReadService << controll >> << @Service >> {
-            + findById(id: Int?) : FindByIdResult
+        class ArtikelReadService << control >> << @Service >> {
+            + suspend findById(id: Int?) : FindByIdResult
             + suspend find(suchkriterien: Map<String, String>): Flow<Artikel>
             - findAll() : Flow<Artikel>
             - findByNachname(name: String): Flow<Artikel>
@@ -25,6 +23,5 @@ package com.acme.artikel {
         ArtikelReadService ..> Flow
     }
 }
-
 hide empty members
 @enduml

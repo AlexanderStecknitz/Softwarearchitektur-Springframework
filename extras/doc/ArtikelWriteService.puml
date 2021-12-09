@@ -12,7 +12,7 @@ package com.acme.artikel {
         class CreateResult
         class UpdateResult
 
-        class ArtikelWriteService << controller >> << @Serivce >> {
+        class ArtikelWriteService << control >> << @Serivce >> {
             + suspend create(artikel: Artikel): CreateResult
             + suspend update(artikel: Artikel, id: Int): UpdateResult
         }

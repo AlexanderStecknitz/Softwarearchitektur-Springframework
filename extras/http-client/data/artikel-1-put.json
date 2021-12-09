@@ -1,6 +1,6 @@
 {
   "name": "Testput",
-  "einkaufsPreis": 0,
-  "verkaufsPreis": 12,
-  "bestand": 0
+  "einkaufsPreis": -1,
+  "verkaufsPreis": -1,
+  "bestand": -1
 }

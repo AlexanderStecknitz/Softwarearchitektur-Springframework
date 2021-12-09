@@ -7,6 +7,10 @@ package org.springframework {
         interface "@RequestParam" as RequestParam
     }
 
+    package hateoas {
+            class CollectionModel<E>
+        }
+
     package http {
         class ResponseEntity<T>
 
@@ -23,18 +27,22 @@ package kotlin.collections {
 package com.acme.artikel {
 
     package service {
-        class ArtikelReadService << controll >> << @Service >>
+        class ArtikelReadService << control >> << @Service >>
     }
 
     package rest {
         class ArtikelGetController << boundary >> << @RestController >> << @RequestMapping >> {
-            + @GetMapping suspend findById(@PathVariable id: Int?) : ResponseEntity<Artikel>
-            + @GetMapping suspend find(@RequestParam queryParams: Map<String, String>): ResponseEntity<Collection<Artikel>>
+            + @GetMapping suspend findById(@PathVariable id: Int?) : ResponseEntity<ArtikelModel>
+            + @GetMapping suspend find(@RequestParam queryParams: Map<String, String>): ResponseEntity<CollectionModel<ArtikelModel>>
         }
+
+        class ArtikelModel << entity >>
 
         ArtikelGetController o-right-> "1" ArtikelReadService : service
 
         ArtikelGetController .up.> ResponseEntity
+        ArtikelGetController .up.> CollectionModel
+        ArtikelGetController .down.> ArtikelModel
         ArtikelGetController .up.> ServerHttpRequest
         ArtikelGetController .up.> PathVariable
         ArtikelGetController .up.> RequestParam
@@ -42,7 +50,6 @@ package com.acme.artikel {
         ArtikelGetController .up.> Map
 
     }
-
 }
 
 hide empty members

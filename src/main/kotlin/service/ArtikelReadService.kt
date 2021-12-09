@@ -53,7 +53,7 @@ class ArtikelReadService {
      * @return Ein Artikel mit der übergegeben ID
      * oder null wenn es keinen Artikel mit der entsprechenden ID gibt.
      */
-    fun findById(id: Int?): FindByIdResult {
+    suspend fun findById(id: Int?): FindByIdResult {
         logger.debug("findById={}", id)
         if (id != 1) return FindByIdResult.NotFound
         return FindByIdResult.Found(
@@ -73,7 +73,7 @@ class ArtikelReadService {
      * @return Gibt ein Flow mit Artikeln zurück die zu den Suchkriterien passen
      */
     @Suppress("ReturnCount")
-    fun find(suchkriterien: Map<String, String>): Flow<Artikel> {
+    suspend fun find(suchkriterien: Map<String, String>): Flow<Artikel> {
         logger.debug("find: suchkriterien={}", suchkriterien)
 
         if (suchkriterien.isEmpty()) {
@@ -132,8 +132,8 @@ class ArtikelReadService {
      * @param einkaufspreis Der Einkaufspreis des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Einkaufspreis
      */
-    private fun findByEinkaufspreis(einkaufspreis: Int): Flow<Artikel> {
-        return flowOf(
+    private fun findByEinkaufspreis(einkaufspreis: Int) =
+        flowOf(
             Artikel(
                 id = 1,
                 name = "Tablet",
@@ -156,15 +156,14 @@ class ArtikelReadService {
                 bestand = 98,
             ),
         )
-    }
 
     /**
      * Sucht einen Artikel mit einem bestimmten Verkaufspreis
      * @param verkaufspreis Der Verkaufspreis des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Verkaufspreis
      */
-    private fun findByVerkaufspreis(verkaufspreis: Int): Flow<Artikel> {
-        return flowOf(
+    private fun findByVerkaufspreis(verkaufspreis: Int) =
+        flowOf(
             Artikel(
                 id = 1,
                 name = "Handschuh",
@@ -186,15 +185,14 @@ class ArtikelReadService {
                 bestand = 98,
             ),
         )
-    }
 
     /**
      * Sucht einen Artikel mit einem bestimmten Bestand
      * @param bestand Der Bestand des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Bestand
      */
-    private fun findByBestand(bestand: Int): Flow<Artikel> {
-        return flowOf(
+    private fun findByBestand(bestand: Int) =
+        flowOf(
             Artikel(
                 id = 1,
                 name = "Gitarre",
@@ -217,7 +215,6 @@ class ArtikelReadService {
                 bestand = bestand,
             ),
         )
-    }
 
     /**
      * Konstanten für die Service Klasse

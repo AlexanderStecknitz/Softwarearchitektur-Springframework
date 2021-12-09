@@ -23,7 +23,7 @@ package kotlin.collections {
 package com.acme.artikel {
 
     package service {
-        class ArtikelWriteService << controll >> << @Service >>
+        class ArtikelWriteService << control >> << @Service >>
     }
 
     package rest {

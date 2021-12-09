@@ -19,7 +19,7 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
      * @param artikel Das Objekt des neuanzulegenden Artikels
      * @return Ein Resultatobjekt mit entweder dem neu angelegten Artikel oder mit einem Fehlermeldungsobjekt
      */
-    fun create(artikel: Artikel): CreateResult {
+    suspend fun create(artikel: Artikel): CreateResult {
         logger.debug("create: {}", artikel)
         val violations = validator.validate(artikel = artikel)
         if (violations.isNotEmpty()) {
@@ -41,7 +41,7 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
      * @param id ID des zu aktualisierenden Artikels
      * @return Ein Resultatobjekt mit entweder dem aktualisierenden Artikel oder mit einem Fehlermeldungsobjekt
      */
-    fun update(artikel: Artikel, id: Int): UpdateResult {
+    suspend fun update(artikel: Artikel, id: Int): UpdateResult {
         logger.debug("update: {}", artikel)
         val violations = validator.validate(artikel = artikel)
         if (violations.isNotEmpty()) {
