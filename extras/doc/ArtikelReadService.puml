@@ -3,6 +3,10 @@ package kotlinx.coroutines.flow {
     interface Flow
 }
 
+package kotlin.collections {
+    interface Map
+}
+
 package com.acme.artikel {
     package entity {
         class Artikel << entity >>
@@ -21,6 +25,7 @@ package com.acme.artikel {
 
         ArtikelReadService .up.> Artikel
         ArtikelReadService ..> Flow
+        ArtikelReadService .up.> Map
     }
 }
 hide empty members

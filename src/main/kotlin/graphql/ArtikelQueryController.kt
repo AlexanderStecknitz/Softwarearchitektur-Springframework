@@ -41,13 +41,11 @@ class ArtikelQueryController(val service: ArtikelReadService) {
     /**
      * Suche mit diversen Suchkriterien
      * @param suchkriterien Suchkriterien und ihre Werte, z.B. `name` und `handschuh`
-     * @return Der gefundene Artikel
-     * @throws NotFoundException falls kein Artikel gefunden wurde
+     * @return Die gefundenen Artikel
      */
     @QueryMapping
     suspend fun artikels(@Argument("input") suchkriterien: Suchkriterien): Flow<Artikel> {
         logger.debug("find: input={}", suchkriterien)
-        @Suppress("BlockingMethodInNonBlockingContext")
         return service.find(suchkriterien.toMap())
             .onEach { artikel -> logger.debug("find: {}", artikel) }
     }
