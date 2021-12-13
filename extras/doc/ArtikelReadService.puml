@@ -1,9 +1,6 @@
 @startuml
 package kotlinx.coroutines.flow {
     interface Flow
-}
-
-package kotlin.collections {
     interface Map
 }
 
