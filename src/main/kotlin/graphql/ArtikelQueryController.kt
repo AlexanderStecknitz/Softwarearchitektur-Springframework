@@ -41,7 +41,7 @@ class ArtikelQueryController(val service: ArtikelReadService) {
     /**
      * Suche mit diversen Suchkriterien
      * @param suchkriterien Suchkriterien und ihre Werte, z.B. `name` und `handschuh`
-     * @return Die gefundenen Artikel
+     * @return Die gefundenen Artikel als Flow
      */
     @QueryMapping
     suspend fun artikels(@Argument("input") suchkriterien: Suchkriterien): Flow<Artikel> {
