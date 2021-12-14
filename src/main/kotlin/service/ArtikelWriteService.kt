@@ -32,7 +32,7 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
         }
         val neuerArtikel = artikel.copy(id = random.nextInt())
         logger.debug("create: {}", neuerArtikel)
-        return CreateResult.Created(neuerArtikel)
+        return CreateResult.Success(neuerArtikel)
     }
 
     /**
@@ -58,7 +58,7 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
         }
         val neuerArtikel = artikel.copy(id = random.nextInt())
         logger.debug("update: artikel {}", artikel)
-        return UpdateResult.Updated(neuerArtikel)
+        return UpdateResult.Success(neuerArtikel)
     }
 
     private companion object {

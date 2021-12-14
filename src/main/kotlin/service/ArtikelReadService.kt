@@ -56,7 +56,7 @@ class ArtikelReadService {
     suspend fun findById(id: Int?): FindByIdResult {
         logger.debug("findById={}", id)
         if (id != 1) return FindByIdResult.NotFound
-        return FindByIdResult.Found(
+        return FindByIdResult.Success(
             Artikel(
                 id = id,
                 name = "Handschuh",

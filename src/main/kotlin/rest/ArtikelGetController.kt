@@ -54,7 +54,7 @@ class ArtikelGetController(private val service: ArtikelReadService) {
     suspend fun findById(@PathVariable id: Int?): ResponseEntity<ArtikelModel> {
         logger.debug("findById: id={}", id)
         val artikel = when (val result = service.findById(id)) {
-            is FindByIdResult.Found -> result.artikel
+            is FindByIdResult.Success -> result.artikel
             is FindByIdResult.NotFound -> return notFound().build()
         }
         val artikelModel = ArtikelModel(artikel)

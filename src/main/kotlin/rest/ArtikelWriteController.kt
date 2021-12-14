@@ -49,7 +49,7 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
         logger.debug("create: {}", artikelDTO)
 
         return when (val result = service.create(artikel = artikelDTO.toArtikel())) {
-            is CreateResult.Created -> {
+            is CreateResult.Success -> {
                 logger.debug("create: {}", result)
                 val location = URI("${request.uri}/${result.artikel.id}")
                 ResponseEntity.created(location).build()
@@ -82,7 +82,7 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
         logger.debug("update: {}", artikelDTO)
 
         return when (val result = service.update(artikel = artikelDTO.toArtikel(), id)) {
-            is UpdateResult.Updated -> {
+            is UpdateResult.Success -> {
                 logger.debug("update: updated {}", result)
                 return ResponseEntity.noContent().build()
             }

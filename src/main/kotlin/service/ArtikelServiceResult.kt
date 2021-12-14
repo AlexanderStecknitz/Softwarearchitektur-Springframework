@@ -11,7 +11,7 @@ sealed interface FindByIdResult {
      * Resultat-Typ, wenn ein Artikel gefunden wurde
      * @property artikel Der gefundene Artikel
      */
-    data class Found(val artikel: Artikel) : FindByIdResult
+    data class Success(val artikel: Artikel) : FindByIdResult
 
     /**
      * Resultat-Typ, wenn kein Artikel gefunden wurde
@@ -27,7 +27,7 @@ sealed interface CreateResult {
      * Resultat-Typ, wenn ein neuer Artikel erfolgreich angelegt wurde
      * @property artikel Der neu angelegte Artikel
      */
-    data class Created(val artikel: Artikel) : CreateResult
+    data class Success(val artikel: Artikel) : CreateResult
 
     /**
      * Resultat-Typ, wenn der Name bereits existiert
@@ -51,7 +51,7 @@ sealed interface UpdateResult {
      * Resultat-Typ, wenn ein Artikel erfolgreich aktualisiert wurde
      * @property artikel Der aktualisierte Artikel
      */
-    data class Updated(val artikel: Artikel) : UpdateResult
+    data class Success(val artikel: Artikel) : UpdateResult
 
     /**
      * Resultat-Typ, wenn der Name bereits existiert
