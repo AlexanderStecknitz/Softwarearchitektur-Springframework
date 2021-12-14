@@ -72,7 +72,7 @@
 //
 //  13) Initialisierung des Gradle Wrappers in der richtigen Version
 //      dazu ist ggf. eine Internetverbindung erforderlich
-//        gradle wrapper --gradle-version=7.3 --distribution-type=bin
+//        gradle wrapper --gradle-version=7.3.1 --distribution-type=bin
 
 // https://github.com/gradle/kotlin-dsl/tree/master/samples
 // https://docs.gradle.org/current/userguide/kotlin_dsl.html
@@ -171,7 +171,7 @@ dependencies {
     implementation(platform(libs.coroutinesBom))
     // https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
     // https://github.com/netty/netty/issues/8537
-    //implementation(platform(libs.nettyBom))
+    implementation(platform(libs.nettyBom))
     //implementation(platform(libs.reactorBom))
     //implementation(platform(libs.jacksonBom))
     //implementation(platform(libs.springBom))
@@ -249,7 +249,7 @@ dependencies {
         implementation(libs.annotations)
         //implementation(libs.springHateoas)
         //implementation(libs.bundles.mongodb)
-        //implementation(libs.bundles.tomcat)
+        implementation(libs.bundles.tomcat)
         //implementation(libs.graphqlJava)
         //implementation(libs.bundles.graphqlJavaBundle)
         //implementation(libs.graphqlJava)
@@ -257,6 +257,7 @@ dependencies {
         //implementation(libs.bundles.slf4jBundle)
         //implementation(libs.logback)
         //implementation(libs.springSecurityRsa)
+        implementation(libs.bundles.log4j)
 
         ktlintCfg(libs.bundles.ktlint)
     }
@@ -271,7 +272,7 @@ allOpen { annotation("org.springframework.boot.context.properties.ConfigurationP
 noArg { annotation("org.springframework.boot.context.properties.ConfigurationProperties") }
 
 sweeney {
-    enforce(mapOf("type" to "gradle", "expect" to "[7.3,7.3]"))
+    enforce(mapOf("type" to "gradle", "expect" to "[7.3.1,7.3.1]"))
     // https://devcenter.heroku.com/articles/java-support#specifying-a-java-version
     enforce(mapOf("type" to "jdk", "expect" to "[16.0.2,17.0.1]"))
     validate()
