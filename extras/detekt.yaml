@@ -41,6 +41,8 @@ complexity:
 coroutines:
   GlobalCoroutineUsage:
     active: true
+  InjectDispatcher:
+    active: true
   RedundantSuspendModifier:
     active: true
   SleepInsteadOfDelay:
@@ -66,6 +68,8 @@ naming:
   BooleanPropertyNaming:
     active: true
   ForbiddenClassName:
+    active: true
+  LambdaParameterNaming:
     active: true
   NoNameShadowing:
     active: true
@@ -93,6 +97,8 @@ potential-bugs:
   LateinitUsage:
     active: true
   MapGetWithNotNullAssertionOperator:
+    active: true
+  MissingPackageDeclaration:
     active: true
   NullableToStringCall:
     active: true

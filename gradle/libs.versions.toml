@@ -18,33 +18,34 @@
 
 # table = Schluessel/Wert-Paare
 [versions]
-kotlin = "1.6.10-RC"
+kotlin = "1.6.10"
 javaVersion = "17"
 
 springBoot = "2.6.1"
-springGraphQL = "1.0.0-M3"
+springGraphQL = "1.0.0-M4"
 #graphqlJava = "17.3"
 graphqlJavaDataloader = "3.1.1"
 #javaNativeImage = "5.3.0"
 annotations = "23.0.0"
-openapi = "1.6.0"
+openapi = "1.6.2"
 yavi = "0.9.1"
 jansi = "2.4.0"
 
 # BOM und ueberschreiben
 allureBom = "2.17.2"
-#jackson = "2.13.0"
+jackson = "2.13.1"
 junit = "5.8.2"
-kotlinCoroutines = "1.6.0-RC2"
-#logback = "1.2.7"
+kotlinCoroutines = "1.6.0-RC3"
+logback = "1.2.9"
 # org.springframework.boot:spring-boot-starter-logging
-log4j2 = "2.16.0"
+log4j2 = "2.17.0"
 #mongodb = "4.4.0"
 #mongoDriverReactivestreams = "4.4.0"
 netty = "4.1.72.Final"
-#reactor = "2020.0.13"
+reactor = "2020.0.14"
 #slf4j = "1.7.32"
-#spring = "5.3.13"
+#spring = "6.0.0-M1"
+spring = "5.3.14"
 #springData = "2021.1.0"
 #springHateoas = "1.4.0"
 #springSecurity = "5.6.0"
@@ -52,12 +53,12 @@ tomcat = "9.0.56"
 
 # Testen
 junitPlatformSuite = "1.8.2"
-kotest = "5.0.2"
+kotest = "5.0.3"
 mockk = "1.12.1"
 
 # QS, Reports, Dokumentation
 ktlint = "0.43.2"
-ktlintKotlin = "1.6.10-RC"
+ktlintKotlin = "1.6.10"
 jacoco = "0.8.7"
 allure = "2.17.2"
 allureCommandline = "2.17.2"
@@ -69,14 +70,14 @@ asciidoctorjPdf = "1.5.4"
 dokka = "1.6.0"
 
 # Plugins
-kotlinPlugin = "1.6.10-RC"
+kotlinPlugin = "1.6.10"
 #springAot = "0.11.0-RC1"
 testLogger = "3.1.0"
 allurePlugin = "2.9.6"
 sweeney = "4.4.0"
 detekt = "1.19.0"
 jib = "3.1.4"
-owaspDependencycheck = "6.5.0.1"
+owaspDependencycheck = "6.5.1"
 snyk = "0.4"
 asciidoctor = "3.3.2"
 nwillc = "3.0.5"
@@ -87,11 +88,11 @@ licenseReport = "2.0"
 kotlinBom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 coroutinesBom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "kotlinCoroutines" }
 nettyBom = { module = "io.netty:netty-bom", version.ref = "netty" }
-#reactorBom = { module = "io.projectreactor:reactor-bom", version.ref = "reactor" }
-#jacksonBom = { module = "com.fasterxml.jackson:jackson-bom", version.ref = "jackson" }
+reactorBom = { module = "io.projectreactor:reactor-bom", version.ref = "reactor" }
+jacksonBom = { module = "com.fasterxml.jackson:jackson-bom", version.ref = "jackson" }
 #slf4jApi = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 #slf4jJul = { module = "org.slf4j:jul-to-slf4j", version.ref = "slf4j" }
-#springBom = { module = "org.springframework:spring-framework-bom", version.ref = "spring" }
+springBom = { module = "org.springframework:spring-framework-bom", version.ref = "spring" }
 #springDataBom = { module = "org.springframework.data:spring-data-bom", version.ref = "springData" }
 #springHateoas = { module = "org.springframework.hateoas:spring-hateoas", version.ref = "springHateoas" }
 #springSecurityBom = { module = "org.springframework.security:spring-security-bom", version.ref = "springSecurity" }
@@ -102,7 +103,7 @@ springBootBom = { module = "org.springframework.boot:spring-boot-starter-parent"
 springGraphQL = { module = "org.springframework.experimental:graphql-spring-boot-starter", version.ref = "springGraphQL" }
 #graphqlJava = { module = "com.graphql-java:graphql-java", version.ref = "graphqlJava" }
 graphqlJavaDataloader = { module = "com.graphql-java:java-dataloader", version.ref = "graphqlJavaDataloader" }
-#logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 log4jApi = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j2" }
 log4j2Slf4j = { module = "org.apache.logging.log4j:log4j-to-slf4j", version.ref = "log4j2" }
 #mongodbCore = { module = "org.mongodb:mongodb-driver-core", version.ref = "mongodb" }

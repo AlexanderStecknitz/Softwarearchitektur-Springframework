@@ -19,4 +19,4 @@ pluginManagement {
 //}
 
 enableFeaturePreview("VERSION_CATALOGS")
-rootProject.name = "artikel"
+rootProject.name = "kunde"

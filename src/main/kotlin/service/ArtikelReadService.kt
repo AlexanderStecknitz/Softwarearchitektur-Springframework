@@ -4,8 +4,14 @@ import com.acme.artikel.entity.Artikel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.withTimeout
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Lazy
+import org.springframework.data.mongodb.core.ReactiveFindOperation
+import org.springframework.data.mongodb.core.flow
+import org.springframework.data.mongodb.core.query
 import org.springframework.stereotype.Service
 
 /**
@@ -14,37 +20,20 @@ import org.springframework.stereotype.Service
  * @author [Alexander Stecknitz]
  */
 @Service
-class ArtikelReadService {
+class ArtikelReadService(
+    private val mongo: ReactiveFindOperation,
+    @Lazy private val queryBuilder: QueryBuilder,
+) {
 
     /**
      * Sucht nach allen Artikeln
-     * @return Ein Flow mit Artikeln
+     * @return Alle Artikel
      */
-    private fun findAll(): Flow<Artikel> {
+    private suspend fun findAll(): Flow<Artikel> = withTimeout(timeoutShort) {
         logger.debug("find: all")
-        return flowOf(
-            Artikel(
-                id = 1,
-                name = "Buch",
-                einkaufsPreis = 12,
-                verkaufsPreis = 30,
-                bestand = 20,
-            ),
-            Artikel(
-                id = 2,
-                name = "Schraubenzieher",
-                einkaufsPreis = 1,
-                verkaufsPreis = 3,
-                bestand = 34,
-            ),
-            Artikel(
-                id = 3,
-                name = "Gummibärchen",
-                einkaufsPreis = 1,
-                verkaufsPreis = 4,
-                bestand = 98,
-            ),
-        )
+        mongo.query<Artikel>()
+            .flow()
+            .onEach { logger.debug("findAll: {}", it) }
     }
 
     /**
@@ -98,7 +87,7 @@ class ArtikelReadService {
      * @return Ein Artikel mit dem übergegeben Namen
      * oder alle, wenn name nicht angegeben wird
      */
-    private fun findByName(name: String): Flow<Artikel> {
+    private suspend fun findByName(name: String): Flow<Artikel> {
         if (name.trim().isNotEmpty()) {
             return flowOf(
                 Artikel(
@@ -132,7 +121,7 @@ class ArtikelReadService {
      * @param einkaufspreis Der Einkaufspreis des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Einkaufspreis
      */
-    private fun findByEinkaufspreis(einkaufspreis: Int) =
+    private suspend fun findByEinkaufspreis(einkaufspreis: Int) =
         flowOf(
             Artikel(
                 id = 1,
@@ -162,7 +151,7 @@ class ArtikelReadService {
      * @param verkaufspreis Der Verkaufspreis des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Verkaufspreis
      */
-    private fun findByVerkaufspreis(verkaufspreis: Int) =
+    private suspend fun findByVerkaufspreis(verkaufspreis: Int) =
         flowOf(
             Artikel(
                 id = 1,
@@ -191,7 +180,7 @@ class ArtikelReadService {
      * @param bestand Der Bestand des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Bestand
      */
-    private fun findByBestand(bestand: Int) =
+    private suspend fun findByBestand(bestand: Int) =
         flowOf(
             Artikel(
                 id = 1,
@@ -221,5 +210,6 @@ class ArtikelReadService {
      */
     private companion object {
         val logger: Logger = LoggerFactory.getLogger(ArtikelReadService::class.java)
+        const val timeoutShort = 500L
     }
 }

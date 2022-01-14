@@ -27,7 +27,7 @@
 //        .\gradlew bootJar
 //        java -jar build/libs/....jar --spring.profiles.active=dev
 //        .\gradlew bootBuildImage [-Dtag='2.0.0']
-//        .\gradlew jibDockerBuild  -DjavaVersion=11 -Dtag='1.0.0-jib' [-Ddebug=true]
+//        .\gradlew jibDockerBuild  -Dtag='1.0.0-jib' [-Ddebug=true]
 //              erfordert die lokale Windows-Gruppe docker-users
 //
 //  3) Tests und QS
@@ -72,7 +72,7 @@
 //
 //  13) Initialisierung des Gradle Wrappers in der richtigen Version
 //      dazu ist ggf. eine Internetverbindung erforderlich
-//        gradle wrapper --gradle-version=7.3.1 --distribution-type=bin
+//        gradle wrapper --gradle-version=7.3.2 --distribution-type=bin
 
 // https://github.com/gradle/kotlin-dsl/tree/master/samples
 // https://docs.gradle.org/current/userguide/kotlin_dsl.html
@@ -172,9 +172,9 @@ dependencies {
     // https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
     // https://github.com/netty/netty/issues/8537
     implementation(platform(libs.nettyBom))
-    //implementation(platform(libs.reactorBom))
-    //implementation(platform(libs.jacksonBom))
-    //implementation(platform(libs.springBom))
+    implementation(platform(libs.reactorBom))
+    implementation(platform(libs.jacksonBom))
+    implementation(platform(libs.springBom))
     //implementation(platform(libs.springDataBom))
     //implementation(platform(libs.springSecurityBom))
     //implementation(platform(libs.junitBom))
@@ -255,7 +255,7 @@ dependencies {
         //implementation(libs.graphqlJava)
         implementation(libs.graphqlJavaDataloader)
         //implementation(libs.bundles.slf4jBundle)
-        //implementation(libs.logback)
+        implementation(libs.logback)
         //implementation(libs.springSecurityRsa)
         implementation(libs.bundles.log4j)
 
@@ -272,15 +272,14 @@ allOpen { annotation("org.springframework.boot.context.properties.ConfigurationP
 noArg { annotation("org.springframework.boot.context.properties.ConfigurationProperties") }
 
 sweeney {
-    enforce(mapOf("type" to "gradle", "expect" to "[7.3.1,7.3.1]"))
+    enforce(mapOf("type" to "gradle", "expect" to "[7.3.2,7.3.2]"))
     // https://devcenter.heroku.com/articles/java-support#specifying-a-java-version
-    enforce(mapOf("type" to "jdk", "expect" to "[16.0.2,17.0.1]"))
+    enforce(mapOf("type" to "jdk", "expect" to "[17.0.1,17.0.1]"))
     validate()
 }
 
 tasks.compileJava {
-    @Suppress("UNNECESSARY_SAFE_CALL", "USELESS_ELVIS")
-    targetCompatibility = JavaVersion.toVersion(System.getProperty("javaVersion"))?.majorVersion ?: libs.versions.javaVersion.get()
+    targetCompatibility = libs.versions.javaVersion.get()
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
@@ -289,7 +288,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         apiVersion = "1.7"
         languageVersion = "1.7"
 
-        jvmTarget = System.getProperty("javaVersion") ?: libs.versions.javaVersion.get()
+        jvmTarget = libs.versions.javaVersion.get()
         verbose = true
         freeCompilerArgs = listOfNotNull(
             "-Xjsr305=strict",
@@ -377,9 +376,10 @@ jib {
         // Ein "distroless image" enthaelt keine Package Manager, Shells, usw., sondern nur in der Variante -debug
         // d.h. ca. 250 MB statt ca. 450 MB
         // https://console.cloud.google.com/gcr/images/distroless
-        image = "gcr.io/distroless/java-debian11:11"
-        if (debug.toBoolean()) {
-            image += "-debug"
+        image = if (debug.toBoolean()) {
+            "gcr.io/distroless/java17-debian11:debug-nonroot"
+        } else {
+            "gcr.io/distroless/java17-debian11:nonroot"
         }
     }
     to {
