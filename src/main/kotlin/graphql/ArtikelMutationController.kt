@@ -33,7 +33,7 @@ class ArtikelMutationController(val service: ArtikelWriteService) {
         logger.debug("create: artikel={}", artikel)
 
         return when (val result = service.create(artikel)) {
-            is CreateResult.Created -> CreatePayLoad(result.artikel.id)
+            is CreateResult.Success -> CreatePayLoad(result.artikel.id)
             is CreateResult.ConstraintViolations -> throw ConstraintViolationsException(violations = result.violations)
             is CreateResult.NameExists -> throw NameExistsException(result.name)
         }

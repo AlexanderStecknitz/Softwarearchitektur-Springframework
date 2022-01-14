@@ -34,7 +34,7 @@ class ArtikelQueryController(val service: ArtikelReadService) {
 
         return when (val result = service.findById(id)) {
             is FindByIdResult.NotFound -> throw NotFoundException(id)
-            is FindByIdResult.Found -> result.artikel
+            is FindByIdResult.Success -> result.artikel
         }
     }
 
