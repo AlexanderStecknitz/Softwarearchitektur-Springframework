@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.core.flow
 import org.springframework.data.mongodb.core.query
 import org.springframework.data.mongodb.core.query.isEqualTo
 import org.springframework.stereotype.Service
+import org.springframework.util.MultiValueMap
 
 /**
  * Service Klasse für die Entität Artikel
@@ -60,23 +61,24 @@ class ArtikelReadService(
      * @return Gibt ein Flow mit Artikeln zurück die zu den Suchkriterien passen
      */
     @Suppress("ReturnCount")
-    suspend fun find(suchkriterien: Map<String, String>): Flow<Artikel> {
+    suspend fun find(suchkriterien: MultiValueMap<String, String>): Flow<Artikel> {
         logger.debug("find: suchkriterien={}", suchkriterien)
 
         if (suchkriterien.isEmpty()) {
             return findAll()
         }
 
-        for ((key, value) in suchkriterien) {
-            when (key) {
-                "name" -> return findByName(value)
-                "einkaufsPreis" -> return findByEinkaufspreis(value.toInt())
-                "verkaufsPreis" -> return findByVerkaufspreis(value.toInt())
-                "bestand" -> return findByBestand(value.toInt())
-            }
-        }
+       val query = when(val builderResult = queryBuilder.build(suchkriterien)) {
+           is QueryBuilderResult.Failure -> return emptyFlow()
+           is QueryBuilderResult.Success -> builderResult.query
+       }
 
-        return emptyFlow()
+        return withTimeout(timeoutLong) {
+            mongo.query<Artikel>()
+                .matching(query)
+                .flow()
+                .onEach { artikel -> logger.debug("find: {}", artikel) }
+        }
     }
 
     /**
@@ -209,5 +211,6 @@ class ArtikelReadService(
     private companion object {
         val logger: Logger = LoggerFactory.getLogger(ArtikelReadService::class.java)
         const val timeoutShort = 500L
+        const val timeoutLong = 2000L
     }
 }
