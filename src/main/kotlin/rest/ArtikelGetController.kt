@@ -19,6 +19,7 @@ import org.springframework.hateoas.MediaTypes.HAL_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.notFound
 import org.springframework.http.ResponseEntity.ok
+import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -88,7 +89,7 @@ class ArtikelGetController(private val service: ArtikelReadService) {
             description = "Keine Artikel gefunden",
         ),
     )
-    suspend fun find(@RequestParam queryParams: Map<String, String>): ResponseEntity<CollectionModel<ArtikelModel>> {
+    suspend fun find(@RequestParam queryParams: MultiValueMap<String, String>): ResponseEntity<CollectionModel<ArtikelModel>> {
         logger.debug("find: queryParams={}", queryParams)
         val modelList = mutableListOf<ArtikelModel>()
         val baseUri = "https://..."
