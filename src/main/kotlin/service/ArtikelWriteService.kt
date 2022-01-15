@@ -1,10 +1,14 @@
 package com.acme.artikel.service
 
 import com.acme.artikel.entity.Artikel
+import kotlinx.coroutines.withTimeout
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Lazy
+import org.springframework.data.mongodb.core.ReactiveFluentMongoOperations
+import org.springframework.data.mongodb.core.insert
+import org.springframework.data.mongodb.core.oneAndAwait
 import org.springframework.stereotype.Service
-import java.util.Random
 
 /**
  * Service Klasse für die HTTP-Methoden PUT und POST
@@ -12,7 +16,11 @@ import java.util.Random
  * @author [Alexander Stecknitz]
  */
 @Service
-class ArtikelWriteService(private val validator: ArtikelValidator, private val readService: ArtikelReadService) {
+class ArtikelWriteService(
+    private val mongo: ReactiveFluentMongoOperations,
+    @Lazy private val validator: ArtikelValidator,
+    @Lazy private val readService: ArtikelReadService,
+    ) {
 
     /**
      * Einen neuen Artikel anlegen
@@ -26,11 +34,11 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
             logger.debug("create: violations={}", violations)
             return CreateResult.ConstraintViolations(violations)
         }
-        if (artikel.name[0].lowercaseChar() == 'a') {
-            logger.debug("create: name {} existiert", artikel.name)
-            return CreateResult.NameExists(artikel.name)
+
+        val neuerArtikel = withTimeout(timeout) {
+            mongo.insert<Artikel>().oneAndAwait(artikel.copy())
         }
-        val neuerArtikel = artikel.copy(id = random.nextInt())
+        checkNotNull(neuerArtikel) {"Fehler beim Neuanlegen des Artikels"}
         logger.debug("create: {}", neuerArtikel)
         return CreateResult.Success(neuerArtikel)
     }
@@ -56,13 +64,13 @@ class ArtikelWriteService(private val validator: ArtikelValidator, private val r
             logger.debug("update: name {} existiert", artikel.name)
             return UpdateResult.NameExists(artikel.name)
         }
-        val neuerArtikel = artikel.copy(id = random.nextInt())
+        val neuerArtikel = artikel.copy()
         logger.debug("update: artikel {}", artikel)
         return UpdateResult.Success(neuerArtikel)
     }
 
     private companion object {
         val logger: Logger = LoggerFactory.getLogger(ArtikelWriteService::class.java)
-        val random: Random = Random()
+        const val timeout = 500L
     }
 }
