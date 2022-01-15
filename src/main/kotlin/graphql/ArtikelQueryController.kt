@@ -46,7 +46,7 @@ class ArtikelQueryController(val service: ArtikelReadService) {
     @QueryMapping
     suspend fun artikels(@Argument("input") suchkriterien: Suchkriterien): Flow<Artikel> {
         logger.debug("find: input={}", suchkriterien)
-        return service.find(suchkriterien.toMap())
+        return service.find(suchkriterien.toMultiValueMap())
             .onEach { artikel -> logger.debug("find: {}", artikel) }
     }
 
