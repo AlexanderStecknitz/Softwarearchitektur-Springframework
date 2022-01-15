@@ -62,10 +62,8 @@ class QueryBuilder {
         @Suppress("MagicNumber")
         if (name.length < 10) Artikel::name.regex(name, "i") else Artikel::name isEqualTo name
 
-    private fun getCriteriaEinkaufsPreis(einkaufsPreis: String): CriteriaDefinition? {
-        val einkaufPreisVal = einkaufsPreis.toBigDecimalOrNull() ?: return null
-        return Artikel::einkaufsPreis gte einkaufPreisVal
-    }
+    private fun getCriteriaEinkaufsPreis(einkaufsPreis: String): CriteriaDefinition =
+        Artikel::einkaufsPreis gte einkaufsPreis
 
     private fun getCriteriaVerkaufsPreis(verkaufsPreis: String): CriteriaDefinition? {
         val verkaufsPreisVal = verkaufsPreis.toBigDecimalOrNull() ?: return null
