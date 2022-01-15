@@ -3,7 +3,6 @@ package com.acme.artikel.service
 import com.acme.artikel.entity.Artikel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withTimeout
 import org.slf4j.Logger
@@ -80,131 +79,6 @@ class ArtikelReadService(
                 .onEach { artikel -> logger.debug("find: {}", artikel) }
         }
     }
-
-    /**
-     * Sucht einen Artikel mit einem bestimmten Namen
-     * @param name Der Name des gesuchten Artikels
-     * @return Ein Artikel mit dem übergegeben Namen
-     * oder alle, wenn name nicht angegeben wird
-     */
-    private suspend fun findByName(name: String): Flow<Artikel> {
-        if (name.trim().isNotEmpty()) {
-            return flowOf(
-                Artikel(
-                    id = 1,
-                    name = name,
-                    einkaufsPreis = 12,
-                    verkaufsPreis = 30,
-                    bestand = 20,
-                ),
-                Artikel(
-                    id = 2,
-                    name = name,
-                    einkaufsPreis = 1,
-                    verkaufsPreis = 3,
-                    bestand = 34,
-                ),
-                Artikel(
-                    id = 3,
-                    name = name,
-                    einkaufsPreis = 1,
-                    verkaufsPreis = 4,
-                    bestand = 98,
-                ),
-            )
-        }
-        return findAll()
-    }
-
-    /**
-     * Sucht einen Artikel mit einem bestimmten Einkaufspreis
-     * @param einkaufspreis Der Einkaufspreis des gesuchten Artikels
-     * @return Ein Artikel mit dem übergegeben Einkaufspreis
-     */
-    private suspend fun findByEinkaufspreis(einkaufspreis: Int) =
-        flowOf(
-            Artikel(
-                id = 1,
-                name = "Tablet",
-                einkaufsPreis = einkaufspreis,
-                verkaufsPreis = 30,
-                bestand = 20,
-            ),
-            Artikel(
-                id = 2,
-                name = "Laptop",
-                einkaufsPreis = einkaufspreis,
-                verkaufsPreis = 3,
-                bestand = 34,
-            ),
-            Artikel(
-                id = 3,
-                name = "PC",
-                einkaufsPreis = einkaufspreis,
-                verkaufsPreis = 4,
-                bestand = 98,
-            ),
-        )
-
-    /**
-     * Sucht einen Artikel mit einem bestimmten Verkaufspreis
-     * @param verkaufspreis Der Verkaufspreis des gesuchten Artikels
-     * @return Ein Artikel mit dem übergegeben Verkaufspreis
-     */
-    private suspend fun findByVerkaufspreis(verkaufspreis: Int) =
-        flowOf(
-            Artikel(
-                id = 1,
-                name = "Handschuh",
-                einkaufsPreis = 20,
-                verkaufsPreis = verkaufspreis,
-                bestand = 20,
-            ),
-            Artikel(
-                id = 2,
-                name = "Kleid",
-                einkaufsPreis = 10,
-                verkaufsPreis = verkaufspreis,
-                bestand = 34,
-            ),
-            Artikel(
-                id = 3, name = "Hemd",
-                einkaufsPreis = 50,
-                verkaufsPreis = verkaufspreis,
-                bestand = 98,
-            ),
-        )
-
-    /**
-     * Sucht einen Artikel mit einem bestimmten Bestand
-     * @param bestand Der Bestand des gesuchten Artikels
-     * @return Ein Artikel mit dem übergegeben Bestand
-     */
-    private suspend fun findByBestand(bestand: Int) =
-        flowOf(
-            Artikel(
-                id = 1,
-                name = "Gitarre",
-                einkaufsPreis = 20,
-                verkaufsPreis = 23,
-                bestand = bestand,
-            ),
-            Artikel(
-                id = 2,
-                name = "Schlagzeug",
-                einkaufsPreis = 10,
-                verkaufsPreis = 21,
-                bestand = bestand,
-            ),
-            Artikel(
-                id = 3,
-                name = "Posaune",
-                einkaufsPreis = 50,
-                verkaufsPreis = 60,
-                bestand = bestand,
-            ),
-        )
-
     /**
      * Konstanten für die Service Klasse
      */
