@@ -10,8 +10,10 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Lazy
 import org.springframework.data.mongodb.core.ReactiveFindOperation
+import org.springframework.data.mongodb.core.awaitOneOrNull
 import org.springframework.data.mongodb.core.flow
 import org.springframework.data.mongodb.core.query
+import org.springframework.data.mongodb.core.query.isEqualTo
 import org.springframework.stereotype.Service
 
 /**
@@ -43,17 +45,13 @@ class ArtikelReadService(
      * oder null wenn es keinen Artikel mit der entsprechenden ID gibt.
      */
     suspend fun findById(id: Int?): FindByIdResult {
-        logger.debug("findById={}", id)
-        if (id != 1) return FindByIdResult.NotFound
-        return FindByIdResult.Success(
-            Artikel(
-                id = id,
-                name = "Handschuh",
-                einkaufsPreis = 12,
-                verkaufsPreis = 24,
-                bestand = 10,
-            ),
-        )
+        val artikel = withTimeout(timeoutShort) {
+            mongo.query<Artikel>()
+                .matching(Artikel::id isEqualTo id)
+                .awaitOneOrNull()
+        } ?: return FindByIdResult.NotFound
+        logger.debug("findById={}", artikel)
+        return FindByIdResult.Success(artikel)
     }
 
     /**
