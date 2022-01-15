@@ -3,8 +3,8 @@ package com.acme.artikel.service
 import com.acme.artikel.entity.Artikel
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.CriteriaDefinition
+import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.gte
 import org.springframework.data.mongodb.core.query.isEqualTo
 import org.springframework.data.mongodb.core.query.regex
@@ -63,17 +63,13 @@ class QueryBuilder {
         if (name.length < 10) Artikel::name.regex(name, "i") else Artikel::name isEqualTo name
 
     private fun getCriteriaEinkaufsPreis(einkaufsPreis: String): CriteriaDefinition =
-        Artikel::einkaufsPreis gte einkaufsPreis
+        Artikel::einkaufsPreis gte einkaufsPreis.toInt()
 
-    private fun getCriteriaVerkaufsPreis(verkaufsPreis: String): CriteriaDefinition? {
-        val verkaufsPreisVal = verkaufsPreis.toBigDecimalOrNull() ?: return null
-        return Artikel::verkaufsPreis gte verkaufsPreisVal
-    }
+    private fun getCriteriaVerkaufsPreis(verkaufsPreis: String): CriteriaDefinition =
+        Artikel::verkaufsPreis gte verkaufsPreis.toInt()
 
-    private fun getCriteriaBestand(bestand: String): CriteriaDefinition? {
-        val bestandVal = bestand.toBigDecimalOrNull() ?: return null
-        return Companion::bestand gte bestandVal
-    }
+    private fun getCriteriaBestand(bestand: String): CriteriaDefinition =
+        Artikel::bestand gte bestand.toInt()
 
     private companion object {
         private const val name = "name"
