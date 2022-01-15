@@ -47,7 +47,7 @@ object TestDaten {
         )
         emit(
             Artikel(
-                id = 1,
+                id = 2,
                 name = "Schlagzeug",
                 einkaufsPreis = 20,
                 verkaufsPreis = 23,
@@ -65,7 +65,7 @@ object TestDaten {
         )
         emit(
             Artikel(
-                id = 1,
+                id = 4,
                 name = "Handschuh",
                 einkaufsPreis = 20,
                 verkaufsPreis = 40,
@@ -74,7 +74,7 @@ object TestDaten {
         )
         emit(
             Artikel(
-                id = 2,
+                id = 5,
                 name = "Kleid",
                 einkaufsPreis = 10,
                 verkaufsPreis = 14,
@@ -83,7 +83,7 @@ object TestDaten {
         )
         emit(
             Artikel(
-                id = 3, name = "Hemd",
+                id = 6, name = "Hemd",
                 einkaufsPreis = 50,
                 verkaufsPreis = 85,
                 bestand = 98,
@@ -91,7 +91,7 @@ object TestDaten {
         )
         emit(
             Artikel(
-                id = 3,
+                id = 7,
                 name = "PC",
                 einkaufsPreis = 2,
                 verkaufsPreis = 4,
