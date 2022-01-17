@@ -54,6 +54,16 @@ class ArtikelReadService(
         return FindByIdResult.Success(artikel)
     }
 
+    suspend fun findById(id: Int): Artikel? {
+        val artikel = withTimeout(timeoutShort) {
+            mongo.query<Artikel>()
+                .matching(Artikel::id isEqualTo id)
+                .awaitOneOrNull()
+        }
+        logger.debug("findById: {}", artikel)
+        return artikel
+    }
+
     /**
      * Sucht einen passenden Artikel zu den Query-Parametern
      * @param suchkriterien Die Suchkriterien für den Artikel
