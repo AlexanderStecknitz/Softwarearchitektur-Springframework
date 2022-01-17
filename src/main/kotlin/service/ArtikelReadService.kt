@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.flow
 import org.springframework.data.mongodb.core.query
 import org.springframework.data.mongodb.core.query.isEqualTo
 import org.springframework.stereotype.Service
+import java.util.*
 
 /**
  * Service Klasse für die Entität Artikel
@@ -42,7 +43,7 @@ class ArtikelReadService(
      * @return Ein Artikel mit der übergegeben ID
      * oder null wenn es keinen Artikel mit der entsprechenden ID gibt.
      */
-    suspend fun findById(id: Int?): FindByIdResult {
+    suspend fun findById(id: UUID?): FindByIdResult {
         val artikel = withTimeout(timeoutShort) {
             mongo.query<Artikel>()
                 .matching(Artikel::id isEqualTo id)
@@ -88,21 +89,21 @@ class ArtikelReadService(
         if (name.trim().isNotEmpty()) {
             return flowOf(
                 Artikel(
-                    id = 1,
+                    id = UUID(0,1),
                     name = name,
                     einkaufsPreis = 12,
                     verkaufsPreis = 30,
                     bestand = 20,
                 ),
                 Artikel(
-                    id = 2,
+                    id = UUID(0,2),
                     name = name,
                     einkaufsPreis = 1,
                     verkaufsPreis = 3,
                     bestand = 34,
                 ),
                 Artikel(
-                    id = 3,
+                    id = UUID(0,3),
                     name = name,
                     einkaufsPreis = 1,
                     verkaufsPreis = 4,
@@ -121,21 +122,21 @@ class ArtikelReadService(
     private suspend fun findByEinkaufspreis(einkaufspreis: Int) =
         flowOf(
             Artikel(
-                id = 1,
+                id = UUID(0,4),
                 name = "Tablet",
                 einkaufsPreis = einkaufspreis,
                 verkaufsPreis = 30,
                 bestand = 20,
             ),
             Artikel(
-                id = 2,
+                id = UUID(0,5),
                 name = "Laptop",
                 einkaufsPreis = einkaufspreis,
                 verkaufsPreis = 3,
                 bestand = 34,
             ),
             Artikel(
-                id = 3,
+                id = UUID(0,7),
                 name = "PC",
                 einkaufsPreis = einkaufspreis,
                 verkaufsPreis = 4,
@@ -151,21 +152,22 @@ class ArtikelReadService(
     private suspend fun findByVerkaufspreis(verkaufspreis: Int) =
         flowOf(
             Artikel(
-                id = 1,
+                id = UUID(0,8),
                 name = "Handschuh",
                 einkaufsPreis = 20,
                 verkaufsPreis = verkaufspreis,
                 bestand = 20,
             ),
             Artikel(
-                id = 2,
+                id = UUID(0,9),
                 name = "Kleid",
                 einkaufsPreis = 10,
                 verkaufsPreis = verkaufspreis,
                 bestand = 34,
             ),
             Artikel(
-                id = 3, name = "Hemd",
+                id = UUID(0,10),
+                name = "Hemd",
                 einkaufsPreis = 50,
                 verkaufsPreis = verkaufspreis,
                 bestand = 98,
@@ -180,21 +182,21 @@ class ArtikelReadService(
     private suspend fun findByBestand(bestand: Int) =
         flowOf(
             Artikel(
-                id = 1,
+                id = UUID(0,11),
                 name = "Gitarre",
                 einkaufsPreis = 20,
                 verkaufsPreis = 23,
                 bestand = bestand,
             ),
             Artikel(
-                id = 2,
+                id = UUID(0,12),
                 name = "Schlagzeug",
                 einkaufsPreis = 10,
                 verkaufsPreis = 21,
                 bestand = bestand,
             ),
             Artikel(
-                id = 3,
+                id = UUID(0,13),
                 name = "Posaune",
                 einkaufsPreis = 50,
                 verkaufsPreis = 60,

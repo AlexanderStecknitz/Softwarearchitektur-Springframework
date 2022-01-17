@@ -2,13 +2,14 @@ package com.acme.artikel.graphql
 
 import graphql.GraphQLError
 import org.springframework.graphql.execution.ErrorType.NOT_FOUND
+import java.util.*
 
 /**
  * Exception, falls mit dem Anwendungskern kein Artikel gefunden wird.
  *
  * @property id ID des nicht-vorhandenen Artikels
  */
-class NotFoundException(val id: Int) : Exception()
+class NotFoundException(val id: UUID) : Exception()
 
 /**
  * Fehlerklasse für GraphQL, falls eine [NotFoundException] geworfen wurde. Die Abbildung erfolgt in
@@ -16,7 +17,7 @@ class NotFoundException(val id: Int) : Exception()
  *
  * @property id ID des nicht-vorhandenen Artikels
  */
-class NotFoundError(private val id: Int) : GraphQLError {
+class NotFoundError(private val id: UUID) : GraphQLError {
     /**
      * Message innerhalb von _Errors_ beim Response für einen GraphQL-Request.
      */

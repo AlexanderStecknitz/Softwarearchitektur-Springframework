@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 /**
  * RestController für die HTTP-Methode GET
@@ -51,7 +52,7 @@ class ArtikelGetController(private val service: ArtikelReadService) {
             description = "Artikel konnte nicht gefunden werden",
         ),
     )
-    suspend fun findById(@PathVariable id: Int?): ResponseEntity<ArtikelModel> {
+    suspend fun findById(@PathVariable id: UUID?): ResponseEntity<ArtikelModel> {
         logger.debug("findById: id={}", id)
         val artikel = when (val result = service.findById(id)) {
             is FindByIdResult.Success -> result.artikel

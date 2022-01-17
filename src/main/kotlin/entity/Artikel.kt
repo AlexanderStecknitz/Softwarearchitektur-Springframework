@@ -1,5 +1,7 @@
 package com.acme.artikel.entity
 
+import java.util.*
+
 /** Beschreibt einen Artikel
  *  @property id Eindeutige ID eines Artikels
  *  @property name Name des Artikels
@@ -11,7 +13,7 @@ data class Artikel(
     /**
      * Eindeutiger Schlüssel
      */
-    val id: Int?,
+    val id: UUID?,
     /**
      * Name oder auch Bezeichnung
      */

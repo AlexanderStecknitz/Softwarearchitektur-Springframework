@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.stereotype.Controller
+import java.util.*
 
 /**
  * Eine _Controller_-Klasse für das Lesen mit der GraphQL-Schnittstelle und den Typen aus dem GraphQL-Schema.
@@ -29,7 +30,7 @@ class ArtikelQueryController(val service: ArtikelReadService) {
      * @throws NotFoundException falls kein Artikel gefunden wurde
      */
     @QueryMapping
-    suspend fun artikel(@Argument id: Int): Artikel {
+    suspend fun artikel(@Argument id: UUID): Artikel {
         logger.debug("findById: id={}", id)
 
         return when (val result = service.findById(id)) {

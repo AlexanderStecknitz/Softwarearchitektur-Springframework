@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.data.mongodb.core.insert
 import org.springframework.data.mongodb.core.oneAndAwait
 import org.springframework.stereotype.Service
+import java.util.*
 
 /**
  * Service Klasse für die HTTP-Methoden PUT und POST
@@ -51,7 +52,7 @@ class ArtikelWriteService(
      * @param id ID des zu aktualisierenden Artikels
      * @return Ein Resultatobjekt mit entweder dem aktualisierenden Artikel oder mit einem Fehlermeldungsobjekt
      */
-    suspend fun update(artikel: Artikel, id: Int): UpdateResult {
+    suspend fun update(artikel: Artikel, id: UUID): UpdateResult {
         mongo as ReactiveMongoTemplate
         val artikelCache: MutableCollection<*> = mongo.converter.mappingContext.persistentEntities
         val artikelDb = readService.findById(id)

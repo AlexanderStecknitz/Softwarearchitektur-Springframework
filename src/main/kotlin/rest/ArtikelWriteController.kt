@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
+import java.util.*
 
 /**
  * RestController für die HTTP Methoden PUT und POST
@@ -75,7 +76,7 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
         ApiResponse(responseCode = "400", description = "Ungültiger Name"),
     )
     suspend fun update(
-        @PathVariable id: Int,
+        @PathVariable id: UUID,
         @RequestBody artikelDTO: ArtikelDTO,
     ): ResponseEntity<GenericBody> {
         logger.debug("update: id={}", id)
