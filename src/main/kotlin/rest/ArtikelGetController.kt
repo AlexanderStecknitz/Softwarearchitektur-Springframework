@@ -113,6 +113,15 @@ class ArtikelGetController(private val service: ArtikelReadService) {
          * Konstante für den API-Path
          */
         const val API_PATH = "/api"
+
+        private const val HEX_PATTERN = "[\\dA-Fa-f]"
+
+        /**
+         * Muster für eine UUID. `$HEX_PATTERN{8}-($HEX_PATTERN{4}-){3}$HEX_PATTERN{12}` enthält eine _capturing group_
+         * und ist nicht zulässig.
+         */
+        const val ID_PATTERN = "$HEX_PATTERN{8}-$HEX_PATTERN{4}-$HEX_PATTERN{4}-$HEX_PATTERN{4}-$HEX_PATTERN{12}"
+
         private val logger: Logger = LoggerFactory.getLogger(ArtikelGetController::class.java)
     }
 }
