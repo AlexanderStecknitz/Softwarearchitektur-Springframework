@@ -16,7 +16,7 @@ class ExceptionResolverAdapter : DataFetcherExceptionResolverAdapter() {
 
     /**
      * Abbildung der Exceptions aus ArtikelGraphQlController auf `GraphQLError`
-     * @param ex Exception aus KundeGraphQlController
+     * @param ex Exception aus ArtikelGraphQlController
      * @param env Environment-Objekt
      */
     override fun resolveToSingleError(ex: Throwable, env: DataFetchingEnvironment): GraphQLError? =
@@ -28,7 +28,7 @@ class ExceptionResolverAdapter : DataFetcherExceptionResolverAdapter() {
 
     /**
      * Abbildung der Exceptions aus ArtikelGraphQlController auf `GraphQLError`
-     * @param ex Exception aus KundeGraphQlController
+     * @param ex Exception aus ArtikelGraphQlController
      * @param env Environment-Objekt
      */
     override fun resolveToMultipleErrors(ex: Throwable, env: DataFetchingEnvironment) =

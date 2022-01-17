@@ -58,7 +58,7 @@ class ArtikelWriteService(
         val artikelDb = readService.findById(id)
         artikelCache.remove(artikelDb)
         val neuerArtikel = artikel.copy(id = id)
-        logger.trace("update: neuerKunde= {}", neuerArtikel)
+        logger.trace("update: neuerArtikel= {}", neuerArtikel)
 
         return withTimeout(timeout) {
             val artikelUpdated = mongo.save(neuerArtikel).awaitSingle()

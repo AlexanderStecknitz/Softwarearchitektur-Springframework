@@ -38,13 +38,13 @@ IMPORTANT: Copyright (C) 2015 - present Jürgen Zimmermann, Hochschule Karlsruhe
 === Der Microservice im Überblick
 
 === Die REST-Schnittstelle
-."KundeGetController" für Lesezugriffe an der REST-Schnittstelle
-[plantuml,KundeGetController,svg]
+."ArtikelGetController" für Lesezugriffe an der REST-Schnittstelle
+[plantuml,ArtikelGetController,svg]
 ----
 include::./ArtikelGetController.puml[]
 ----
 
-."KundeWriteController" für Schreibzugriffe an der REST-Schnittstelle
+."ArtikelWriteController" für Schreibzugriffe an der REST-Schnittstelle
 [plantuml,ArtikelWriteController.puml,svg]
 ----
 include::./ArtikelWriteController.puml[]
@@ -54,14 +54,14 @@ include::./ArtikelWriteController.puml[]
 
 bla bla
 
-."KundeReadService" im Anwendungskern
-[plantuml,KundeReadService,svg]
+."ArtikelReadService" im Anwendungskern
+[plantuml,ArtikelReadService,svg]
 ----
 include::./ArtikelReadService.puml[]
 ----
 
-."KundeWriteService" im Anwendungskern
-[plantuml,KundeWriteService,svg]
+."ArtikelWriteService" im Anwendungskern
+[plantuml,ArtikelWriteService,svg]
 ----
 include::./ArtikelWriteService.puml[]
 ----
@@ -70,8 +70,8 @@ include::./ArtikelWriteService.puml[]
 
 bla bla
 
-.Die Entity-Klasse "Kunde" für Kundendaten
-[plantuml,Kunde,svg]
+.Die Entity-Klasse "Artikel" für Artikeldaten
+[plantuml,Artikel,svg]
 ----
 include::./Artikel.puml[]
 ----

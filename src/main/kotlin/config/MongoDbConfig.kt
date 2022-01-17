@@ -26,16 +26,14 @@ import java.util.UUID
 
 /**
  * Spring-Konfiguration für Enum-Konvertierungen beim Zugriff auf _MongoDB_.
- *
- * @author Jürgen Zimmermann](mailto:Juergen.Zimmermann@h-ka.de)
  */
 interface MongoDbConfig {
     /**
-     * Bean zur Generierung der Kunde-ID beim Anlegen eines neuen Kunden
-     * @return Kunde-Objekt mit einer Kunde-ID
+     * Bean zur Generierung der Artikel-ID beim Anlegen eines neuen Arikels
+     * @return Artikel-Objekt mit einer Artikel-ID
      */
     @Bean
-    fun generateKundeId() = ReactiveBeforeConvertCallback<Artikel> { artikel, _ ->
+    fun generateArtikelUUID() = ReactiveBeforeConvertCallback<Artikel> { artikel, _ ->
         if (artikel.id == null) {
             artikel.copy(id = UUID.randomUUID(), name = artikel.name.lowercase())
         } else {
