@@ -1,4 +1,4 @@
-PUT {{baseUrl}}/api/1
+PUT {{baseUrl}}/api/00000000-0000-0000-0000-000000000003
 Content-Type: application/json
 ALPN: h2
 

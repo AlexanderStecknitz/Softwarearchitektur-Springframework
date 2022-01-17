@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.data.mongodb.core.WriteConcernResolver
 import org.springframework.data.mongodb.core.mapping.event.ReactiveBeforeConvertCallback
 import reactor.kotlin.core.publisher.toMono
-import kotlin.random.Random
+import java.util.*
 
 /**
  * Spring-Konfiguration für Enum-Konvertierungen beim Zugriff auf _MongoDB_.
@@ -37,8 +37,7 @@ interface MongoDbConfig {
     @Bean
     fun generateKundeId() = ReactiveBeforeConvertCallback<Artikel> { artikel, _ ->
         if (artikel.id == null) {
-            val random: Random = Random
-            artikel.copy(id = random.nextInt(), name = artikel.name.lowercase())
+            artikel.copy(id = UUID.randomUUID(), name = artikel.name.lowercase())
         } else {
             artikel
         }.toMono()
