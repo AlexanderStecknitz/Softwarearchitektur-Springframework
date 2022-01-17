@@ -1,8 +1,5 @@
 package com.acme.artikel.graphql
 
-import org.springframework.util.LinkedMultiValueMap
-import org.springframework.util.MultiValueMap
-
 /**
  * Eine _Value_-Klasse für Eingabedaten passend zu `Suchkriterien` aus dem GraphQL-Schema.
  *
@@ -23,8 +20,8 @@ data class Suchkriterien(
      * Konvertierung in eine Map
      * @return Das konvertierte Map-Objekt
      */
-    fun toMultiValueMap(): MultiValueMap<String, String> {
-        val map = LinkedMultiValueMap<String, String>()
+    fun toMap(): Map<String, String> {
+        val map = mutableMapOf<String, String>()
         if (name != null) {
             map["nachname"] = name
         }
