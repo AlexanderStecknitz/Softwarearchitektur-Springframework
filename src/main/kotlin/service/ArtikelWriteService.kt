@@ -1,11 +1,13 @@
 package com.acme.artikel.service
 
 import com.acme.artikel.entity.Artikel
+import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.withTimeout
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Lazy
 import org.springframework.data.mongodb.core.ReactiveFluentMongoOperations
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.data.mongodb.core.insert
 import org.springframework.data.mongodb.core.oneAndAwait
 import org.springframework.stereotype.Service
@@ -50,23 +52,17 @@ class ArtikelWriteService(
      * @return Ein Resultatobjekt mit entweder dem aktualisierenden Artikel oder mit einem Fehlermeldungsobjekt
      */
     suspend fun update(artikel: Artikel, id: Int): UpdateResult {
-        logger.debug("update: {}", artikel)
-        val violations = validator.validate(artikel = artikel)
-        if (violations.isNotEmpty()) {
-            logger.debug("create: violations={}", violations)
-            return UpdateResult.ConstraintViolations(violations)
-        }
-        if (readService.findById(id) is FindByIdResult.NotFound) {
-            return UpdateResult.NotFound
-        }
-
-        if (artikel.name[0].lowercaseChar() == 'a') {
-            logger.debug("update: name {} existiert", artikel.name)
-            return UpdateResult.NameExists(artikel.name)
-        }
+        mongo as ReactiveMongoTemplate
+        val artikelCache: MutableCollection<*> = mongo.converter.mappingContext.persistentEntities
+        val artikelDb = readService.findById(id)
+        artikelCache.remove(artikelDb)
         val neuerArtikel = artikel.copy()
-        logger.debug("update: artikel {}", artikel)
-        return UpdateResult.Success(neuerArtikel)
+        logger.trace("update: neuerKunde= {}", neuerArtikel)
+
+        return withTimeout(timeout) {
+                val artikelUpdated = mongo.save(neuerArtikel).awaitSingle()
+                UpdateResult.Success(artikelUpdated)
+        }
     }
 
     private companion object {
