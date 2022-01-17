@@ -33,6 +33,7 @@ import java.util.*
 @RestController
 @RequestMapping(ArtikelGetController.API_PATH)
 @Tag(name = "Artikel API")
+@Suppress("RegExpUnexpectedAnchor")
 class ArtikelGetController(private val service: ArtikelReadService) {
 
     /**
@@ -40,7 +41,7 @@ class ArtikelGetController(private val service: ArtikelReadService) {
      * @param id Die ID zum suchen eines Artikels
      * @return Bei gefundem Artikel ein 200 Response mit dem Artikel oder 404 bei einem nicht gefundenen
      */
-    @GetMapping(path = ["/{id:[1-9][0-9]*}"], produces = [HAL_JSON_VALUE])
+    @GetMapping(path = ["/{id:$ID_PATTERN}"], produces = [HAL_JSON_VALUE])
     @Operation(summary = "Suche mit einer Artikel-ID", tags = ["Suchen"])
     @ApiResponses(
         ApiResponse(
