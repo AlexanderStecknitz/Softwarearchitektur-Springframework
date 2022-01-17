@@ -1,6 +1,6 @@
 package com.acme.artikel.entity
 
-import java.util.*
+import java.util.UUID
 
 /** Beschreibt einen Artikel
  *  @property id Eindeutige ID eines Artikels

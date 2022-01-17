@@ -2,7 +2,7 @@ package com.acme.artikel.graphql
 
 import graphql.GraphQLError
 import org.springframework.graphql.execution.ErrorType.NOT_FOUND
-import java.util.*
+import java.util.UUID
 
 /**
  * Exception, falls mit dem Anwendungskern kein Artikel gefunden wird.

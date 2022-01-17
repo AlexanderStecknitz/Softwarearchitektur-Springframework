@@ -20,7 +20,7 @@ package com.acme.artikel.config.dev
 
 import com.acme.artikel.entity.Artikel
 import kotlinx.coroutines.flow.flow
-import java.util.*
+import java.util.UUID
 
 // Default-Implementierungen in einem Interface gibt es ab Java 8, d.h. ab 2013 !!!
 // Eine abstrakte Klasse kann uebrigens auch Properties / Attribute / Felder sowie einen Konstruktor haben.
@@ -39,7 +39,7 @@ object TestDaten {
     val artikel = flow {
         emit(
             Artikel(
-                id = UUID(0,1),
+                id = UUID(0, 1),
                 name = "Gitarre",
                 einkaufsPreis = 20,
                 verkaufsPreis = 23,
@@ -48,7 +48,7 @@ object TestDaten {
         )
         emit(
             Artikel(
-                id = UUID(0,2),
+                id = UUID(0, 2),
                 name = "Schlagzeug",
                 einkaufsPreis = 20,
                 verkaufsPreis = 23,
@@ -57,7 +57,7 @@ object TestDaten {
         )
         emit(
             Artikel(
-                id = UUID(0,3),
+                id = UUID(0, 3),
                 name = "Posaune",
                 einkaufsPreis = 50,
                 verkaufsPreis = 60,
@@ -66,7 +66,7 @@ object TestDaten {
         )
         emit(
             Artikel(
-                id = UUID(0,4),
+                id = UUID(0, 4),
                 name = "Handschuh",
                 einkaufsPreis = 20,
                 verkaufsPreis = 40,
@@ -75,7 +75,7 @@ object TestDaten {
         )
         emit(
             Artikel(
-                id = UUID(0,5),
+                id = UUID(0, 5),
                 name = "Kleid",
                 einkaufsPreis = 10,
                 verkaufsPreis = 14,
@@ -84,7 +84,7 @@ object TestDaten {
         )
         emit(
             Artikel(
-                id = UUID(0,6), name = "Hemd",
+                id = UUID(0, 6), name = "Hemd",
                 einkaufsPreis = 50,
                 verkaufsPreis = 85,
                 bestand = 98,
@@ -92,7 +92,7 @@ object TestDaten {
         )
         emit(
             Artikel(
-                id = UUID(0,7),
+                id = UUID(0, 7),
                 name = "PC",
                 einkaufsPreis = 2,
                 verkaufsPreis = 4,

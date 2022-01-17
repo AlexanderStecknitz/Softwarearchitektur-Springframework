@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.data.mongodb.core.WriteConcernResolver
 import org.springframework.data.mongodb.core.mapping.event.ReactiveBeforeConvertCallback
 import reactor.kotlin.core.publisher.toMono
-import java.util.*
+import java.util.UUID
 
 /**
  * Spring-Konfiguration für Enum-Konvertierungen beim Zugriff auf _MongoDB_.

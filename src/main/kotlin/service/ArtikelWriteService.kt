@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.data.mongodb.core.insert
 import org.springframework.data.mongodb.core.oneAndAwait
 import org.springframework.stereotype.Service
-import java.util.*
+import java.util.UUID
 
 /**
  * Service Klasse für die HTTP-Methoden PUT und POST

@@ -14,13 +14,14 @@ import org.springframework.data.mongodb.core.flow
 import org.springframework.data.mongodb.core.query
 import org.springframework.data.mongodb.core.query.isEqualTo
 import org.springframework.stereotype.Service
-import java.util.*
+import java.util.UUID
 
 /**
  * Service Klasse für die Entität Artikel
  * Dies ist eine Mock-Klasse
  * @author [Alexander Stecknitz]
  */
+@Suppress("MagicNumber")
 @Service
 class ArtikelReadService(
     private val mongo: ReactiveFindOperation,
@@ -89,21 +90,21 @@ class ArtikelReadService(
         if (name.trim().isNotEmpty()) {
             return flowOf(
                 Artikel(
-                    id = UUID(0,1),
+                    id = UUID(0, 1),
                     name = name,
                     einkaufsPreis = 12,
                     verkaufsPreis = 30,
                     bestand = 20,
                 ),
                 Artikel(
-                    id = UUID(0,2),
+                    id = UUID(0, 2),
                     name = name,
                     einkaufsPreis = 1,
                     verkaufsPreis = 3,
                     bestand = 34,
                 ),
                 Artikel(
-                    id = UUID(0,3),
+                    id = UUID(0, 3),
                     name = name,
                     einkaufsPreis = 1,
                     verkaufsPreis = 4,
@@ -119,24 +120,24 @@ class ArtikelReadService(
      * @param einkaufspreis Der Einkaufspreis des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Einkaufspreis
      */
-    private suspend fun findByEinkaufspreis(einkaufspreis: Int) =
+    private fun findByEinkaufspreis(einkaufspreis: Int) =
         flowOf(
             Artikel(
-                id = UUID(0,4),
+                id = UUID(0, 4),
                 name = "Tablet",
                 einkaufsPreis = einkaufspreis,
                 verkaufsPreis = 30,
                 bestand = 20,
             ),
             Artikel(
-                id = UUID(0,5),
+                id = UUID(0, 5),
                 name = "Laptop",
                 einkaufsPreis = einkaufspreis,
                 verkaufsPreis = 3,
                 bestand = 34,
             ),
             Artikel(
-                id = UUID(0,7),
+                id = UUID(0, 7),
                 name = "PC",
                 einkaufsPreis = einkaufspreis,
                 verkaufsPreis = 4,
@@ -149,24 +150,24 @@ class ArtikelReadService(
      * @param verkaufspreis Der Verkaufspreis des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Verkaufspreis
      */
-    private suspend fun findByVerkaufspreis(verkaufspreis: Int) =
+    private fun findByVerkaufspreis(verkaufspreis: Int) =
         flowOf(
             Artikel(
-                id = UUID(0,8),
+                id = UUID(0, 8),
                 name = "Handschuh",
                 einkaufsPreis = 20,
                 verkaufsPreis = verkaufspreis,
                 bestand = 20,
             ),
             Artikel(
-                id = UUID(0,9),
+                id = UUID(0, 9),
                 name = "Kleid",
                 einkaufsPreis = 10,
                 verkaufsPreis = verkaufspreis,
                 bestand = 34,
             ),
             Artikel(
-                id = UUID(0,10),
+                id = UUID(0, 10),
                 name = "Hemd",
                 einkaufsPreis = 50,
                 verkaufsPreis = verkaufspreis,
@@ -179,24 +180,24 @@ class ArtikelReadService(
      * @param bestand Der Bestand des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Bestand
      */
-    private suspend fun findByBestand(bestand: Int) =
+    private fun findByBestand(bestand: Int) =
         flowOf(
             Artikel(
-                id = UUID(0,11),
+                id = UUID(0, 11),
                 name = "Gitarre",
                 einkaufsPreis = 20,
                 verkaufsPreis = 23,
                 bestand = bestand,
             ),
             Artikel(
-                id = UUID(0,12),
+                id = UUID(0, 12),
                 name = "Schlagzeug",
                 einkaufsPreis = 10,
                 verkaufsPreis = 21,
                 bestand = bestand,
             ),
             Artikel(
-                id = UUID(0,13),
+                id = UUID(0, 13),
                 name = "Posaune",
                 einkaufsPreis = 50,
                 verkaufsPreis = 60,
