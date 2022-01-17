@@ -22,7 +22,7 @@ class ArtikelWriteService(
     private val mongo: ReactiveFluentMongoOperations,
     @Lazy private val validator: ArtikelValidator,
     @Lazy private val readService: ArtikelReadService,
-    ) {
+) {
 
     /**
      * Einen neuen Artikel anlegen
@@ -40,7 +40,7 @@ class ArtikelWriteService(
         val neuerArtikel = withTimeout(timeout) {
             mongo.insert<Artikel>().oneAndAwait(artikel.copy())
         }
-        checkNotNull(neuerArtikel) {"Fehler beim Neuanlegen des Artikels"}
+        checkNotNull(neuerArtikel) { "Fehler beim Neuanlegen des Artikels" }
         logger.debug("create: {}", neuerArtikel)
         return CreateResult.Success(neuerArtikel)
     }
@@ -60,8 +60,8 @@ class ArtikelWriteService(
         logger.trace("update: neuerKunde= {}", neuerArtikel)
 
         return withTimeout(timeout) {
-                val artikelUpdated = mongo.save(neuerArtikel).awaitSingle()
-                UpdateResult.Success(artikelUpdated)
+            val artikelUpdated = mongo.save(neuerArtikel).awaitSingle()
+            UpdateResult.Success(artikelUpdated)
         }
     }
 

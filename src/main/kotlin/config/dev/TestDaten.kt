@@ -43,7 +43,7 @@ object TestDaten {
                 einkaufsPreis = 20,
                 verkaufsPreis = 23,
                 bestand = 2,
-            )
+            ),
         )
         emit(
             Artikel(
@@ -61,7 +61,7 @@ object TestDaten {
                 einkaufsPreis = 50,
                 verkaufsPreis = 60,
                 bestand = 10,
-            )
+            ),
         )
         emit(
             Artikel(
@@ -70,7 +70,7 @@ object TestDaten {
                 einkaufsPreis = 20,
                 verkaufsPreis = 40,
                 bestand = 20,
-            )
+            ),
         )
         emit(
             Artikel(
@@ -79,7 +79,7 @@ object TestDaten {
                 einkaufsPreis = 10,
                 verkaufsPreis = 14,
                 bestand = 34,
-            )
+            ),
         )
         emit(
             Artikel(
@@ -87,7 +87,7 @@ object TestDaten {
                 einkaufsPreis = 50,
                 verkaufsPreis = 85,
                 bestand = 98,
-            )
+            ),
         )
         emit(
             Artikel(
@@ -96,7 +96,7 @@ object TestDaten {
                 einkaufsPreis = 2,
                 verkaufsPreis = 4,
                 bestand = 98,
-            )
+            ),
         )
     }
 }

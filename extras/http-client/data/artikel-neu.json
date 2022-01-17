@@ -1,6 +1,6 @@
 {
   "name": "handschuh",
-  "einkaufsPreis": -1,
-  "verkaufsPreis": -1,
-  "bestand": -1
+  "einkaufsPreis": 10,
+  "verkaufsPreis": 10,
+  "bestand": 10
 }
