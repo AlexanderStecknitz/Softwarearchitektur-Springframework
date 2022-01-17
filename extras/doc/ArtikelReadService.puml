@@ -4,6 +4,14 @@ package kotlinx.coroutines.flow {
     interface Map
 }
 
+package java.util {
+    class UUID
+}
+
+package org.springframework.data.mongodb.core {
+    class ReactiveFluentMongoOperations
+}
+
 package com.acme.artikel {
     package entity {
         class Artikel << entity >>
@@ -11,18 +19,23 @@ package com.acme.artikel {
 
     package service {
         class ArtikelReadService << control >> << @Service >> {
-            + suspend findById(id: Int?) : FindByIdResult
+            + suspend findById(id: UUID?) : FindByIdResult
             + suspend find(suchkriterien: Map<String, String>): Flow<Artikel>
-            - findAll() : Flow<Artikel>
+            - suspend findAll() : Flow<Artikel>
             - findByNachname(name: String): Flow<Artikel>
             - findByEinkaufspreis(einkaufspreis: Int): Flow<Artikel>
             - findByVerkaufspreis(verkaufspreis: Int): Flow<Artikel>
             - findByBestand(bestand: Int): Flow<Artikel>
         }
 
+        class FindByIdResult
+
         ArtikelReadService .up.> Artikel
         ArtikelReadService ..> Flow
         ArtikelReadService .up.> Map
+        ArtikelReadService .up.> UUID
+        ArtikelReadService .up.> FindByIdResult
+        ArtikelReadService o--> "1" ReactiveFluentMongoOperations : mongo
     }
 }
 hide empty members

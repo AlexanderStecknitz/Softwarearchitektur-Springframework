@@ -20,6 +20,10 @@ package kotlin.collections {
     interface Map
 }
 
+package java.util {
+    class UUID
+}
+
 package com.acme.artikel {
 
     package service {
@@ -39,8 +43,8 @@ package com.acme.artikel {
         GenericBody <|-- Values
 
         class ArtikelWriteController << boundary >> << @RestController >> << @RequestMapping >> {
-            + @GetMapping suspend create(@RequestBody ArtikelDTO: ArtikelDTO, request: ServerHttpRequest) : ResponseEntity<GenericBody>
-            + @GetMapping suspend update(@PathVariable id: Int, @RequestBody artikelDTO: ArtikelDTO): ResponseEntity<GenericBody>
+            + @GetMapping suspend create(@RequestBody artikelDTO: ArtikelDTO, request: ServerHttpRequest) : ResponseEntity<GenericBody>
+            + @GetMapping suspend update(@PathVariable id: UUID, @RequestBody artikelDTO: ArtikelDTO): ResponseEntity<GenericBody>
         }
 
         ArtikelWriteController o-right-> "1" ArtikelWriteService : service
@@ -55,6 +59,8 @@ package com.acme.artikel {
         ArtikelWriteController .up.> RequestBody
 
         ArtikelWriteController .up.> Map
+
+        ArtikelWriteController .up.> UUID
 
     }
 

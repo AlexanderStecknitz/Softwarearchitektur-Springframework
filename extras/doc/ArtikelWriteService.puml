@@ -1,5 +1,13 @@
 @startuml ArtikelWriteService
 
+package org.springframework.data.mongodb.core {
+    class ReactiveFluentMongoOperations
+}
+
+package java.utils {
+    class UUID
+}
+
 package com.acme.artikel {
 
     package entity {
@@ -14,7 +22,7 @@ package com.acme.artikel {
 
         class ArtikelWriteService << control >> << @Serivce >> {
             + suspend create(artikel: Artikel): CreateResult
-            + suspend update(artikel: Artikel, id: Int): UpdateResult
+            + suspend update(artikel: Artikel, id: UUID): UpdateResult
         }
 
         ArtikelWriteService o-down-> "1" ArtikelValidator
@@ -22,6 +30,8 @@ package com.acme.artikel {
         ArtikelWriteService .up.> Artikel
         ArtikelWriteService .up.> CreateResult
         ArtikelWriteService .up.> UpdateResult
+        ArtikelWriteService .up.> UUID
+        ArtikelWriteService o--> "1" ReactiveFluentMongoOperations : mongo
 
     }
 }

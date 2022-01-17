@@ -1,15 +1,21 @@
 @startuml
 
+package java.util {
+   class UUID
+}
+
 package com.acme.artikel.entity {
 
     class Artikel << entity >> {
-    - id : Int?
+    - id : UUID?
     - name : String
     - einkaufsPreis : Int
     - verkaufsPreis : Int
     - bestand : Int
     }
 
+    Artikel ..> UUID
 }
+
 hide empty members
 @enduml

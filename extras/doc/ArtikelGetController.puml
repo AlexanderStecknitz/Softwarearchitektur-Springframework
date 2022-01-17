@@ -24,6 +24,10 @@ package kotlin.collections {
     interface Map
 }
 
+package java.util {
+    class UUID
+}
+
 package com.acme.artikel {
 
     package service {
@@ -32,7 +36,7 @@ package com.acme.artikel {
 
     package rest {
         class ArtikelGetController << boundary >> << @RestController >> << @RequestMapping >> {
-            + @GetMapping suspend findById(@PathVariable id: Int?) : ResponseEntity<ArtikelModel>
+            + @GetMapping suspend findById(@PathVariable id: UUID?) : ResponseEntity<ArtikelModel>
             + @GetMapping suspend find(@RequestParam queryParams: Map<String, String>): ResponseEntity<CollectionModel<ArtikelModel>>
         }
 
@@ -48,6 +52,8 @@ package com.acme.artikel {
         ArtikelGetController .up.> RequestParam
 
         ArtikelGetController .up.> Map
+
+        ArtikelGetController .up.> UUID
 
     }
 }
