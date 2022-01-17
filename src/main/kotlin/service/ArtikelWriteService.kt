@@ -54,7 +54,7 @@ class ArtikelWriteService(
     suspend fun update(artikel: Artikel, id: Int): UpdateResult {
         mongo as ReactiveMongoTemplate
         val artikelCache: MutableCollection<*> = mongo.converter.mappingContext.persistentEntities
-        val artikelDb = readService.findById(id)
+        val artikelDb = readService.findById(id) ?: UpdateResult.NotFound
         artikelCache.remove(artikelDb)
         val neuerArtikel = artikel.copy(id = id)
         logger.trace("update: neuerKunde= {}", neuerArtikel)
