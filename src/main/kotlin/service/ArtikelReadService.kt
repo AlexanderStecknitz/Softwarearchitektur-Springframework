@@ -80,7 +80,8 @@ class ArtikelReadService(
     }
 
     /**
-     * Sucht einen Artikel mit einem bestimmten Namen
+     * Sucht einen Artikel mit einem bestimmten Namen.
+     * Dies ist derzeit noch eine Mock-Klasse.
      * @param name Der Name des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Namen
      * oder alle, wenn name nicht angegeben wird
@@ -115,7 +116,8 @@ class ArtikelReadService(
     }
 
     /**
-     * Sucht einen Artikel mit einem bestimmten Einkaufspreis
+     * Sucht einen Artikel mit einem bestimmten Einkaufspreis.
+     * Dies ist derzeit noch eine Mock-Klasse.
      * @param einkaufspreis Der Einkaufspreis des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Einkaufspreis
      */
@@ -145,7 +147,8 @@ class ArtikelReadService(
         )
 
     /**
-     * Sucht einen Artikel mit einem bestimmten Verkaufspreis
+     * Sucht einen Artikel mit einem bestimmten Verkaufspreis.
+     * Dies ist derzeit noch eine Mock-Klasse.
      * @param verkaufspreis Der Verkaufspreis des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Verkaufspreis
      */
@@ -175,7 +178,8 @@ class ArtikelReadService(
         )
 
     /**
-     * Sucht einen Artikel mit einem bestimmten Bestand
+     * Sucht einen Artikel mit einem bestimmten Bestand.
+     * Dies ist derzeit noch eine Mock-Klasse.
      * @param bestand Der Bestand des gesuchten Artikels
      * @return Ein Artikel mit dem übergegeben Bestand
      */

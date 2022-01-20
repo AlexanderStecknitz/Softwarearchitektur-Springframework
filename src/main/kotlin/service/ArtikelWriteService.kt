@@ -53,9 +53,16 @@ class ArtikelWriteService(
      * @return Ein Resultatobjekt mit entweder dem aktualisierenden Artikel oder mit einem Fehlermeldungsobjekt
      */
     suspend fun update(artikel: Artikel, id: UUID): UpdateResult {
+        val violations = validator.validate(artikel)
+        if (violations.isNotEmpty()) {
+            return UpdateResult.ConstraintViolations(violations)
+        }
         mongo as ReactiveMongoTemplate
         val artikelCache: MutableCollection<*> = mongo.converter.mappingContext.persistentEntities
         val artikelDb = readService.findById(id)
+        if (artikelDb is FindByIdResult.NotFound) {
+            return UpdateResult.NotFound
+        }
         artikelCache.remove(artikelDb)
         val neuerArtikel = artikel.copy(id = id)
         logger.trace("update: neuerArtikel= {}", neuerArtikel)

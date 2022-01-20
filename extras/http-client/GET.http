@@ -1,15 +1,20 @@
+# Suche alle Artikel
+# 200
 GET {{baseUrl}}/api
 Accept: application/hal+json
 ALPN: h2
 
 ###
 
+# Suche nach dem Artikel mit der angegebenen ID
+# 200
 GET {{baseUrl}}/api/00000000-0000-0000-0000-000000000001
 Accept: application/hal+json
 ALPN: h2
 
 ###
 
+# Suche nach einem Artikel der nicht in der Datenbank exisitert
 # Fehlermeldung 404
 GET {{baseUrl}}/api/00000000-0000-0000-0000-000000000010
 Accept: application/hal+json
@@ -17,12 +22,16 @@ ALPN: h2
 
 ###
 
+# Derzeit noch nicht über DB, reine Mock-Objekte
+# 200
 GET {{baseUrl}}/api?name=hallo
 Accept: application/hal+json
 ALPN: h2
 
 ###
 
+# Derzeit noch nicht über DB, reine Mock-Objekte
+# 200
 GET{{baseUrl}}/api?einkaufsPreis=2
 Accept: application/hal+json
 ALPN: h2

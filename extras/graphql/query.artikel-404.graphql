@@ -1,0 +1,9 @@
+# Sucht nach einem nicht vorhandenen Artikel
+{
+  artikel(id: "00000000-0000-0000-0000-000000000010") {
+    name
+    einkaufsPreis
+    verkaufsPreis
+    bestand
+  }
+}

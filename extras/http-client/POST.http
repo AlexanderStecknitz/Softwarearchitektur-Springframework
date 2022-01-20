@@ -1,5 +1,17 @@
+# Lege einen neuen Artikel an
+# 201
 POST {{baseUrl}}/api
 Content-Type: application/json
 ALPN: h2
 
 < data/artikel-neu.json
+
+###
+
+# Lege einen neuen Artikel mit invaliden Daten an
+# 400
+POST {{baseUrl}}/api
+Content-Type: application/json
+ALPN: h2
+
+< data/artikel-neu-fehler.json

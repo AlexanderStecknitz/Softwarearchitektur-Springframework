@@ -1,7 +1,8 @@
+# Legt einen neuen Artikel an
 mutation {
   create(
     input: {
-      name: "handschuh"
+      name: "TestGraphQL"
       einkaufsPreis: 10
       verkaufsPreis: 10
       bestand: 10

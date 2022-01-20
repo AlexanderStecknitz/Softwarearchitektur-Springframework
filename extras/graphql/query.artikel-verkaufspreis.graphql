@@ -1,3 +1,4 @@
+# Derzeit noch nicht über DB, reine Mock-Objekte
 {
   artikels(input: {verkaufsPreis: "20"}) {
     id

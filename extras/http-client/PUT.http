@@ -1,5 +1,27 @@
-PUT {{baseUrl}}/api/00000000-0000-0000-0000-000000000003
+# Einen Artikel aktualisieren
+# 204
+PUT {{baseUrl}}/api/00000000-0000-0000-0000-000000000002
 Content-Type: application/json
 ALPN: h2
 
 < data/artikel-1-put.json
+
+###
+
+# Einen Artikel mit nicht vorhandener ID aktualisieren
+# 404
+PUT {{baseUrl}}/api/00000000-0000-0000-0000-00000000010
+Content-Type: application/json
+ALPN: h2
+
+< data/artikel-1-put.json
+
+###
+
+# Artikel mit invaliden Daten aktualisieren
+# 400
+PUT {{baseUrl}}/api/00000000-0000-0000-0000-000000000003
+Content-Type: application/json
+ALPN: h2
+
+< data/artikel-1-put-fehler.json
