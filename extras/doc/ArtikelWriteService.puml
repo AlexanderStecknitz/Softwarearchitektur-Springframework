@@ -12,7 +12,7 @@ package com.acme.artikel {
 
     package entity {
             class Artikel << entity >>
-        }
+    }
 
     package service {
         class ArtikelValidator

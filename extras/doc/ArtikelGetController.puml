@@ -9,7 +9,7 @@ package org.springframework {
 
     package hateoas {
             class CollectionModel<E>
-        }
+    }
 
     package http {
         class ResponseEntity<T>
