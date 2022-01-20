@@ -37,7 +37,6 @@ import org.springframework.data.mongodb.core.index.Index
 import org.springframework.data.mongodb.core.indexOps
 import org.springframework.data.mongodb.core.insert
 import org.springframework.data.mongodb.core.oneAndAwait
-import org.springframework.data.mongodb.core.schema.JsonSchemaProperty.date
 import org.springframework.data.mongodb.core.schema.JsonSchemaProperty.int32
 import org.springframework.data.mongodb.core.schema.JsonSchemaProperty.string
 import org.springframework.data.mongodb.core.schema.MongoJsonSchema
@@ -91,8 +90,6 @@ interface DbPopulate {
                 int32(einkaufsPreis),
                 int32(verkaufsPreis),
                 int32(bestand),
-                date(erzeugt),
-                date(aktualisiert),
             )
             .build()
         logger.info(

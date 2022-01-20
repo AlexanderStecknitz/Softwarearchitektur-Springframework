@@ -36,7 +36,7 @@ configMapGenerator:
 secretGenerator:
   - name: mongodb
     literals:
-      - password=Change Me!
+      - password=p
 
 # wegen "secretKeyRef" in deployment.yaml des separaten Microservice
 generatorOptions:

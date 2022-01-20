@@ -28,7 +28,7 @@ package com.acme.artikel {
             - findByBestand(bestand: Int): Flow<Artikel>
         }
 
-        class FindByIdResult
+        interface FindByIdResult
 
         ArtikelReadService .up.> Artikel
         ArtikelReadService ..> Flow

@@ -43,8 +43,8 @@ spring:
     authentication-database: admin
     auto-index-creation: false
     database: acme
-    host: localhost
-    password: p
+    #host: localhost
+    #password: p
     #port: 27017
     repositories.type: none
     # https://docs.mongodb.com/manual/reference/connection-string

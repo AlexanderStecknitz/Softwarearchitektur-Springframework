@@ -14,9 +14,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ---
-# https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization
-# https://www.giantswarm.io/blog/application-configuration-management-with-kustomize
-
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -25,10 +22,13 @@ namespace: acme
 # https://github.com/kubernetes-sigs/kustomize/blob/master/examples/configGeneration.md
 # https://github.com/kubernetes-sigs/kustomize/blob/master/examples/generatorOptions.md
 configMapGenerator:
-  - name: artikel-env-v1
+  - name: artikel-env-v2
     literals:
       - TZ=Europe/Berlin
       - LANG=de_DE.utf8
+      # Rechnername des Service (Rechnername des Pod: mongodb-0.mongodb.acme.svc.cluster.local)
+      - SPRING_DATA_MONGODB_HOST=mongodb
+      - SPRING_MAIL_HOST=mailserver
       # nur fuer slf4j und logback, nicht fuer log4j2 (ANSI-Farben werden bei Lens angezeigt, nicht bei Octant oder IJ)
       #- SPRING_OUTPUT_ANSI_ENABLED=NEVER
 

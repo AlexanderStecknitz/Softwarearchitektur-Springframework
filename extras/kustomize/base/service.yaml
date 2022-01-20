@@ -13,6 +13,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+# ----------------------------------------------------------------------
+# B e a c h t e :   den Service in Beispiel 1 muesste man jetzt loeschen
+# ----------------------------------------------------------------------
+
 ---
 # https://kubernetes.io/docs/concepts/services-networking/connect-applications-service
 # https://kubernetes.io/docs/concepts/services-networking/service

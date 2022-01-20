@@ -35,8 +35,6 @@ IMPORTANT: Copyright (C) 2015 - present Jürgen Zimmermann, Hochschule Karlsruhe
 
 == Der Microservice Artikel
 
-=== Der Microservice im Überblick
-
 === Die REST-Schnittstelle
 ."ArtikelGetController" für Lesezugriffe an der REST-Schnittstelle
 [plantuml,ArtikelGetController,svg]

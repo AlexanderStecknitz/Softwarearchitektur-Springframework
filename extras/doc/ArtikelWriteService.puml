@@ -14,11 +14,11 @@ package com.acme.artikel {
             class Artikel << entity >>
         }
 
-    package service #DDDDDD {
+    package service {
         class ArtikelValidator
         class ArtikelReadService
-        class CreateResult
-        class UpdateResult
+        interface CreateResult
+        interface UpdateResult
 
         class ArtikelWriteService << control >> << @Serivce >> {
             + suspend create(artikel: Artikel): CreateResult
