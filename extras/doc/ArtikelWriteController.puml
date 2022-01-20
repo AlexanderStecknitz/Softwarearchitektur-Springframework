@@ -16,10 +16,6 @@ package org.springframework {
     }
 }
 
-package kotlin.collections {
-    interface Map
-}
-
 package java.util {
     class UUID
 }
