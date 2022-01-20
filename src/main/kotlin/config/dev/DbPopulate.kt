@@ -112,7 +112,5 @@ interface DbPopulate {
         val einkaufsPreis = Artikel::einkaufsPreis.name
         val verkaufsPreis = Artikel::verkaufsPreis.name
         val bestand = Artikel::bestand.name
-        const val erzeugt = "erzeugt"
-        const val aktualisiert = "aktualisiert"
     }
 }
