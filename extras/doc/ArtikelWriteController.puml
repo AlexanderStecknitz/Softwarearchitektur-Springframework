@@ -54,8 +54,6 @@ package com.acme.artikel {
         ArtikelWriteController .up.> PathVariable
         ArtikelWriteController .up.> RequestBody
 
-        ArtikelWriteController .up.> Map
-
         ArtikelWriteController .up.> UUID
 
     }
