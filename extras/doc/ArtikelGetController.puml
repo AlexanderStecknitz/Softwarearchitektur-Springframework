@@ -8,7 +8,7 @@ package org.springframework {
     }
 
     package hateoas {
-            class CollectionModel<E>
+        class CollectionModel<E>
     }
 
     package http {

@@ -49,7 +49,7 @@ class ArtikelGetController(private val service: ArtikelReadService) {
             description = "Artikel wurde gefunden",
         ),
         ApiResponse(
-            responseCode = "400",
+            responseCode = "404",
             description = "Artikel konnte nicht gefunden werden",
         ),
     )
@@ -86,7 +86,7 @@ class ArtikelGetController(private val service: ArtikelReadService) {
             description = "CollectionModel mit den Artikeln",
         ),
         ApiResponse(
-            responseCode = "400",
+            responseCode = "404",
             description = "Keine Artikel gefunden",
         ),
     )

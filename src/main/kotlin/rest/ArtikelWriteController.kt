@@ -3,6 +3,7 @@
 package com.acme.artikel.rest
 
 import com.acme.artikel.rest.ArtikelGetController.Companion.API_PATH
+import com.acme.artikel.rest.ArtikelGetController.Companion.ID_PATTERN
 import com.acme.artikel.service.ArtikelWriteService
 import com.acme.artikel.service.CreateResult
 import com.acme.artikel.service.UpdateResult
@@ -69,7 +70,8 @@ class ArtikelWriteController(private val service: ArtikelWriteService) {
      * @param id ID des Artikels
      * @param artikelDTO Das Artikelobjekt als Data Transfer Objekt für den Request-Body
      */
-    @PutMapping(path = ["/{id}"], consumes = [APPLICATION_JSON_VALUE])
+    @Suppress("RegExpUnexpectedAnchor")
+    @PutMapping(path = ["/{id:$ID_PATTERN}"], consumes = [APPLICATION_JSON_VALUE])
     @Operation(summary = "Einen Artikel mit neuen Werten aktualisieren", tags = ["Aktualisieren"])
     @ApiResponses(
         ApiResponse(responseCode = "201", description = "Aktualisiert"),
