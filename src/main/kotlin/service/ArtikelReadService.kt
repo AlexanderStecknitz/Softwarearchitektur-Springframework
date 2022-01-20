@@ -59,7 +59,6 @@ class ArtikelReadService(
      * @param suchkriterien Die Suchkriterien für den Artikel
      * @return Gibt ein Flow mit Artikeln zurück die zu den Suchkriterien passen
      */
-
     @Suppress("ReturnCount")
     suspend fun find(suchkriterien: Map<String, String>): Flow<Artikel> {
         logger.debug("find: suchkriterien={}", suchkriterien)
